@@ -1,0 +1,5621 @@
+{
+  "model_path": "/Users/viggy/Documents/Grad School/Sem_4/ECE 591 - SW HW Co-design/Project/bitbreaker/models/Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+  "quant_label": "Q4_K_M",
+  "tensor_data_base_offset": 7831552,
+  "n_layers": 16,
+  "fp16_bit_layout": {
+    "sign": [
+      15
+    ],
+    "exponent_msb": [
+      14
+    ],
+    "exponent": [
+      10,
+      11,
+      12,
+      13,
+      14
+    ],
+    "mantissa_msb": [
+      9
+    ],
+    "mantissa": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "mantissa_lsb": [
+      0
+    ]
+  },
+  "block_layouts_reference": {
+    "F16": {
+      "weights_per_block": 1,
+      "bytes_per_block": 2,
+      "regions": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    "Q8_0": {
+      "weights_per_block": 32,
+      "bytes_per_block": 34,
+      "regions": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    "Q4_0": {
+      "weights_per_block": 32,
+      "bytes_per_block": 18,
+      "regions": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    "Q4_K": {
+      "weights_per_block": 256,
+      "bytes_per_block": 144,
+      "regions": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    "Q6_K": {
+      "weights_per_block": 256,
+      "bytes_per_block": 210,
+      "regions": [
+        {
+          "name": "weights_low",
+          "block_offset": 0,
+          "num_bytes": 128,
+          "description": "Lower 4 bits of 256 \u00d7 6-bit weights, packed as 128 bytes"
+        },
+        {
+          "name": "weights_high",
+          "block_offset": 128,
+          "num_bytes": 64,
+          "description": "Upper 2 bits of 256 \u00d7 6-bit weights, packed as 64 bytes"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 192,
+          "num_bytes": 16,
+          "description": "16 \u00d7 INT8 sub-block scales; each affects 16 weights"
+        },
+        {
+          "name": "super_scale_d",
+          "block_offset": 208,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 16 sub-block scales; 1 bit flip corrupts all 256 weights"
+        }
+      ]
+    }
+  },
+  "tensors": [
+    {
+      "name": "rope_freqs.weight",
+      "ggml_type": "F32",
+      "role": "other",
+      "layer": null,
+      "dims": [
+        32
+      ],
+      "n_weights": 32,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 7831552,
+      "file_byte_end": 7831680,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "token_embd.weight",
+      "ggml_type": "Q6_K",
+      "role": "embedding",
+      "layer": null,
+      "dims": [
+        2048,
+        128256
+      ],
+      "n_weights": 262668288,
+      "n_blocks": 1026048,
+      "bytes_per_block": 210,
+      "file_byte_start": 7831680,
+      "file_byte_end": 223301760,
+      "in_scope": false,
+      "reason_out_of_scope": "Embedding tensor excluded from flip pool",
+      "block_layout": [
+        {
+          "name": "weights_low",
+          "block_offset": 0,
+          "num_bytes": 128,
+          "description": "Lower 4 bits of 256 \u00d7 6-bit weights, packed as 128 bytes"
+        },
+        {
+          "name": "weights_high",
+          "block_offset": 128,
+          "num_bytes": 64,
+          "description": "Upper 2 bits of 256 \u00d7 6-bit weights, packed as 64 bytes"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 192,
+          "num_bytes": 16,
+          "description": "16 \u00d7 INT8 sub-block scales; each affects 16 weights"
+        },
+        {
+          "name": "super_scale_d",
+          "block_offset": 208,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 16 sub-block scales; 1 bit flip corrupts all 256 weights"
+        }
+      ]
+    },
+    {
+      "name": "blk.0.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 0,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 223301760,
+      "file_byte_end": 223309952,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.0.ffn_down.weight",
+      "ggml_type": "Q6_K",
+      "role": "ffn",
+      "layer": 0,
+      "dims": [
+        8192,
+        2048
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 65536,
+      "bytes_per_block": 210,
+      "file_byte_start": 223309952,
+      "file_byte_end": 237072512,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights_low",
+          "block_offset": 0,
+          "num_bytes": 128,
+          "description": "Lower 4 bits of 256 \u00d7 6-bit weights, packed as 128 bytes"
+        },
+        {
+          "name": "weights_high",
+          "block_offset": 128,
+          "num_bytes": 64,
+          "description": "Upper 2 bits of 256 \u00d7 6-bit weights, packed as 64 bytes"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 192,
+          "num_bytes": 16,
+          "description": "16 \u00d7 INT8 sub-block scales; each affects 16 weights"
+        },
+        {
+          "name": "super_scale_d",
+          "block_offset": 208,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 16 sub-block scales; 1 bit flip corrupts all 256 weights"
+        }
+      ]
+    },
+    {
+      "name": "blk.0.ffn_gate.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 0,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 65536,
+      "bytes_per_block": 144,
+      "file_byte_start": 237072512,
+      "file_byte_end": 246509696,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.0.ffn_up.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 0,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 65536,
+      "bytes_per_block": 144,
+      "file_byte_start": 246509696,
+      "file_byte_end": 255946880,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.0.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 0,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 255946880,
+      "file_byte_end": 255955072,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.0.attn_k.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 0,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 4096,
+      "bytes_per_block": 144,
+      "file_byte_start": 255955072,
+      "file_byte_end": 256544896,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.0.attn_output.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 0,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 16384,
+      "bytes_per_block": 144,
+      "file_byte_start": 256544896,
+      "file_byte_end": 258904192,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.0.attn_q.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 0,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 16384,
+      "bytes_per_block": 144,
+      "file_byte_start": 258904192,
+      "file_byte_end": 261263488,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.0.attn_v.weight",
+      "ggml_type": "Q6_K",
+      "role": "attn",
+      "layer": 0,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 4096,
+      "bytes_per_block": 210,
+      "file_byte_start": 261263488,
+      "file_byte_end": 262123648,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights_low",
+          "block_offset": 0,
+          "num_bytes": 128,
+          "description": "Lower 4 bits of 256 \u00d7 6-bit weights, packed as 128 bytes"
+        },
+        {
+          "name": "weights_high",
+          "block_offset": 128,
+          "num_bytes": 64,
+          "description": "Upper 2 bits of 256 \u00d7 6-bit weights, packed as 64 bytes"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 192,
+          "num_bytes": 16,
+          "description": "16 \u00d7 INT8 sub-block scales; each affects 16 weights"
+        },
+        {
+          "name": "super_scale_d",
+          "block_offset": 208,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 16 sub-block scales; 1 bit flip corrupts all 256 weights"
+        }
+      ]
+    },
+    {
+      "name": "blk.1.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 1,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 262123648,
+      "file_byte_end": 262131840,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.1.ffn_down.weight",
+      "ggml_type": "Q6_K",
+      "role": "ffn",
+      "layer": 1,
+      "dims": [
+        8192,
+        2048
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 65536,
+      "bytes_per_block": 210,
+      "file_byte_start": 262131840,
+      "file_byte_end": 275894400,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights_low",
+          "block_offset": 0,
+          "num_bytes": 128,
+          "description": "Lower 4 bits of 256 \u00d7 6-bit weights, packed as 128 bytes"
+        },
+        {
+          "name": "weights_high",
+          "block_offset": 128,
+          "num_bytes": 64,
+          "description": "Upper 2 bits of 256 \u00d7 6-bit weights, packed as 64 bytes"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 192,
+          "num_bytes": 16,
+          "description": "16 \u00d7 INT8 sub-block scales; each affects 16 weights"
+        },
+        {
+          "name": "super_scale_d",
+          "block_offset": 208,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 16 sub-block scales; 1 bit flip corrupts all 256 weights"
+        }
+      ]
+    },
+    {
+      "name": "blk.1.ffn_gate.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 1,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 65536,
+      "bytes_per_block": 144,
+      "file_byte_start": 275894400,
+      "file_byte_end": 285331584,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.1.ffn_up.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 1,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 65536,
+      "bytes_per_block": 144,
+      "file_byte_start": 285331584,
+      "file_byte_end": 294768768,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.1.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 1,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 294768768,
+      "file_byte_end": 294776960,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.1.attn_k.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 1,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 4096,
+      "bytes_per_block": 144,
+      "file_byte_start": 294776960,
+      "file_byte_end": 295366784,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.1.attn_output.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 1,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 16384,
+      "bytes_per_block": 144,
+      "file_byte_start": 295366784,
+      "file_byte_end": 297726080,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.1.attn_q.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 1,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 16384,
+      "bytes_per_block": 144,
+      "file_byte_start": 297726080,
+      "file_byte_end": 300085376,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.1.attn_v.weight",
+      "ggml_type": "Q6_K",
+      "role": "attn",
+      "layer": 1,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 4096,
+      "bytes_per_block": 210,
+      "file_byte_start": 300085376,
+      "file_byte_end": 300945536,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights_low",
+          "block_offset": 0,
+          "num_bytes": 128,
+          "description": "Lower 4 bits of 256 \u00d7 6-bit weights, packed as 128 bytes"
+        },
+        {
+          "name": "weights_high",
+          "block_offset": 128,
+          "num_bytes": 64,
+          "description": "Upper 2 bits of 256 \u00d7 6-bit weights, packed as 64 bytes"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 192,
+          "num_bytes": 16,
+          "description": "16 \u00d7 INT8 sub-block scales; each affects 16 weights"
+        },
+        {
+          "name": "super_scale_d",
+          "block_offset": 208,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 16 sub-block scales; 1 bit flip corrupts all 256 weights"
+        }
+      ]
+    },
+    {
+      "name": "blk.10.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 10,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 300945536,
+      "file_byte_end": 300953728,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.10.ffn_down.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 10,
+      "dims": [
+        8192,
+        2048
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 65536,
+      "bytes_per_block": 144,
+      "file_byte_start": 300953728,
+      "file_byte_end": 310390912,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.10.ffn_gate.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 10,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 65536,
+      "bytes_per_block": 144,
+      "file_byte_start": 310390912,
+      "file_byte_end": 319828096,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.10.ffn_up.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 10,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 65536,
+      "bytes_per_block": 144,
+      "file_byte_start": 319828096,
+      "file_byte_end": 329265280,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.10.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 10,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 329265280,
+      "file_byte_end": 329273472,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.10.attn_k.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 10,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 4096,
+      "bytes_per_block": 144,
+      "file_byte_start": 329273472,
+      "file_byte_end": 329863296,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.10.attn_output.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 10,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 16384,
+      "bytes_per_block": 144,
+      "file_byte_start": 329863296,
+      "file_byte_end": 332222592,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.10.attn_q.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 10,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 16384,
+      "bytes_per_block": 144,
+      "file_byte_start": 332222592,
+      "file_byte_end": 334581888,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.10.attn_v.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 10,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 4096,
+      "bytes_per_block": 144,
+      "file_byte_start": 334581888,
+      "file_byte_end": 335171712,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.11.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 11,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 335171712,
+      "file_byte_end": 335179904,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.11.ffn_down.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 11,
+      "dims": [
+        8192,
+        2048
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 65536,
+      "bytes_per_block": 144,
+      "file_byte_start": 335179904,
+      "file_byte_end": 344617088,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.11.ffn_gate.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 11,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 65536,
+      "bytes_per_block": 144,
+      "file_byte_start": 344617088,
+      "file_byte_end": 354054272,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.11.ffn_up.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 11,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 65536,
+      "bytes_per_block": 144,
+      "file_byte_start": 354054272,
+      "file_byte_end": 363491456,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.11.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 11,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 363491456,
+      "file_byte_end": 363499648,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.11.attn_k.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 11,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 4096,
+      "bytes_per_block": 144,
+      "file_byte_start": 363499648,
+      "file_byte_end": 364089472,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.11.attn_output.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 11,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 16384,
+      "bytes_per_block": 144,
+      "file_byte_start": 364089472,
+      "file_byte_end": 366448768,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.11.attn_q.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 11,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 16384,
+      "bytes_per_block": 144,
+      "file_byte_start": 366448768,
+      "file_byte_end": 368808064,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.11.attn_v.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 11,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 4096,
+      "bytes_per_block": 144,
+      "file_byte_start": 368808064,
+      "file_byte_end": 369397888,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.12.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 12,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 369397888,
+      "file_byte_end": 369406080,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.12.ffn_down.weight",
+      "ggml_type": "Q6_K",
+      "role": "ffn",
+      "layer": 12,
+      "dims": [
+        8192,
+        2048
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 65536,
+      "bytes_per_block": 210,
+      "file_byte_start": 369406080,
+      "file_byte_end": 383168640,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights_low",
+          "block_offset": 0,
+          "num_bytes": 128,
+          "description": "Lower 4 bits of 256 \u00d7 6-bit weights, packed as 128 bytes"
+        },
+        {
+          "name": "weights_high",
+          "block_offset": 128,
+          "num_bytes": 64,
+          "description": "Upper 2 bits of 256 \u00d7 6-bit weights, packed as 64 bytes"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 192,
+          "num_bytes": 16,
+          "description": "16 \u00d7 INT8 sub-block scales; each affects 16 weights"
+        },
+        {
+          "name": "super_scale_d",
+          "block_offset": 208,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 16 sub-block scales; 1 bit flip corrupts all 256 weights"
+        }
+      ]
+    },
+    {
+      "name": "blk.12.ffn_gate.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 12,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 65536,
+      "bytes_per_block": 144,
+      "file_byte_start": 383168640,
+      "file_byte_end": 392605824,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.12.ffn_up.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 12,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 65536,
+      "bytes_per_block": 144,
+      "file_byte_start": 392605824,
+      "file_byte_end": 402043008,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.12.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 12,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 402043008,
+      "file_byte_end": 402051200,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.12.attn_k.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 12,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 4096,
+      "bytes_per_block": 144,
+      "file_byte_start": 402051200,
+      "file_byte_end": 402641024,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.12.attn_output.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 12,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 16384,
+      "bytes_per_block": 144,
+      "file_byte_start": 402641024,
+      "file_byte_end": 405000320,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.12.attn_q.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 12,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 16384,
+      "bytes_per_block": 144,
+      "file_byte_start": 405000320,
+      "file_byte_end": 407359616,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.12.attn_v.weight",
+      "ggml_type": "Q6_K",
+      "role": "attn",
+      "layer": 12,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 4096,
+      "bytes_per_block": 210,
+      "file_byte_start": 407359616,
+      "file_byte_end": 408219776,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights_low",
+          "block_offset": 0,
+          "num_bytes": 128,
+          "description": "Lower 4 bits of 256 \u00d7 6-bit weights, packed as 128 bytes"
+        },
+        {
+          "name": "weights_high",
+          "block_offset": 128,
+          "num_bytes": 64,
+          "description": "Upper 2 bits of 256 \u00d7 6-bit weights, packed as 64 bytes"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 192,
+          "num_bytes": 16,
+          "description": "16 \u00d7 INT8 sub-block scales; each affects 16 weights"
+        },
+        {
+          "name": "super_scale_d",
+          "block_offset": 208,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 16 sub-block scales; 1 bit flip corrupts all 256 weights"
+        }
+      ]
+    },
+    {
+      "name": "blk.13.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 13,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 408219776,
+      "file_byte_end": 408227968,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.13.ffn_down.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 13,
+      "dims": [
+        8192,
+        2048
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 65536,
+      "bytes_per_block": 144,
+      "file_byte_start": 408227968,
+      "file_byte_end": 417665152,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.13.ffn_gate.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 13,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 65536,
+      "bytes_per_block": 144,
+      "file_byte_start": 417665152,
+      "file_byte_end": 427102336,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.13.ffn_up.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 13,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 65536,
+      "bytes_per_block": 144,
+      "file_byte_start": 427102336,
+      "file_byte_end": 436539520,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.13.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 13,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 436539520,
+      "file_byte_end": 436547712,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.13.attn_k.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 13,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 4096,
+      "bytes_per_block": 144,
+      "file_byte_start": 436547712,
+      "file_byte_end": 437137536,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.13.attn_output.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 13,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 16384,
+      "bytes_per_block": 144,
+      "file_byte_start": 437137536,
+      "file_byte_end": 439496832,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.13.attn_q.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 13,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 16384,
+      "bytes_per_block": 144,
+      "file_byte_start": 439496832,
+      "file_byte_end": 441856128,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.13.attn_v.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 13,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 4096,
+      "bytes_per_block": 144,
+      "file_byte_start": 441856128,
+      "file_byte_end": 442445952,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.14.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 14,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 442445952,
+      "file_byte_end": 442454144,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.14.ffn_down.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 14,
+      "dims": [
+        8192,
+        2048
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 65536,
+      "bytes_per_block": 144,
+      "file_byte_start": 442454144,
+      "file_byte_end": 451891328,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.14.ffn_gate.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 14,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 65536,
+      "bytes_per_block": 144,
+      "file_byte_start": 451891328,
+      "file_byte_end": 461328512,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.14.ffn_up.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 14,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 65536,
+      "bytes_per_block": 144,
+      "file_byte_start": 461328512,
+      "file_byte_end": 470765696,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.14.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 14,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 470765696,
+      "file_byte_end": 470773888,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.14.attn_k.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 14,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 4096,
+      "bytes_per_block": 144,
+      "file_byte_start": 470773888,
+      "file_byte_end": 471363712,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.14.attn_output.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 14,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 16384,
+      "bytes_per_block": 144,
+      "file_byte_start": 471363712,
+      "file_byte_end": 473723008,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.14.attn_q.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 14,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 16384,
+      "bytes_per_block": 144,
+      "file_byte_start": 473723008,
+      "file_byte_end": 476082304,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.14.attn_v.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 14,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 4096,
+      "bytes_per_block": 144,
+      "file_byte_start": 476082304,
+      "file_byte_end": 476672128,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.15.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 15,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 476672128,
+      "file_byte_end": 476680320,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.15.ffn_down.weight",
+      "ggml_type": "Q6_K",
+      "role": "ffn",
+      "layer": 15,
+      "dims": [
+        8192,
+        2048
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 65536,
+      "bytes_per_block": 210,
+      "file_byte_start": 476680320,
+      "file_byte_end": 490442880,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights_low",
+          "block_offset": 0,
+          "num_bytes": 128,
+          "description": "Lower 4 bits of 256 \u00d7 6-bit weights, packed as 128 bytes"
+        },
+        {
+          "name": "weights_high",
+          "block_offset": 128,
+          "num_bytes": 64,
+          "description": "Upper 2 bits of 256 \u00d7 6-bit weights, packed as 64 bytes"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 192,
+          "num_bytes": 16,
+          "description": "16 \u00d7 INT8 sub-block scales; each affects 16 weights"
+        },
+        {
+          "name": "super_scale_d",
+          "block_offset": 208,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 16 sub-block scales; 1 bit flip corrupts all 256 weights"
+        }
+      ]
+    },
+    {
+      "name": "blk.15.ffn_gate.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 15,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 65536,
+      "bytes_per_block": 144,
+      "file_byte_start": 490442880,
+      "file_byte_end": 499880064,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.15.ffn_up.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 15,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 65536,
+      "bytes_per_block": 144,
+      "file_byte_start": 499880064,
+      "file_byte_end": 509317248,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.15.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 15,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 509317248,
+      "file_byte_end": 509325440,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.15.attn_k.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 15,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 4096,
+      "bytes_per_block": 144,
+      "file_byte_start": 509325440,
+      "file_byte_end": 509915264,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.15.attn_output.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 15,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 16384,
+      "bytes_per_block": 144,
+      "file_byte_start": 509915264,
+      "file_byte_end": 512274560,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.15.attn_q.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 15,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 16384,
+      "bytes_per_block": 144,
+      "file_byte_start": 512274560,
+      "file_byte_end": 514633856,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.15.attn_v.weight",
+      "ggml_type": "Q6_K",
+      "role": "attn",
+      "layer": 15,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 4096,
+      "bytes_per_block": 210,
+      "file_byte_start": 514633856,
+      "file_byte_end": 515494016,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights_low",
+          "block_offset": 0,
+          "num_bytes": 128,
+          "description": "Lower 4 bits of 256 \u00d7 6-bit weights, packed as 128 bytes"
+        },
+        {
+          "name": "weights_high",
+          "block_offset": 128,
+          "num_bytes": 64,
+          "description": "Upper 2 bits of 256 \u00d7 6-bit weights, packed as 64 bytes"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 192,
+          "num_bytes": 16,
+          "description": "16 \u00d7 INT8 sub-block scales; each affects 16 weights"
+        },
+        {
+          "name": "super_scale_d",
+          "block_offset": 208,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 16 sub-block scales; 1 bit flip corrupts all 256 weights"
+        }
+      ]
+    },
+    {
+      "name": "blk.2.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 2,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 515494016,
+      "file_byte_end": 515502208,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.2.ffn_down.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 2,
+      "dims": [
+        8192,
+        2048
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 65536,
+      "bytes_per_block": 144,
+      "file_byte_start": 515502208,
+      "file_byte_end": 524939392,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.2.ffn_gate.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 2,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 65536,
+      "bytes_per_block": 144,
+      "file_byte_start": 524939392,
+      "file_byte_end": 534376576,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.2.ffn_up.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 2,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 65536,
+      "bytes_per_block": 144,
+      "file_byte_start": 534376576,
+      "file_byte_end": 543813760,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.2.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 2,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 543813760,
+      "file_byte_end": 543821952,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.2.attn_k.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 2,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 4096,
+      "bytes_per_block": 144,
+      "file_byte_start": 543821952,
+      "file_byte_end": 544411776,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.2.attn_output.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 2,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 16384,
+      "bytes_per_block": 144,
+      "file_byte_start": 544411776,
+      "file_byte_end": 546771072,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.2.attn_q.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 2,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 16384,
+      "bytes_per_block": 144,
+      "file_byte_start": 546771072,
+      "file_byte_end": 549130368,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.2.attn_v.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 2,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 4096,
+      "bytes_per_block": 144,
+      "file_byte_start": 549130368,
+      "file_byte_end": 549720192,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.3.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 3,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 549720192,
+      "file_byte_end": 549728384,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.3.ffn_down.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 3,
+      "dims": [
+        8192,
+        2048
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 65536,
+      "bytes_per_block": 144,
+      "file_byte_start": 549728384,
+      "file_byte_end": 559165568,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.3.ffn_gate.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 3,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 65536,
+      "bytes_per_block": 144,
+      "file_byte_start": 559165568,
+      "file_byte_end": 568602752,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.3.ffn_up.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 3,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 65536,
+      "bytes_per_block": 144,
+      "file_byte_start": 568602752,
+      "file_byte_end": 578039936,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.3.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 3,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 578039936,
+      "file_byte_end": 578048128,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.3.attn_k.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 3,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 4096,
+      "bytes_per_block": 144,
+      "file_byte_start": 578048128,
+      "file_byte_end": 578637952,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.3.attn_output.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 3,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 16384,
+      "bytes_per_block": 144,
+      "file_byte_start": 578637952,
+      "file_byte_end": 580997248,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.3.attn_q.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 3,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 16384,
+      "bytes_per_block": 144,
+      "file_byte_start": 580997248,
+      "file_byte_end": 583356544,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.3.attn_v.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 3,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 4096,
+      "bytes_per_block": 144,
+      "file_byte_start": 583356544,
+      "file_byte_end": 583946368,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.4.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 4,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 583946368,
+      "file_byte_end": 583954560,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.4.ffn_down.weight",
+      "ggml_type": "Q6_K",
+      "role": "ffn",
+      "layer": 4,
+      "dims": [
+        8192,
+        2048
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 65536,
+      "bytes_per_block": 210,
+      "file_byte_start": 583954560,
+      "file_byte_end": 597717120,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights_low",
+          "block_offset": 0,
+          "num_bytes": 128,
+          "description": "Lower 4 bits of 256 \u00d7 6-bit weights, packed as 128 bytes"
+        },
+        {
+          "name": "weights_high",
+          "block_offset": 128,
+          "num_bytes": 64,
+          "description": "Upper 2 bits of 256 \u00d7 6-bit weights, packed as 64 bytes"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 192,
+          "num_bytes": 16,
+          "description": "16 \u00d7 INT8 sub-block scales; each affects 16 weights"
+        },
+        {
+          "name": "super_scale_d",
+          "block_offset": 208,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 16 sub-block scales; 1 bit flip corrupts all 256 weights"
+        }
+      ]
+    },
+    {
+      "name": "blk.4.ffn_gate.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 4,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 65536,
+      "bytes_per_block": 144,
+      "file_byte_start": 597717120,
+      "file_byte_end": 607154304,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.4.ffn_up.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 4,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 65536,
+      "bytes_per_block": 144,
+      "file_byte_start": 607154304,
+      "file_byte_end": 616591488,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.4.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 4,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 616591488,
+      "file_byte_end": 616599680,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.4.attn_k.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 4,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 4096,
+      "bytes_per_block": 144,
+      "file_byte_start": 616599680,
+      "file_byte_end": 617189504,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.4.attn_output.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 4,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 16384,
+      "bytes_per_block": 144,
+      "file_byte_start": 617189504,
+      "file_byte_end": 619548800,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.4.attn_q.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 4,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 16384,
+      "bytes_per_block": 144,
+      "file_byte_start": 619548800,
+      "file_byte_end": 621908096,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.4.attn_v.weight",
+      "ggml_type": "Q6_K",
+      "role": "attn",
+      "layer": 4,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 4096,
+      "bytes_per_block": 210,
+      "file_byte_start": 621908096,
+      "file_byte_end": 622768256,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights_low",
+          "block_offset": 0,
+          "num_bytes": 128,
+          "description": "Lower 4 bits of 256 \u00d7 6-bit weights, packed as 128 bytes"
+        },
+        {
+          "name": "weights_high",
+          "block_offset": 128,
+          "num_bytes": 64,
+          "description": "Upper 2 bits of 256 \u00d7 6-bit weights, packed as 64 bytes"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 192,
+          "num_bytes": 16,
+          "description": "16 \u00d7 INT8 sub-block scales; each affects 16 weights"
+        },
+        {
+          "name": "super_scale_d",
+          "block_offset": 208,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 16 sub-block scales; 1 bit flip corrupts all 256 weights"
+        }
+      ]
+    },
+    {
+      "name": "blk.5.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 5,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 622768256,
+      "file_byte_end": 622776448,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.5.ffn_down.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 5,
+      "dims": [
+        8192,
+        2048
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 65536,
+      "bytes_per_block": 144,
+      "file_byte_start": 622776448,
+      "file_byte_end": 632213632,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.5.ffn_gate.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 5,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 65536,
+      "bytes_per_block": 144,
+      "file_byte_start": 632213632,
+      "file_byte_end": 641650816,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.5.ffn_up.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 5,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 65536,
+      "bytes_per_block": 144,
+      "file_byte_start": 641650816,
+      "file_byte_end": 651088000,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.5.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 5,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 651088000,
+      "file_byte_end": 651096192,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.5.attn_k.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 5,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 4096,
+      "bytes_per_block": 144,
+      "file_byte_start": 651096192,
+      "file_byte_end": 651686016,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.5.attn_output.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 5,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 16384,
+      "bytes_per_block": 144,
+      "file_byte_start": 651686016,
+      "file_byte_end": 654045312,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.5.attn_q.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 5,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 16384,
+      "bytes_per_block": 144,
+      "file_byte_start": 654045312,
+      "file_byte_end": 656404608,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.5.attn_v.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 5,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 4096,
+      "bytes_per_block": 144,
+      "file_byte_start": 656404608,
+      "file_byte_end": 656994432,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.6.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 6,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 656994432,
+      "file_byte_end": 657002624,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.6.ffn_down.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 6,
+      "dims": [
+        8192,
+        2048
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 65536,
+      "bytes_per_block": 144,
+      "file_byte_start": 657002624,
+      "file_byte_end": 666439808,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.6.ffn_gate.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 6,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 65536,
+      "bytes_per_block": 144,
+      "file_byte_start": 666439808,
+      "file_byte_end": 675876992,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.6.ffn_up.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 6,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 65536,
+      "bytes_per_block": 144,
+      "file_byte_start": 675876992,
+      "file_byte_end": 685314176,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.6.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 6,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 685314176,
+      "file_byte_end": 685322368,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.6.attn_k.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 6,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 4096,
+      "bytes_per_block": 144,
+      "file_byte_start": 685322368,
+      "file_byte_end": 685912192,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.6.attn_output.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 6,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 16384,
+      "bytes_per_block": 144,
+      "file_byte_start": 685912192,
+      "file_byte_end": 688271488,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.6.attn_q.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 6,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 16384,
+      "bytes_per_block": 144,
+      "file_byte_start": 688271488,
+      "file_byte_end": 690630784,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.6.attn_v.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 6,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 4096,
+      "bytes_per_block": 144,
+      "file_byte_start": 690630784,
+      "file_byte_end": 691220608,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.7.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 7,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 691220608,
+      "file_byte_end": 691228800,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.7.ffn_down.weight",
+      "ggml_type": "Q6_K",
+      "role": "ffn",
+      "layer": 7,
+      "dims": [
+        8192,
+        2048
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 65536,
+      "bytes_per_block": 210,
+      "file_byte_start": 691228800,
+      "file_byte_end": 704991360,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights_low",
+          "block_offset": 0,
+          "num_bytes": 128,
+          "description": "Lower 4 bits of 256 \u00d7 6-bit weights, packed as 128 bytes"
+        },
+        {
+          "name": "weights_high",
+          "block_offset": 128,
+          "num_bytes": 64,
+          "description": "Upper 2 bits of 256 \u00d7 6-bit weights, packed as 64 bytes"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 192,
+          "num_bytes": 16,
+          "description": "16 \u00d7 INT8 sub-block scales; each affects 16 weights"
+        },
+        {
+          "name": "super_scale_d",
+          "block_offset": 208,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 16 sub-block scales; 1 bit flip corrupts all 256 weights"
+        }
+      ]
+    },
+    {
+      "name": "blk.7.ffn_gate.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 7,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 65536,
+      "bytes_per_block": 144,
+      "file_byte_start": 704991360,
+      "file_byte_end": 714428544,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.7.ffn_up.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 7,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 65536,
+      "bytes_per_block": 144,
+      "file_byte_start": 714428544,
+      "file_byte_end": 723865728,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.7.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 7,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 723865728,
+      "file_byte_end": 723873920,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.7.attn_k.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 7,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 4096,
+      "bytes_per_block": 144,
+      "file_byte_start": 723873920,
+      "file_byte_end": 724463744,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.7.attn_output.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 7,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 16384,
+      "bytes_per_block": 144,
+      "file_byte_start": 724463744,
+      "file_byte_end": 726823040,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.7.attn_q.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 7,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 16384,
+      "bytes_per_block": 144,
+      "file_byte_start": 726823040,
+      "file_byte_end": 729182336,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.7.attn_v.weight",
+      "ggml_type": "Q6_K",
+      "role": "attn",
+      "layer": 7,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 4096,
+      "bytes_per_block": 210,
+      "file_byte_start": 729182336,
+      "file_byte_end": 730042496,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights_low",
+          "block_offset": 0,
+          "num_bytes": 128,
+          "description": "Lower 4 bits of 256 \u00d7 6-bit weights, packed as 128 bytes"
+        },
+        {
+          "name": "weights_high",
+          "block_offset": 128,
+          "num_bytes": 64,
+          "description": "Upper 2 bits of 256 \u00d7 6-bit weights, packed as 64 bytes"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 192,
+          "num_bytes": 16,
+          "description": "16 \u00d7 INT8 sub-block scales; each affects 16 weights"
+        },
+        {
+          "name": "super_scale_d",
+          "block_offset": 208,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 16 sub-block scales; 1 bit flip corrupts all 256 weights"
+        }
+      ]
+    },
+    {
+      "name": "blk.8.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 8,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 730042496,
+      "file_byte_end": 730050688,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.8.ffn_down.weight",
+      "ggml_type": "Q6_K",
+      "role": "ffn",
+      "layer": 8,
+      "dims": [
+        8192,
+        2048
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 65536,
+      "bytes_per_block": 210,
+      "file_byte_start": 730050688,
+      "file_byte_end": 743813248,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights_low",
+          "block_offset": 0,
+          "num_bytes": 128,
+          "description": "Lower 4 bits of 256 \u00d7 6-bit weights, packed as 128 bytes"
+        },
+        {
+          "name": "weights_high",
+          "block_offset": 128,
+          "num_bytes": 64,
+          "description": "Upper 2 bits of 256 \u00d7 6-bit weights, packed as 64 bytes"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 192,
+          "num_bytes": 16,
+          "description": "16 \u00d7 INT8 sub-block scales; each affects 16 weights"
+        },
+        {
+          "name": "super_scale_d",
+          "block_offset": 208,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 16 sub-block scales; 1 bit flip corrupts all 256 weights"
+        }
+      ]
+    },
+    {
+      "name": "blk.8.ffn_gate.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 8,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 65536,
+      "bytes_per_block": 144,
+      "file_byte_start": 743813248,
+      "file_byte_end": 753250432,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.8.ffn_up.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 8,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 65536,
+      "bytes_per_block": 144,
+      "file_byte_start": 753250432,
+      "file_byte_end": 762687616,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.8.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 8,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 762687616,
+      "file_byte_end": 762695808,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.8.attn_k.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 8,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 4096,
+      "bytes_per_block": 144,
+      "file_byte_start": 762695808,
+      "file_byte_end": 763285632,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.8.attn_output.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 8,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 16384,
+      "bytes_per_block": 144,
+      "file_byte_start": 763285632,
+      "file_byte_end": 765644928,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.8.attn_q.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 8,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 16384,
+      "bytes_per_block": 144,
+      "file_byte_start": 765644928,
+      "file_byte_end": 768004224,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.8.attn_v.weight",
+      "ggml_type": "Q6_K",
+      "role": "attn",
+      "layer": 8,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 4096,
+      "bytes_per_block": 210,
+      "file_byte_start": 768004224,
+      "file_byte_end": 768864384,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights_low",
+          "block_offset": 0,
+          "num_bytes": 128,
+          "description": "Lower 4 bits of 256 \u00d7 6-bit weights, packed as 128 bytes"
+        },
+        {
+          "name": "weights_high",
+          "block_offset": 128,
+          "num_bytes": 64,
+          "description": "Upper 2 bits of 256 \u00d7 6-bit weights, packed as 64 bytes"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 192,
+          "num_bytes": 16,
+          "description": "16 \u00d7 INT8 sub-block scales; each affects 16 weights"
+        },
+        {
+          "name": "super_scale_d",
+          "block_offset": 208,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 16 sub-block scales; 1 bit flip corrupts all 256 weights"
+        }
+      ]
+    },
+    {
+      "name": "blk.9.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 9,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 768864384,
+      "file_byte_end": 768872576,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.9.ffn_down.weight",
+      "ggml_type": "Q6_K",
+      "role": "ffn",
+      "layer": 9,
+      "dims": [
+        8192,
+        2048
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 65536,
+      "bytes_per_block": 210,
+      "file_byte_start": 768872576,
+      "file_byte_end": 782635136,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights_low",
+          "block_offset": 0,
+          "num_bytes": 128,
+          "description": "Lower 4 bits of 256 \u00d7 6-bit weights, packed as 128 bytes"
+        },
+        {
+          "name": "weights_high",
+          "block_offset": 128,
+          "num_bytes": 64,
+          "description": "Upper 2 bits of 256 \u00d7 6-bit weights, packed as 64 bytes"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 192,
+          "num_bytes": 16,
+          "description": "16 \u00d7 INT8 sub-block scales; each affects 16 weights"
+        },
+        {
+          "name": "super_scale_d",
+          "block_offset": 208,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 16 sub-block scales; 1 bit flip corrupts all 256 weights"
+        }
+      ]
+    },
+    {
+      "name": "blk.9.ffn_gate.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 9,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 65536,
+      "bytes_per_block": 144,
+      "file_byte_start": 782635136,
+      "file_byte_end": 792072320,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.9.ffn_up.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 9,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 65536,
+      "bytes_per_block": 144,
+      "file_byte_start": 792072320,
+      "file_byte_end": 801509504,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.9.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 9,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 801509504,
+      "file_byte_end": 801517696,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.9.attn_k.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 9,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 4096,
+      "bytes_per_block": 144,
+      "file_byte_start": 801517696,
+      "file_byte_end": 802107520,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.9.attn_output.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 9,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 16384,
+      "bytes_per_block": 144,
+      "file_byte_start": 802107520,
+      "file_byte_end": 804466816,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.9.attn_q.weight",
+      "ggml_type": "Q4_K",
+      "role": "attn",
+      "layer": 9,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 16384,
+      "bytes_per_block": 144,
+      "file_byte_start": 804466816,
+      "file_byte_end": 806826112,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.9.attn_v.weight",
+      "ggml_type": "Q6_K",
+      "role": "attn",
+      "layer": 9,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 4096,
+      "bytes_per_block": 210,
+      "file_byte_start": 806826112,
+      "file_byte_end": 807686272,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights_low",
+          "block_offset": 0,
+          "num_bytes": 128,
+          "description": "Lower 4 bits of 256 \u00d7 6-bit weights, packed as 128 bytes"
+        },
+        {
+          "name": "weights_high",
+          "block_offset": 128,
+          "num_bytes": 64,
+          "description": "Upper 2 bits of 256 \u00d7 6-bit weights, packed as 64 bytes"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 192,
+          "num_bytes": 16,
+          "description": "16 \u00d7 INT8 sub-block scales; each affects 16 weights"
+        },
+        {
+          "name": "super_scale_d",
+          "block_offset": 208,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 16 sub-block scales; 1 bit flip corrupts all 256 weights"
+        }
+      ]
+    },
+    {
+      "name": "output_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": null,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 807686272,
+      "file_byte_end": 807694464,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    }
+  ]
+}

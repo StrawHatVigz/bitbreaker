@@ -1,0 +1,502 @@
+{
+  "label": "qwen_q4km",
+  "model_path": "models/qwen2.5-0.5b-instruct-fp16.gguf",
+  "tasks": {
+    "arc_easy": {
+      "task": "arc_easy",
+      "accuracy": 0.7,
+      "correct": 14,
+      "total": 20,
+      "results": [
+        {
+          "question": "Which statement best explains why photosynthesis is the foundation of most food webs?",
+          "correct_label": "A",
+          "predicted_label": "A",
+          "correct": true,
+          "scores": {
+            "A": -19.594083786010742,
+            "B": -30.742395401000977,
+            "C": -25.691909790039062,
+            "D": -21.243267059326172
+          }
+        },
+        {
+          "question": "Which piece of safety equipment is used to keep mold spores from entering the respiratory system?",
+          "correct_label": "B",
+          "predicted_label": "C",
+          "correct": false,
+          "scores": {
+            "A": -13.398712158203125,
+            "B": -13.466086387634277,
+            "C": -12.927480697631836,
+            "D": -18.484533309936523
+          }
+        },
+        {
+          "question": "Meiosis is a type of cell division in which germ cells divide to produce haploid cells. Where does meiosis occur?",
+          "correct_label": "D",
+          "predicted_label": "C",
+          "correct": false,
+          "scores": {
+            "A": -19.053335189819336,
+            "B": -19.636131286621094,
+            "C": -15.8603515625,
+            "D": -19.079517364501953
+          }
+        },
+        {
+          "question": "Which characteristic describes the texture of a kitten's fur?",
+          "correct_label": "D",
+          "predicted_label": "D",
+          "correct": true,
+          "scores": {
+            "A": -12.799309730529785,
+            "B": -13.786791801452637,
+            "C": -14.44579792022705,
+            "D": -10.391595840454102
+          }
+        },
+        {
+          "question": "Which best describes the structure of an atom?",
+          "correct_label": "B",
+          "predicted_label": "C",
+          "correct": false,
+          "scores": {
+            "A": -39.49122619628906,
+            "B": -39.97639083862305,
+            "C": -38.73668670654297,
+            "D": -47.41099166870117
+          }
+        },
+        {
+          "question": "To express the distance between the Milky Way galaxy and other galaxies, the most appropriate unit of measurement is the",
+          "correct_label": "C",
+          "predicted_label": "C",
+          "correct": true,
+          "scores": {
+            "A": -6.792534351348877,
+            "B": -7.701934814453125,
+            "C": -3.9266581535339355,
+            "D": -7.997879505157471
+          }
+        },
+        {
+          "question": "A student has just completed a laboratory activity. What is the last action that the student should perform before leaving the lab area?",
+          "correct_label": "A",
+          "predicted_label": "A",
+          "correct": true,
+          "scores": {
+            "A": -8.890948295593262,
+            "B": -12.034562110900879,
+            "C": -20.698698043823242,
+            "D": -27.617568969726562
+          }
+        },
+        {
+          "question": "Students are investigating the effects of different fertilizers on plant growth. Which units would be best to measure the mass of the fertilizer used?",
+          "correct_label": "C",
+          "predicted_label": "C",
+          "correct": true,
+          "scores": {
+            "A": -10.389522552490234,
+            "B": -10.323321342468262,
+            "C": -0.9310702085494995,
+            "D": -4.552891731262207
+          }
+        },
+        {
+          "question": "Plants use sunlight to make",
+          "correct_label": "C",
+          "predicted_label": "C",
+          "correct": true,
+          "scores": {
+            "A": -14.87411117553711,
+            "B": -12.737371444702148,
+            "C": -8.828173637390137,
+            "D": -11.866632461547852
+          }
+        },
+        {
+          "question": "Which of these correctly identifies the way materials are transported in a plant?",
+          "correct_label": "A",
+          "predicted_label": "A",
+          "correct": true,
+          "scores": {
+            "A": -18.343791961669922,
+            "B": -19.80592918395996,
+            "C": -38.788387298583984,
+            "D": -29.860517501831055
+          }
+        },
+        {
+          "question": "When trees develop leaves in the spring, 10 changes occur on the forest floor. Why does the development of leaves cause changes on the forest floor?",
+          "correct_label": "B",
+          "predicted_label": "A",
+          "correct": false,
+          "scores": {
+            "A": -14.808757781982422,
+            "B": -24.069395065307617,
+            "C": -18.244661331176758,
+            "D": -25.774972915649414
+          }
+        },
+        {
+          "question": "The circulatory system and the endocrine system work together in the human body. Which describes one way in which these systems interact?",
+          "correct_label": "B",
+          "predicted_label": "C",
+          "correct": false,
+          "scores": {
+            "A": -32.64097595214844,
+            "B": -32.66220474243164,
+            "C": -30.4406681060791,
+            "D": -36.81109619140625
+          }
+        },
+        {
+          "question": "A student throws a ball into the air. While the ball travels up, the speed of the ball decreases. What force causes the ball to slow while traveling up?",
+          "correct_label": "B",
+          "predicted_label": "B",
+          "correct": true,
+          "scores": {
+            "A": -14.544288635253906,
+            "B": -1.7694356441497803,
+            "C": -12.850516319274902,
+            "D": -8.632247924804688
+          }
+        },
+        {
+          "question": "Which of these will most likely harm a habitat?",
+          "correct_label": "B",
+          "predicted_label": "B",
+          "correct": true,
+          "scores": {
+            "A": -13.608325004577637,
+            "B": -11.255414009094238,
+            "C": -13.269821166992188,
+            "D": -12.422497749328613
+          }
+        },
+        {
+          "question": "All living and nonliving material is composed of",
+          "correct_label": "2",
+          "predicted_label": "2",
+          "correct": true,
+          "scores": {
+            "1": -9.042431831359863,
+            "2": -6.932849407196045,
+            "3": -7.528414249420166,
+            "4": -12.513362884521484
+          }
+        },
+        {
+          "question": "Which process best explains how the Grand Canyon became so wide?",
+          "correct_label": "B",
+          "predicted_label": "B",
+          "correct": true,
+          "scores": {
+            "A": -17.850236892700195,
+            "B": -9.317142486572266,
+            "C": -13.164952278137207,
+            "D": -13.244004249572754
+          }
+        },
+        {
+          "question": "As global temperatures increase, certain organisms will be more affected than others. The changes associated with global warming may result in an increase in sea level. Which organisms will be affected most as a result of the change in sea level?",
+          "correct_label": "B",
+          "predicted_label": "B",
+          "correct": true,
+          "scores": {
+            "A": -34.8140983581543,
+            "B": -29.746721267700195,
+            "C": -33.60627365112305,
+            "D": -43.334171295166016
+          }
+        },
+        {
+          "question": "A dish of sugar water was left on a window sill. One week later, there were only sugar crystals left in the dish. The water was gone. The best explanation for the appearance of sugar crystals is",
+          "correct_label": "D",
+          "predicted_label": "D",
+          "correct": true,
+          "scores": {
+            "A": -26.59142303466797,
+            "B": -21.191438674926758,
+            "C": -36.296688079833984,
+            "D": -8.624858856201172
+          }
+        },
+        {
+          "question": "Using a softball bat to hit a softball is an example of using which simple machine?",
+          "correct_label": "B",
+          "predicted_label": "A",
+          "correct": false,
+          "scores": {
+            "A": -1.4722923040390015,
+            "B": -4.985618591308594,
+            "C": -9.419103622436523,
+            "D": -8.603842735290527
+          }
+        },
+        {
+          "question": "When an igneous intrusion comes into contact with surrounding rock, the surrounding rock will",
+          "correct_label": "D",
+          "predicted_label": "D",
+          "correct": true,
+          "scores": {
+            "A": -11.276939392089844,
+            "B": -12.614253044128418,
+            "C": -12.783133506774902,
+            "D": -10.463664054870605
+          }
+        }
+      ]
+    },
+    "hellaswag": {
+      "task": "hellaswag",
+      "accuracy": 0.3,
+      "correct": 6,
+      "total": 20,
+      "results": [
+        {
+          "context": "A man is sitting on a roof. he",
+          "correct": 3,
+          "predicted": 2,
+          "is_correct": false,
+          "scores": [
+            -47.67545700073242,
+            -37.994163513183594,
+            -19.613985061645508,
+            -38.58839797973633
+          ]
+        },
+        {
+          "context": "A lady walks to a barbell. She bends down and grabs the pole. the lady",
+          "correct": 3,
+          "predicted": 1,
+          "is_correct": false,
+          "scores": [
+            -21.462657928466797,
+            -13.665396690368652,
+            -15.048296928405762,
+            -22.471782684326172
+          ]
+        },
+        {
+          "context": "Two women in a child are shown in a canoe while a man pulls the canoe while standing in the water, with other individuals visible in the background. the child and a different man",
+          "correct": 2,
+          "predicted": 2,
+          "is_correct": true,
+          "scores": [
+            -40.11911392211914,
+            -49.62101364135742,
+            -23.276695251464844,
+            -107.47871398925781
+          ]
+        },
+        {
+          "context": "A boy is running down a track. the boy",
+          "correct": 2,
+          "predicted": 0,
+          "is_correct": false,
+          "scores": [
+            -18.07417869567871,
+            -28.696611404418945,
+            -38.724082946777344,
+            -28.54830551147461
+          ]
+        },
+        {
+          "context": "The boy lifts his body above the height of a pole. The boy lands on his back on to a red mat. the boy",
+          "correct": 1,
+          "predicted": 1,
+          "is_correct": true,
+          "scores": [
+            -17.95136260986328,
+            -12.54629898071289,
+            -17.088130950927734,
+            -18.78314208984375
+          ]
+        },
+        {
+          "context": "The boy lands on his back on to a red mat. The boy gets up from the mat. the boy",
+          "correct": 1,
+          "predicted": 2,
+          "is_correct": false,
+          "scores": [
+            -20.85316276550293,
+            -39.11499786376953,
+            -14.459275245666504,
+            -34.45380401611328
+          ]
+        },
+        {
+          "context": "A man is standing in front of a camera. He starts playing a harmonica for the camera. he",
+          "correct": 2,
+          "predicted": 1,
+          "is_correct": false,
+          "scores": [
+            -28.2634334564209,
+            -14.885251998901367,
+            -34.312774658203125,
+            -28.03724479675293
+          ]
+        },
+        {
+          "context": "A cartoon animation video is shown with people wandering around and rockets being shot. two men",
+          "correct": 0,
+          "predicted": 2,
+          "is_correct": false,
+          "scores": [
+            -63.058475494384766,
+            -41.62615203857422,
+            -35.145721435546875,
+            -35.8999137878418
+          ]
+        },
+        {
+          "context": "A man is holding a pocket knife while sitting on some rocks in the wilderness. then he",
+          "correct": 1,
+          "predicted": 2,
+          "is_correct": false,
+          "scores": [
+            -127.17511749267578,
+            -48.73377227783203,
+            -20.51784896850586,
+            -56.13766098022461
+          ]
+        },
+        {
+          "context": "Then he takes a small stone from the flowing river and smashes it on another stone. He starts to crush the small stone to smaller pieces. he",
+          "correct": 1,
+          "predicted": 1,
+          "is_correct": true,
+          "scores": [
+            -53.151023864746094,
+            -31.509441375732422,
+            -76.24067687988281,
+            -64.89034271240234
+          ]
+        },
+        {
+          "context": "Then he takes a piece of bark and rubs the powered stone pieces onto it. The stone particles stick to the wet piece of wood. he",
+          "correct": 3,
+          "predicted": 2,
+          "is_correct": false,
+          "scores": [
+            -28.36884307861328,
+            -60.57603454589844,
+            -20.9366512298584,
+            -33.62250518798828
+          ]
+        },
+        {
+          "context": "The stone particles stick to the wet piece of wood. He then takes the knife and sharpens it against the wood piece. he",
+          "correct": 3,
+          "predicted": 2,
+          "is_correct": false,
+          "scores": [
+            -27.163299560546875,
+            -64.54621887207031,
+            -24.569326400756836,
+            -62.46101379394531
+          ]
+        },
+        {
+          "context": "He then takes the knife and sharpens it against the wood piece. He then notices a little black and green poisonous frog sitting next to him. the frog",
+          "correct": 2,
+          "predicted": 2,
+          "is_correct": true,
+          "scores": [
+            -64.01883697509766,
+            -48.1623420715332,
+            -20.158170700073242,
+            -34.40579605102539
+          ]
+        },
+        {
+          "context": "He then notices a little black and green poisonous frog sitting next to him. The frog then escapes and jumps away. he",
+          "correct": 2,
+          "predicted": 3,
+          "is_correct": false,
+          "scores": [
+            -57.41911315917969,
+            -70.86957550048828,
+            -51.40353775024414,
+            -40.968353271484375
+          ]
+        },
+        {
+          "context": "A person is playing bagpipes out in a park. A man and two boys watching from a far. the camera",
+          "correct": 0,
+          "predicted": 1,
+          "is_correct": false,
+          "scores": [
+            -43.727989196777344,
+            -42.9231071472168,
+            -47.633949279785156,
+            -50.0291748046875
+          ]
+        },
+        {
+          "context": "Two people are seen passing a ball back and fourth in a pool and leads into one speaking to the camera. the man",
+          "correct": 3,
+          "predicted": 3,
+          "is_correct": true,
+          "scores": [
+            -77.36609649658203,
+            -60.864044189453125,
+            -77.04024505615234,
+            -39.918357849121094
+          ]
+        },
+        {
+          "context": "A woman is sitting at a table in a fast food restaurant while eating. She continually speaks to nobody as she eats. she",
+          "correct": 2,
+          "predicted": 1,
+          "is_correct": false,
+          "scores": [
+            -51.13304901123047,
+            -31.68096160888672,
+            -49.23772430419922,
+            -40.66910171508789
+          ]
+        },
+        {
+          "context": "A group of cheerleaders run onto a stage before a cheering audience. they",
+          "correct": 0,
+          "predicted": 2,
+          "is_correct": false,
+          "scores": [
+            -59.70518493652344,
+            -67.09268951416016,
+            -37.51679992675781,
+            -68.17057037353516
+          ]
+        },
+        {
+          "context": "A group of cheerleaders run onto a stage before a cheering audience. They get into formation, then begin dancing and flipping as male cheerleaders join them. they all",
+          "correct": 1,
+          "predicted": 2,
+          "is_correct": false,
+          "scores": [
+            -38.291778564453125,
+            -34.69297790527344,
+            -32.18486785888672,
+            -72.98017883300781
+          ]
+        },
+        {
+          "context": "They get into formation, then begin dancing and flipping as male cheerleaders join them. They all continue dancing and flipping, doing hand springs. when they",
+          "correct": 1,
+          "predicted": 1,
+          "is_correct": true,
+          "scores": [
+            -66.55050659179688,
+            -42.40999984741211,
+            -46.354583740234375,
+            -56.372310638427734
+          ]
+        }
+      ]
+    }
+  }
+}

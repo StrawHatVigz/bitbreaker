@@ -1,0 +1,254 @@
+{
+  "label": "qwen_q4km",
+  "model_path": "models/qwen2.5-0.5b-instruct-q4_k_m.gguf",
+  "tasks": {
+    "arc_easy": {
+      "task": "arc_easy",
+      "accuracy": 0.7,
+      "correct": 14,
+      "total": 20,
+      "results": [
+        {
+          "question": "Which statement best explains why photosynthesis is the foundation of most food webs?",
+          "correct_label": "A",
+          "predicted_label": "A",
+          "correct": true,
+          "scores": {
+            "A": -20.177169799804688,
+            "B": -31.983776092529297,
+            "C": -24.451786041259766,
+            "D": -22.59187889099121
+          }
+        },
+        {
+          "question": "Which piece of safety equipment is used to keep mold spores from entering the respiratory system?",
+          "correct_label": "B",
+          "predicted_label": "B",
+          "correct": true,
+          "scores": {
+            "A": -12.908919334411621,
+            "B": -12.464240074157715,
+            "C": -13.060979843139648,
+            "D": -20.187610626220703
+          }
+        },
+        {
+          "question": "Meiosis is a type of cell division in which germ cells divide to produce haploid cells. Where does meiosis occur?",
+          "correct_label": "D",
+          "predicted_label": "C",
+          "correct": false,
+          "scores": {
+            "A": -21.779611587524414,
+            "B": -22.03429412841797,
+            "C": -18.696964263916016,
+            "D": -21.907806396484375
+          }
+        },
+        {
+          "question": "Which characteristic describes the texture of a kitten's fur?",
+          "correct_label": "D",
+          "predicted_label": "D",
+          "correct": true,
+          "scores": {
+            "A": -12.026345252990723,
+            "B": -13.505578994750977,
+            "C": -13.38928508758545,
+            "D": -9.170878410339355
+          }
+        },
+        {
+          "question": "Which best describes the structure of an atom?",
+          "correct_label": "B",
+          "predicted_label": "C",
+          "correct": false,
+          "scores": {
+            "A": -40.707088470458984,
+            "B": -41.33262634277344,
+            "C": -38.727142333984375,
+            "D": -49.121700286865234
+          }
+        },
+        {
+          "question": "To express the distance between the Milky Way galaxy and other galaxies, the most appropriate unit of measurement is the",
+          "correct_label": "C",
+          "predicted_label": "C",
+          "correct": true,
+          "scores": {
+            "A": -6.836460590362549,
+            "B": -5.516288757324219,
+            "C": -2.9987497329711914,
+            "D": -8.122998237609863
+          }
+        },
+        {
+          "question": "A student has just completed a laboratory activity. What is the last action that the student should perform before leaving the lab area?",
+          "correct_label": "A",
+          "predicted_label": "A",
+          "correct": true,
+          "scores": {
+            "A": -10.399622917175293,
+            "B": -13.098225593566895,
+            "C": -21.979490280151367,
+            "D": -29.812326431274414
+          }
+        },
+        {
+          "question": "Students are investigating the effects of different fertilizers on plant growth. Which units would be best to measure the mass of the fertilizer used?",
+          "correct_label": "C",
+          "predicted_label": "C",
+          "correct": true,
+          "scores": {
+            "A": -9.610814094543457,
+            "B": -9.244670867919922,
+            "C": -1.2851845026016235,
+            "D": -4.761719703674316
+          }
+        },
+        {
+          "question": "Plants use sunlight to make",
+          "correct_label": "C",
+          "predicted_label": "C",
+          "correct": true,
+          "scores": {
+            "A": -14.325323104858398,
+            "B": -10.324796676635742,
+            "C": -3.8001861572265625,
+            "D": -8.930996894836426
+          }
+        },
+        {
+          "question": "Which of these correctly identifies the way materials are transported in a plant?",
+          "correct_label": "A",
+          "predicted_label": "A",
+          "correct": true,
+          "scores": {
+            "A": -19.38273048400879,
+            "B": -19.73997688293457,
+            "C": -38.052734375,
+            "D": -30.45697593688965
+          }
+        },
+        {
+          "question": "When trees develop leaves in the spring, 10 changes occur on the forest floor. Why does the development of leaves cause changes on the forest floor?",
+          "correct_label": "B",
+          "predicted_label": "A",
+          "correct": false,
+          "scores": {
+            "A": -15.393367767333984,
+            "B": -24.559261322021484,
+            "C": -18.933443069458008,
+            "D": -26.81458282470703
+          }
+        },
+        {
+          "question": "The circulatory system and the endocrine system work together in the human body. Which describes one way in which these systems interact?",
+          "correct_label": "B",
+          "predicted_label": "C",
+          "correct": false,
+          "scores": {
+            "A": -33.93661880493164,
+            "B": -34.368099212646484,
+            "C": -29.877878189086914,
+            "D": -36.016685485839844
+          }
+        },
+        {
+          "question": "A student throws a ball into the air. While the ball travels up, the speed of the ball decreases. What force causes the ball to slow while traveling up?",
+          "correct_label": "B",
+          "predicted_label": "B",
+          "correct": true,
+          "scores": {
+            "A": -14.920915603637695,
+            "B": -1.4545475244522095,
+            "C": -12.714742660522461,
+            "D": -8.5953950881958
+          }
+        },
+        {
+          "question": "Which of these will most likely harm a habitat?",
+          "correct_label": "B",
+          "predicted_label": "B",
+          "correct": true,
+          "scores": {
+            "A": -12.248482704162598,
+            "B": -10.816130638122559,
+            "C": -12.157302856445312,
+            "D": -11.304195404052734
+          }
+        },
+        {
+          "question": "All living and nonliving material is composed of",
+          "correct_label": "2",
+          "predicted_label": "2",
+          "correct": true,
+          "scores": {
+            "1": -7.716041088104248,
+            "2": -2.974569797515869,
+            "3": -6.064065456390381,
+            "4": -13.863828659057617
+          }
+        },
+        {
+          "question": "Which process best explains how the Grand Canyon became so wide?",
+          "correct_label": "B",
+          "predicted_label": "B",
+          "correct": true,
+          "scores": {
+            "A": -18.180173873901367,
+            "B": -8.493817329406738,
+            "C": -13.909682273864746,
+            "D": -13.470382690429688
+          }
+        },
+        {
+          "question": "As global temperatures increase, certain organisms will be more affected than others. The changes associated with global warming may result in an increase in sea level. Which organisms will be affected most as a result of the change in sea level?",
+          "correct_label": "B",
+          "predicted_label": "B",
+          "correct": true,
+          "scores": {
+            "A": -33.47380065917969,
+            "B": -28.856813430786133,
+            "C": -31.047819137573242,
+            "D": -41.722869873046875
+          }
+        },
+        {
+          "question": "A dish of sugar water was left on a window sill. One week later, there were only sugar crystals left in the dish. The water was gone. The best explanation for the appearance of sugar crystals is",
+          "correct_label": "D",
+          "predicted_label": "D",
+          "correct": true,
+          "scores": {
+            "A": -27.550369262695312,
+            "B": -20.528648376464844,
+            "C": -35.538509368896484,
+            "D": -8.064979553222656
+          }
+        },
+        {
+          "question": "Using a softball bat to hit a softball is an example of using which simple machine?",
+          "correct_label": "B",
+          "predicted_label": "A",
+          "correct": false,
+          "scores": {
+            "A": -1.1388964653015137,
+            "B": -4.755085468292236,
+            "C": -9.416825294494629,
+            "D": -8.697940826416016
+          }
+        },
+        {
+          "question": "When an igneous intrusion comes into contact with surrounding rock, the surrounding rock will",
+          "correct_label": "D",
+          "predicted_label": "A",
+          "correct": false,
+          "scores": {
+            "A": -9.008408546447754,
+            "B": -13.307846069335938,
+            "C": -12.753863334655762,
+            "D": -10.361029624938965
+          }
+        }
+      ]
+    }
+  }
+}

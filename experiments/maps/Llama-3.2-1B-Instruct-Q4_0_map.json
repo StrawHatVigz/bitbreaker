@@ -1,0 +1,4251 @@
+{
+  "model_path": "/Users/viggy/Documents/Grad School/Sem_4/ECE 591 - SW HW Co-design/Project/bitbreaker/models/Llama-3.2-1B-Instruct-Q4_0.gguf",
+  "quant_label": "Q4_0",
+  "tensor_data_base_offset": 7831552,
+  "n_layers": 16,
+  "fp16_bit_layout": {
+    "sign": [
+      15
+    ],
+    "exponent_msb": [
+      14
+    ],
+    "exponent": [
+      10,
+      11,
+      12,
+      13,
+      14
+    ],
+    "mantissa_msb": [
+      9
+    ],
+    "mantissa": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "mantissa_lsb": [
+      0
+    ]
+  },
+  "block_layouts_reference": {
+    "F16": {
+      "weights_per_block": 1,
+      "bytes_per_block": 2,
+      "regions": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    "Q8_0": {
+      "weights_per_block": 32,
+      "bytes_per_block": 34,
+      "regions": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    "Q4_0": {
+      "weights_per_block": 32,
+      "bytes_per_block": 18,
+      "regions": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    "Q4_K": {
+      "weights_per_block": 256,
+      "bytes_per_block": 144,
+      "regions": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    "Q6_K": {
+      "weights_per_block": 256,
+      "bytes_per_block": 210,
+      "regions": [
+        {
+          "name": "weights_low",
+          "block_offset": 0,
+          "num_bytes": 128,
+          "description": "Lower 4 bits of 256 \u00d7 6-bit weights, packed as 128 bytes"
+        },
+        {
+          "name": "weights_high",
+          "block_offset": 128,
+          "num_bytes": 64,
+          "description": "Upper 2 bits of 256 \u00d7 6-bit weights, packed as 64 bytes"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 192,
+          "num_bytes": 16,
+          "description": "16 \u00d7 INT8 sub-block scales; each affects 16 weights"
+        },
+        {
+          "name": "super_scale_d",
+          "block_offset": 208,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 16 sub-block scales; 1 bit flip corrupts all 256 weights"
+        }
+      ]
+    }
+  },
+  "tensors": [
+    {
+      "name": "rope_freqs.weight",
+      "ggml_type": "F32",
+      "role": "other",
+      "layer": null,
+      "dims": [
+        32
+      ],
+      "n_weights": 32,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 7831552,
+      "file_byte_end": 7831680,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "token_embd.weight",
+      "ggml_type": "Q6_K",
+      "role": "embedding",
+      "layer": null,
+      "dims": [
+        2048,
+        128256
+      ],
+      "n_weights": 262668288,
+      "n_blocks": 1026048,
+      "bytes_per_block": 210,
+      "file_byte_start": 7831680,
+      "file_byte_end": 223301760,
+      "in_scope": false,
+      "reason_out_of_scope": "Embedding tensor excluded from flip pool",
+      "block_layout": [
+        {
+          "name": "weights_low",
+          "block_offset": 0,
+          "num_bytes": 128,
+          "description": "Lower 4 bits of 256 \u00d7 6-bit weights, packed as 128 bytes"
+        },
+        {
+          "name": "weights_high",
+          "block_offset": 128,
+          "num_bytes": 64,
+          "description": "Upper 2 bits of 256 \u00d7 6-bit weights, packed as 64 bytes"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 192,
+          "num_bytes": 16,
+          "description": "16 \u00d7 INT8 sub-block scales; each affects 16 weights"
+        },
+        {
+          "name": "super_scale_d",
+          "block_offset": 208,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 16 sub-block scales; 1 bit flip corrupts all 256 weights"
+        }
+      ]
+    },
+    {
+      "name": "blk.0.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 0,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 223301760,
+      "file_byte_end": 223309952,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.0.ffn_down.weight",
+      "ggml_type": "Q4_1",
+      "role": "ffn",
+      "layer": 0,
+      "dims": [
+        8192,
+        2048
+      ],
+      "n_weights": 16777216,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 223309952,
+      "file_byte_end": 223309952,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q4_1",
+      "block_layout": null
+    },
+    {
+      "name": "blk.0.ffn_gate.weight",
+      "ggml_type": "Q4_0",
+      "role": "ffn",
+      "layer": 0,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 524288,
+      "bytes_per_block": 18,
+      "file_byte_start": 233795712,
+      "file_byte_end": 243232896,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.0.ffn_up.weight",
+      "ggml_type": "Q4_0",
+      "role": "ffn",
+      "layer": 0,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 524288,
+      "bytes_per_block": 18,
+      "file_byte_start": 243232896,
+      "file_byte_end": 252670080,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.0.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 0,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 252670080,
+      "file_byte_end": 252678272,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.0.attn_k.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 0,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 32768,
+      "bytes_per_block": 18,
+      "file_byte_start": 252678272,
+      "file_byte_end": 253268096,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.0.attn_output.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 0,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 131072,
+      "bytes_per_block": 18,
+      "file_byte_start": 253268096,
+      "file_byte_end": 255627392,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.0.attn_q.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 0,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 131072,
+      "bytes_per_block": 18,
+      "file_byte_start": 255627392,
+      "file_byte_end": 257986688,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.0.attn_v.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 0,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 32768,
+      "bytes_per_block": 18,
+      "file_byte_start": 257986688,
+      "file_byte_end": 258576512,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.1.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 1,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 258576512,
+      "file_byte_end": 258584704,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.1.ffn_down.weight",
+      "ggml_type": "Q4_1",
+      "role": "ffn",
+      "layer": 1,
+      "dims": [
+        8192,
+        2048
+      ],
+      "n_weights": 16777216,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 258584704,
+      "file_byte_end": 258584704,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q4_1",
+      "block_layout": null
+    },
+    {
+      "name": "blk.1.ffn_gate.weight",
+      "ggml_type": "Q4_0",
+      "role": "ffn",
+      "layer": 1,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 524288,
+      "bytes_per_block": 18,
+      "file_byte_start": 269070464,
+      "file_byte_end": 278507648,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.1.ffn_up.weight",
+      "ggml_type": "Q4_0",
+      "role": "ffn",
+      "layer": 1,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 524288,
+      "bytes_per_block": 18,
+      "file_byte_start": 278507648,
+      "file_byte_end": 287944832,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.1.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 1,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 287944832,
+      "file_byte_end": 287953024,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.1.attn_k.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 1,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 32768,
+      "bytes_per_block": 18,
+      "file_byte_start": 287953024,
+      "file_byte_end": 288542848,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.1.attn_output.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 1,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 131072,
+      "bytes_per_block": 18,
+      "file_byte_start": 288542848,
+      "file_byte_end": 290902144,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.1.attn_q.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 1,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 131072,
+      "bytes_per_block": 18,
+      "file_byte_start": 290902144,
+      "file_byte_end": 293261440,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.1.attn_v.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 1,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 32768,
+      "bytes_per_block": 18,
+      "file_byte_start": 293261440,
+      "file_byte_end": 293851264,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.10.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 10,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 293851264,
+      "file_byte_end": 293859456,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.10.ffn_down.weight",
+      "ggml_type": "Q4_0",
+      "role": "ffn",
+      "layer": 10,
+      "dims": [
+        8192,
+        2048
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 524288,
+      "bytes_per_block": 18,
+      "file_byte_start": 293859456,
+      "file_byte_end": 303296640,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.10.ffn_gate.weight",
+      "ggml_type": "Q4_0",
+      "role": "ffn",
+      "layer": 10,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 524288,
+      "bytes_per_block": 18,
+      "file_byte_start": 303296640,
+      "file_byte_end": 312733824,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.10.ffn_up.weight",
+      "ggml_type": "Q4_0",
+      "role": "ffn",
+      "layer": 10,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 524288,
+      "bytes_per_block": 18,
+      "file_byte_start": 312733824,
+      "file_byte_end": 322171008,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.10.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 10,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 322171008,
+      "file_byte_end": 322179200,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.10.attn_k.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 10,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 32768,
+      "bytes_per_block": 18,
+      "file_byte_start": 322179200,
+      "file_byte_end": 322769024,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.10.attn_output.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 10,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 131072,
+      "bytes_per_block": 18,
+      "file_byte_start": 322769024,
+      "file_byte_end": 325128320,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.10.attn_q.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 10,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 131072,
+      "bytes_per_block": 18,
+      "file_byte_start": 325128320,
+      "file_byte_end": 327487616,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.10.attn_v.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 10,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 32768,
+      "bytes_per_block": 18,
+      "file_byte_start": 327487616,
+      "file_byte_end": 328077440,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.11.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 11,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 328077440,
+      "file_byte_end": 328085632,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.11.ffn_down.weight",
+      "ggml_type": "Q4_0",
+      "role": "ffn",
+      "layer": 11,
+      "dims": [
+        8192,
+        2048
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 524288,
+      "bytes_per_block": 18,
+      "file_byte_start": 328085632,
+      "file_byte_end": 337522816,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.11.ffn_gate.weight",
+      "ggml_type": "Q4_0",
+      "role": "ffn",
+      "layer": 11,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 524288,
+      "bytes_per_block": 18,
+      "file_byte_start": 337522816,
+      "file_byte_end": 346960000,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.11.ffn_up.weight",
+      "ggml_type": "Q4_0",
+      "role": "ffn",
+      "layer": 11,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 524288,
+      "bytes_per_block": 18,
+      "file_byte_start": 346960000,
+      "file_byte_end": 356397184,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.11.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 11,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 356397184,
+      "file_byte_end": 356405376,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.11.attn_k.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 11,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 32768,
+      "bytes_per_block": 18,
+      "file_byte_start": 356405376,
+      "file_byte_end": 356995200,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.11.attn_output.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 11,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 131072,
+      "bytes_per_block": 18,
+      "file_byte_start": 356995200,
+      "file_byte_end": 359354496,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.11.attn_q.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 11,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 131072,
+      "bytes_per_block": 18,
+      "file_byte_start": 359354496,
+      "file_byte_end": 361713792,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.11.attn_v.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 11,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 32768,
+      "bytes_per_block": 18,
+      "file_byte_start": 361713792,
+      "file_byte_end": 362303616,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.12.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 12,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 362303616,
+      "file_byte_end": 362311808,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.12.ffn_down.weight",
+      "ggml_type": "Q4_0",
+      "role": "ffn",
+      "layer": 12,
+      "dims": [
+        8192,
+        2048
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 524288,
+      "bytes_per_block": 18,
+      "file_byte_start": 362311808,
+      "file_byte_end": 371748992,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.12.ffn_gate.weight",
+      "ggml_type": "Q4_0",
+      "role": "ffn",
+      "layer": 12,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 524288,
+      "bytes_per_block": 18,
+      "file_byte_start": 371748992,
+      "file_byte_end": 381186176,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.12.ffn_up.weight",
+      "ggml_type": "Q4_0",
+      "role": "ffn",
+      "layer": 12,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 524288,
+      "bytes_per_block": 18,
+      "file_byte_start": 381186176,
+      "file_byte_end": 390623360,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.12.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 12,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 390623360,
+      "file_byte_end": 390631552,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.12.attn_k.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 12,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 32768,
+      "bytes_per_block": 18,
+      "file_byte_start": 390631552,
+      "file_byte_end": 391221376,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.12.attn_output.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 12,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 131072,
+      "bytes_per_block": 18,
+      "file_byte_start": 391221376,
+      "file_byte_end": 393580672,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.12.attn_q.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 12,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 131072,
+      "bytes_per_block": 18,
+      "file_byte_start": 393580672,
+      "file_byte_end": 395939968,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.12.attn_v.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 12,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 32768,
+      "bytes_per_block": 18,
+      "file_byte_start": 395939968,
+      "file_byte_end": 396529792,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.13.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 13,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 396529792,
+      "file_byte_end": 396537984,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.13.ffn_down.weight",
+      "ggml_type": "Q4_0",
+      "role": "ffn",
+      "layer": 13,
+      "dims": [
+        8192,
+        2048
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 524288,
+      "bytes_per_block": 18,
+      "file_byte_start": 396537984,
+      "file_byte_end": 405975168,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.13.ffn_gate.weight",
+      "ggml_type": "Q4_0",
+      "role": "ffn",
+      "layer": 13,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 524288,
+      "bytes_per_block": 18,
+      "file_byte_start": 405975168,
+      "file_byte_end": 415412352,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.13.ffn_up.weight",
+      "ggml_type": "Q4_0",
+      "role": "ffn",
+      "layer": 13,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 524288,
+      "bytes_per_block": 18,
+      "file_byte_start": 415412352,
+      "file_byte_end": 424849536,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.13.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 13,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 424849536,
+      "file_byte_end": 424857728,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.13.attn_k.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 13,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 32768,
+      "bytes_per_block": 18,
+      "file_byte_start": 424857728,
+      "file_byte_end": 425447552,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.13.attn_output.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 13,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 131072,
+      "bytes_per_block": 18,
+      "file_byte_start": 425447552,
+      "file_byte_end": 427806848,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.13.attn_q.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 13,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 131072,
+      "bytes_per_block": 18,
+      "file_byte_start": 427806848,
+      "file_byte_end": 430166144,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.13.attn_v.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 13,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 32768,
+      "bytes_per_block": 18,
+      "file_byte_start": 430166144,
+      "file_byte_end": 430755968,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.14.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 14,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 430755968,
+      "file_byte_end": 430764160,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.14.ffn_down.weight",
+      "ggml_type": "Q4_0",
+      "role": "ffn",
+      "layer": 14,
+      "dims": [
+        8192,
+        2048
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 524288,
+      "bytes_per_block": 18,
+      "file_byte_start": 430764160,
+      "file_byte_end": 440201344,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.14.ffn_gate.weight",
+      "ggml_type": "Q4_0",
+      "role": "ffn",
+      "layer": 14,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 524288,
+      "bytes_per_block": 18,
+      "file_byte_start": 440201344,
+      "file_byte_end": 449638528,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.14.ffn_up.weight",
+      "ggml_type": "Q4_0",
+      "role": "ffn",
+      "layer": 14,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 524288,
+      "bytes_per_block": 18,
+      "file_byte_start": 449638528,
+      "file_byte_end": 459075712,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.14.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 14,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 459075712,
+      "file_byte_end": 459083904,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.14.attn_k.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 14,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 32768,
+      "bytes_per_block": 18,
+      "file_byte_start": 459083904,
+      "file_byte_end": 459673728,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.14.attn_output.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 14,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 131072,
+      "bytes_per_block": 18,
+      "file_byte_start": 459673728,
+      "file_byte_end": 462033024,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.14.attn_q.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 14,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 131072,
+      "bytes_per_block": 18,
+      "file_byte_start": 462033024,
+      "file_byte_end": 464392320,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.14.attn_v.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 14,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 32768,
+      "bytes_per_block": 18,
+      "file_byte_start": 464392320,
+      "file_byte_end": 464982144,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.15.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 15,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 464982144,
+      "file_byte_end": 464990336,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.15.ffn_down.weight",
+      "ggml_type": "Q4_0",
+      "role": "ffn",
+      "layer": 15,
+      "dims": [
+        8192,
+        2048
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 524288,
+      "bytes_per_block": 18,
+      "file_byte_start": 464990336,
+      "file_byte_end": 474427520,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.15.ffn_gate.weight",
+      "ggml_type": "Q4_0",
+      "role": "ffn",
+      "layer": 15,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 524288,
+      "bytes_per_block": 18,
+      "file_byte_start": 474427520,
+      "file_byte_end": 483864704,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.15.ffn_up.weight",
+      "ggml_type": "Q4_0",
+      "role": "ffn",
+      "layer": 15,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 524288,
+      "bytes_per_block": 18,
+      "file_byte_start": 483864704,
+      "file_byte_end": 493301888,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.15.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 15,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 493301888,
+      "file_byte_end": 493310080,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.15.attn_k.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 15,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 32768,
+      "bytes_per_block": 18,
+      "file_byte_start": 493310080,
+      "file_byte_end": 493899904,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.15.attn_output.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 15,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 131072,
+      "bytes_per_block": 18,
+      "file_byte_start": 493899904,
+      "file_byte_end": 496259200,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.15.attn_q.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 15,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 131072,
+      "bytes_per_block": 18,
+      "file_byte_start": 496259200,
+      "file_byte_end": 498618496,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.15.attn_v.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 15,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 32768,
+      "bytes_per_block": 18,
+      "file_byte_start": 498618496,
+      "file_byte_end": 499208320,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.2.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 2,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 499208320,
+      "file_byte_end": 499216512,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.2.ffn_down.weight",
+      "ggml_type": "Q4_0",
+      "role": "ffn",
+      "layer": 2,
+      "dims": [
+        8192,
+        2048
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 524288,
+      "bytes_per_block": 18,
+      "file_byte_start": 499216512,
+      "file_byte_end": 508653696,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.2.ffn_gate.weight",
+      "ggml_type": "Q4_0",
+      "role": "ffn",
+      "layer": 2,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 524288,
+      "bytes_per_block": 18,
+      "file_byte_start": 508653696,
+      "file_byte_end": 518090880,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.2.ffn_up.weight",
+      "ggml_type": "Q4_0",
+      "role": "ffn",
+      "layer": 2,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 524288,
+      "bytes_per_block": 18,
+      "file_byte_start": 518090880,
+      "file_byte_end": 527528064,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.2.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 2,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 527528064,
+      "file_byte_end": 527536256,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.2.attn_k.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 2,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 32768,
+      "bytes_per_block": 18,
+      "file_byte_start": 527536256,
+      "file_byte_end": 528126080,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.2.attn_output.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 2,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 131072,
+      "bytes_per_block": 18,
+      "file_byte_start": 528126080,
+      "file_byte_end": 530485376,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.2.attn_q.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 2,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 131072,
+      "bytes_per_block": 18,
+      "file_byte_start": 530485376,
+      "file_byte_end": 532844672,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.2.attn_v.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 2,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 32768,
+      "bytes_per_block": 18,
+      "file_byte_start": 532844672,
+      "file_byte_end": 533434496,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.3.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 3,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 533434496,
+      "file_byte_end": 533442688,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.3.ffn_down.weight",
+      "ggml_type": "Q4_0",
+      "role": "ffn",
+      "layer": 3,
+      "dims": [
+        8192,
+        2048
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 524288,
+      "bytes_per_block": 18,
+      "file_byte_start": 533442688,
+      "file_byte_end": 542879872,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.3.ffn_gate.weight",
+      "ggml_type": "Q4_0",
+      "role": "ffn",
+      "layer": 3,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 524288,
+      "bytes_per_block": 18,
+      "file_byte_start": 542879872,
+      "file_byte_end": 552317056,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.3.ffn_up.weight",
+      "ggml_type": "Q4_0",
+      "role": "ffn",
+      "layer": 3,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 524288,
+      "bytes_per_block": 18,
+      "file_byte_start": 552317056,
+      "file_byte_end": 561754240,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.3.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 3,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 561754240,
+      "file_byte_end": 561762432,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.3.attn_k.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 3,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 32768,
+      "bytes_per_block": 18,
+      "file_byte_start": 561762432,
+      "file_byte_end": 562352256,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.3.attn_output.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 3,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 131072,
+      "bytes_per_block": 18,
+      "file_byte_start": 562352256,
+      "file_byte_end": 564711552,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.3.attn_q.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 3,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 131072,
+      "bytes_per_block": 18,
+      "file_byte_start": 564711552,
+      "file_byte_end": 567070848,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.3.attn_v.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 3,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 32768,
+      "bytes_per_block": 18,
+      "file_byte_start": 567070848,
+      "file_byte_end": 567660672,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.4.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 4,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 567660672,
+      "file_byte_end": 567668864,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.4.ffn_down.weight",
+      "ggml_type": "Q4_0",
+      "role": "ffn",
+      "layer": 4,
+      "dims": [
+        8192,
+        2048
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 524288,
+      "bytes_per_block": 18,
+      "file_byte_start": 567668864,
+      "file_byte_end": 577106048,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.4.ffn_gate.weight",
+      "ggml_type": "Q4_0",
+      "role": "ffn",
+      "layer": 4,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 524288,
+      "bytes_per_block": 18,
+      "file_byte_start": 577106048,
+      "file_byte_end": 586543232,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.4.ffn_up.weight",
+      "ggml_type": "Q4_0",
+      "role": "ffn",
+      "layer": 4,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 524288,
+      "bytes_per_block": 18,
+      "file_byte_start": 586543232,
+      "file_byte_end": 595980416,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.4.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 4,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 595980416,
+      "file_byte_end": 595988608,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.4.attn_k.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 4,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 32768,
+      "bytes_per_block": 18,
+      "file_byte_start": 595988608,
+      "file_byte_end": 596578432,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.4.attn_output.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 4,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 131072,
+      "bytes_per_block": 18,
+      "file_byte_start": 596578432,
+      "file_byte_end": 598937728,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.4.attn_q.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 4,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 131072,
+      "bytes_per_block": 18,
+      "file_byte_start": 598937728,
+      "file_byte_end": 601297024,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.4.attn_v.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 4,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 32768,
+      "bytes_per_block": 18,
+      "file_byte_start": 601297024,
+      "file_byte_end": 601886848,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.5.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 5,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 601886848,
+      "file_byte_end": 601895040,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.5.ffn_down.weight",
+      "ggml_type": "Q4_0",
+      "role": "ffn",
+      "layer": 5,
+      "dims": [
+        8192,
+        2048
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 524288,
+      "bytes_per_block": 18,
+      "file_byte_start": 601895040,
+      "file_byte_end": 611332224,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.5.ffn_gate.weight",
+      "ggml_type": "Q4_0",
+      "role": "ffn",
+      "layer": 5,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 524288,
+      "bytes_per_block": 18,
+      "file_byte_start": 611332224,
+      "file_byte_end": 620769408,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.5.ffn_up.weight",
+      "ggml_type": "Q4_0",
+      "role": "ffn",
+      "layer": 5,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 524288,
+      "bytes_per_block": 18,
+      "file_byte_start": 620769408,
+      "file_byte_end": 630206592,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.5.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 5,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 630206592,
+      "file_byte_end": 630214784,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.5.attn_k.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 5,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 32768,
+      "bytes_per_block": 18,
+      "file_byte_start": 630214784,
+      "file_byte_end": 630804608,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.5.attn_output.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 5,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 131072,
+      "bytes_per_block": 18,
+      "file_byte_start": 630804608,
+      "file_byte_end": 633163904,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.5.attn_q.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 5,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 131072,
+      "bytes_per_block": 18,
+      "file_byte_start": 633163904,
+      "file_byte_end": 635523200,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.5.attn_v.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 5,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 32768,
+      "bytes_per_block": 18,
+      "file_byte_start": 635523200,
+      "file_byte_end": 636113024,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.6.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 6,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 636113024,
+      "file_byte_end": 636121216,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.6.ffn_down.weight",
+      "ggml_type": "Q4_0",
+      "role": "ffn",
+      "layer": 6,
+      "dims": [
+        8192,
+        2048
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 524288,
+      "bytes_per_block": 18,
+      "file_byte_start": 636121216,
+      "file_byte_end": 645558400,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.6.ffn_gate.weight",
+      "ggml_type": "Q4_0",
+      "role": "ffn",
+      "layer": 6,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 524288,
+      "bytes_per_block": 18,
+      "file_byte_start": 645558400,
+      "file_byte_end": 654995584,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.6.ffn_up.weight",
+      "ggml_type": "Q4_0",
+      "role": "ffn",
+      "layer": 6,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 524288,
+      "bytes_per_block": 18,
+      "file_byte_start": 654995584,
+      "file_byte_end": 664432768,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.6.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 6,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 664432768,
+      "file_byte_end": 664440960,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.6.attn_k.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 6,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 32768,
+      "bytes_per_block": 18,
+      "file_byte_start": 664440960,
+      "file_byte_end": 665030784,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.6.attn_output.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 6,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 131072,
+      "bytes_per_block": 18,
+      "file_byte_start": 665030784,
+      "file_byte_end": 667390080,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.6.attn_q.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 6,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 131072,
+      "bytes_per_block": 18,
+      "file_byte_start": 667390080,
+      "file_byte_end": 669749376,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.6.attn_v.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 6,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 32768,
+      "bytes_per_block": 18,
+      "file_byte_start": 669749376,
+      "file_byte_end": 670339200,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.7.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 7,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 670339200,
+      "file_byte_end": 670347392,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.7.ffn_down.weight",
+      "ggml_type": "Q4_0",
+      "role": "ffn",
+      "layer": 7,
+      "dims": [
+        8192,
+        2048
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 524288,
+      "bytes_per_block": 18,
+      "file_byte_start": 670347392,
+      "file_byte_end": 679784576,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.7.ffn_gate.weight",
+      "ggml_type": "Q4_0",
+      "role": "ffn",
+      "layer": 7,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 524288,
+      "bytes_per_block": 18,
+      "file_byte_start": 679784576,
+      "file_byte_end": 689221760,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.7.ffn_up.weight",
+      "ggml_type": "Q4_0",
+      "role": "ffn",
+      "layer": 7,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 524288,
+      "bytes_per_block": 18,
+      "file_byte_start": 689221760,
+      "file_byte_end": 698658944,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.7.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 7,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 698658944,
+      "file_byte_end": 698667136,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.7.attn_k.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 7,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 32768,
+      "bytes_per_block": 18,
+      "file_byte_start": 698667136,
+      "file_byte_end": 699256960,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.7.attn_output.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 7,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 131072,
+      "bytes_per_block": 18,
+      "file_byte_start": 699256960,
+      "file_byte_end": 701616256,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.7.attn_q.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 7,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 131072,
+      "bytes_per_block": 18,
+      "file_byte_start": 701616256,
+      "file_byte_end": 703975552,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.7.attn_v.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 7,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 32768,
+      "bytes_per_block": 18,
+      "file_byte_start": 703975552,
+      "file_byte_end": 704565376,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.8.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 8,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 704565376,
+      "file_byte_end": 704573568,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.8.ffn_down.weight",
+      "ggml_type": "Q4_0",
+      "role": "ffn",
+      "layer": 8,
+      "dims": [
+        8192,
+        2048
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 524288,
+      "bytes_per_block": 18,
+      "file_byte_start": 704573568,
+      "file_byte_end": 714010752,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.8.ffn_gate.weight",
+      "ggml_type": "Q4_0",
+      "role": "ffn",
+      "layer": 8,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 524288,
+      "bytes_per_block": 18,
+      "file_byte_start": 714010752,
+      "file_byte_end": 723447936,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.8.ffn_up.weight",
+      "ggml_type": "Q4_0",
+      "role": "ffn",
+      "layer": 8,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 524288,
+      "bytes_per_block": 18,
+      "file_byte_start": 723447936,
+      "file_byte_end": 732885120,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.8.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 8,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 732885120,
+      "file_byte_end": 732893312,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.8.attn_k.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 8,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 32768,
+      "bytes_per_block": 18,
+      "file_byte_start": 732893312,
+      "file_byte_end": 733483136,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.8.attn_output.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 8,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 131072,
+      "bytes_per_block": 18,
+      "file_byte_start": 733483136,
+      "file_byte_end": 735842432,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.8.attn_q.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 8,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 131072,
+      "bytes_per_block": 18,
+      "file_byte_start": 735842432,
+      "file_byte_end": 738201728,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.8.attn_v.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 8,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 32768,
+      "bytes_per_block": 18,
+      "file_byte_start": 738201728,
+      "file_byte_end": 738791552,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.9.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 9,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 738791552,
+      "file_byte_end": 738799744,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.9.ffn_down.weight",
+      "ggml_type": "Q4_0",
+      "role": "ffn",
+      "layer": 9,
+      "dims": [
+        8192,
+        2048
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 524288,
+      "bytes_per_block": 18,
+      "file_byte_start": 738799744,
+      "file_byte_end": 748236928,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.9.ffn_gate.weight",
+      "ggml_type": "Q4_0",
+      "role": "ffn",
+      "layer": 9,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 524288,
+      "bytes_per_block": 18,
+      "file_byte_start": 748236928,
+      "file_byte_end": 757674112,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.9.ffn_up.weight",
+      "ggml_type": "Q4_0",
+      "role": "ffn",
+      "layer": 9,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 524288,
+      "bytes_per_block": 18,
+      "file_byte_start": 757674112,
+      "file_byte_end": 767111296,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.9.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 9,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 767111296,
+      "file_byte_end": 767119488,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.9.attn_k.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 9,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 32768,
+      "bytes_per_block": 18,
+      "file_byte_start": 767119488,
+      "file_byte_end": 767709312,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.9.attn_output.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 9,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 131072,
+      "bytes_per_block": 18,
+      "file_byte_start": 767709312,
+      "file_byte_end": 770068608,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.9.attn_q.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 9,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 131072,
+      "bytes_per_block": 18,
+      "file_byte_start": 770068608,
+      "file_byte_end": 772427904,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "blk.9.attn_v.weight",
+      "ggml_type": "Q4_0",
+      "role": "attn",
+      "layer": 9,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 32768,
+      "bytes_per_block": 18,
+      "file_byte_start": 772427904,
+      "file_byte_end": 773017728,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    {
+      "name": "output_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": null,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 773017728,
+      "file_byte_end": 773025920,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "model": "llama_q4km",
+  "quant": "Q4_K_M",
+  "runs": [
+    {
+      "flip_count": 1,
+      "seed": 0,
+      "ppl": 14.3558,
+      "ppl_err": 0.10677,
+      "arc_easy": 0.6898148148148148,
+      "arc_n": 2376,
+      "hellaswag": 0.4032,
+      "hellaswag_n": 2500,
+      "error": null
+    },
+    {
+      "flip_count": 1,
+      "seed": 1,
+      "ppl": 14.3576,
+      "ppl_err": 0.1068,
+      "arc_easy": 0.6893939393939394,
+      "arc_n": 2376,
+      "hellaswag": 0.4048,
+      "hellaswag_n": 2500,
+      "error": null
+    },
+    {
+      "flip_count": 1,
+      "seed": 2,
+      "ppl": 14.3583,
+      "ppl_err": 0.10679,
+      "arc_easy": 0.6893939393939394,
+      "arc_n": 2376,
+      "hellaswag": 0.404,
+      "hellaswag_n": 2500,
+      "error": null
+    }
+  ]
+}

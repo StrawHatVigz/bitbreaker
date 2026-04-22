@@ -1,0 +1,6070 @@
+{
+  "model_path": "/Users/viggy/Documents/Grad School/Sem_4/ECE 591 - SW HW Co-design/Project/bitbreaker/models/qwen2.5-0.5b-instruct-q4_k_m.gguf",
+  "quant_label": "Q4_K_M",
+  "tensor_data_base_offset": 5947744,
+  "n_layers": 24,
+  "fp16_bit_layout": {
+    "sign": [
+      15
+    ],
+    "exponent_msb": [
+      14
+    ],
+    "exponent": [
+      10,
+      11,
+      12,
+      13,
+      14
+    ],
+    "mantissa_msb": [
+      9
+    ],
+    "mantissa": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "mantissa_lsb": [
+      0
+    ]
+  },
+  "block_layouts_reference": {
+    "F16": {
+      "weights_per_block": 1,
+      "bytes_per_block": 2,
+      "regions": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    "Q8_0": {
+      "weights_per_block": 32,
+      "bytes_per_block": 34,
+      "regions": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    "Q4_0": {
+      "weights_per_block": 32,
+      "bytes_per_block": 18,
+      "regions": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    "Q4_K": {
+      "weights_per_block": 256,
+      "bytes_per_block": 144,
+      "regions": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    "Q6_K": {
+      "weights_per_block": 256,
+      "bytes_per_block": 210,
+      "regions": [
+        {
+          "name": "weights_low",
+          "block_offset": 0,
+          "num_bytes": 128,
+          "description": "Lower 4 bits of 256 \u00d7 6-bit weights, packed as 128 bytes"
+        },
+        {
+          "name": "weights_high",
+          "block_offset": 128,
+          "num_bytes": 64,
+          "description": "Upper 2 bits of 256 \u00d7 6-bit weights, packed as 64 bytes"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 192,
+          "num_bytes": 16,
+          "description": "16 \u00d7 INT8 sub-block scales; each affects 16 weights"
+        },
+        {
+          "name": "super_scale_d",
+          "block_offset": 208,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 16 sub-block scales; 1 bit flip corrupts all 256 weights"
+        }
+      ]
+    }
+  },
+  "tensors": [
+    {
+      "name": "output.weight",
+      "ggml_type": "Q8_0",
+      "role": "output",
+      "layer": null,
+      "dims": [
+        896,
+        151936
+      ],
+      "n_weights": 136134656,
+      "n_blocks": 4254208,
+      "bytes_per_block": 34,
+      "file_byte_start": 5947744,
+      "file_byte_end": 150590816,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "token_embd.weight",
+      "ggml_type": "Q5_0",
+      "role": "embedding",
+      "layer": null,
+      "dims": [
+        896,
+        151936
+      ],
+      "n_weights": 136134656,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 150590816,
+      "file_byte_end": 150590816,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.0.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 0,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 244183392,
+      "file_byte_end": 244186976,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.0.ffn_down.weight",
+      "ggml_type": "Q6_K",
+      "role": "ffn",
+      "layer": 0,
+      "dims": [
+        4864,
+        896
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 17024,
+      "bytes_per_block": 210,
+      "file_byte_start": 244186976,
+      "file_byte_end": 247762016,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights_low",
+          "block_offset": 0,
+          "num_bytes": 128,
+          "description": "Lower 4 bits of 256 \u00d7 6-bit weights, packed as 128 bytes"
+        },
+        {
+          "name": "weights_high",
+          "block_offset": 128,
+          "num_bytes": 64,
+          "description": "Upper 2 bits of 256 \u00d7 6-bit weights, packed as 64 bytes"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 192,
+          "num_bytes": 16,
+          "description": "16 \u00d7 INT8 sub-block scales; each affects 16 weights"
+        },
+        {
+          "name": "super_scale_d",
+          "block_offset": 208,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 16 sub-block scales; 1 bit flip corrupts all 256 weights"
+        }
+      ]
+    },
+    {
+      "name": "blk.0.ffn_gate.weight",
+      "ggml_type": "Q5_0",
+      "role": "ffn",
+      "layer": 0,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 247762016,
+      "file_byte_end": 247762016,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.0.ffn_up.weight",
+      "ggml_type": "Q5_0",
+      "role": "ffn",
+      "layer": 0,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 250758240,
+      "file_byte_end": 250758240,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.0.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 0,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 253754464,
+      "file_byte_end": 253758048,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.0.attn_k.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 0,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 253758048,
+      "file_byte_end": 253758560,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.0.attn_k.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 0,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 253758560,
+      "file_byte_end": 253758560,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.0.attn_output.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 0,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 253837408,
+      "file_byte_end": 253837408,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.0.attn_q.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 0,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 254389344,
+      "file_byte_end": 254392928,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.0.attn_q.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 0,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 254392928,
+      "file_byte_end": 254392928,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.0.attn_v.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 0,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 254944864,
+      "file_byte_end": 254945376,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.0.attn_v.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 0,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 254945376,
+      "file_byte_end": 255067232,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.1.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 1,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 255067232,
+      "file_byte_end": 255070816,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.1.ffn_down.weight",
+      "ggml_type": "Q6_K",
+      "role": "ffn",
+      "layer": 1,
+      "dims": [
+        4864,
+        896
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 17024,
+      "bytes_per_block": 210,
+      "file_byte_start": 255070816,
+      "file_byte_end": 258645856,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights_low",
+          "block_offset": 0,
+          "num_bytes": 128,
+          "description": "Lower 4 bits of 256 \u00d7 6-bit weights, packed as 128 bytes"
+        },
+        {
+          "name": "weights_high",
+          "block_offset": 128,
+          "num_bytes": 64,
+          "description": "Upper 2 bits of 256 \u00d7 6-bit weights, packed as 64 bytes"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 192,
+          "num_bytes": 16,
+          "description": "16 \u00d7 INT8 sub-block scales; each affects 16 weights"
+        },
+        {
+          "name": "super_scale_d",
+          "block_offset": 208,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 16 sub-block scales; 1 bit flip corrupts all 256 weights"
+        }
+      ]
+    },
+    {
+      "name": "blk.1.ffn_gate.weight",
+      "ggml_type": "Q5_0",
+      "role": "ffn",
+      "layer": 1,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 258645856,
+      "file_byte_end": 258645856,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.1.ffn_up.weight",
+      "ggml_type": "Q5_0",
+      "role": "ffn",
+      "layer": 1,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 261642080,
+      "file_byte_end": 261642080,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.1.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 1,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 264638304,
+      "file_byte_end": 264641888,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.1.attn_k.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 1,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 264641888,
+      "file_byte_end": 264642400,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.1.attn_k.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 1,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 264642400,
+      "file_byte_end": 264642400,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.1.attn_output.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 1,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 264721248,
+      "file_byte_end": 264721248,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.1.attn_q.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 1,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 265273184,
+      "file_byte_end": 265276768,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.1.attn_q.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 1,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 265276768,
+      "file_byte_end": 265276768,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.1.attn_v.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 1,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 265828704,
+      "file_byte_end": 265829216,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.1.attn_v.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 1,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 265829216,
+      "file_byte_end": 265951072,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.10.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 10,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 265951072,
+      "file_byte_end": 265954656,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.10.ffn_down.weight",
+      "ggml_type": "Q6_K",
+      "role": "ffn",
+      "layer": 10,
+      "dims": [
+        4864,
+        896
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 17024,
+      "bytes_per_block": 210,
+      "file_byte_start": 265954656,
+      "file_byte_end": 269529696,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights_low",
+          "block_offset": 0,
+          "num_bytes": 128,
+          "description": "Lower 4 bits of 256 \u00d7 6-bit weights, packed as 128 bytes"
+        },
+        {
+          "name": "weights_high",
+          "block_offset": 128,
+          "num_bytes": 64,
+          "description": "Upper 2 bits of 256 \u00d7 6-bit weights, packed as 64 bytes"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 192,
+          "num_bytes": 16,
+          "description": "16 \u00d7 INT8 sub-block scales; each affects 16 weights"
+        },
+        {
+          "name": "super_scale_d",
+          "block_offset": 208,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 16 sub-block scales; 1 bit flip corrupts all 256 weights"
+        }
+      ]
+    },
+    {
+      "name": "blk.10.ffn_gate.weight",
+      "ggml_type": "Q5_0",
+      "role": "ffn",
+      "layer": 10,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 269529696,
+      "file_byte_end": 269529696,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.10.ffn_up.weight",
+      "ggml_type": "Q5_0",
+      "role": "ffn",
+      "layer": 10,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 272525920,
+      "file_byte_end": 272525920,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.10.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 10,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 275522144,
+      "file_byte_end": 275525728,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.10.attn_k.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 10,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 275525728,
+      "file_byte_end": 275526240,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.10.attn_k.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 10,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 275526240,
+      "file_byte_end": 275526240,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.10.attn_output.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 10,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 275605088,
+      "file_byte_end": 275605088,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.10.attn_q.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 10,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 276157024,
+      "file_byte_end": 276160608,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.10.attn_q.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 10,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 276160608,
+      "file_byte_end": 276160608,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.10.attn_v.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 10,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 276712544,
+      "file_byte_end": 276713056,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.10.attn_v.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 10,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 276713056,
+      "file_byte_end": 276834912,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.11.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 11,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 276834912,
+      "file_byte_end": 276838496,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.11.ffn_down.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 11,
+      "dims": [
+        4864,
+        896
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 17024,
+      "bytes_per_block": 144,
+      "file_byte_start": 276838496,
+      "file_byte_end": 279289952,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.11.ffn_gate.weight",
+      "ggml_type": "Q5_0",
+      "role": "ffn",
+      "layer": 11,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 279289952,
+      "file_byte_end": 279289952,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.11.ffn_up.weight",
+      "ggml_type": "Q5_0",
+      "role": "ffn",
+      "layer": 11,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 282286176,
+      "file_byte_end": 282286176,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.11.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 11,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 285282400,
+      "file_byte_end": 285285984,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.11.attn_k.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 11,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 285285984,
+      "file_byte_end": 285286496,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.11.attn_k.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 11,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 285286496,
+      "file_byte_end": 285286496,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.11.attn_output.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 11,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 285365344,
+      "file_byte_end": 285365344,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.11.attn_q.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 11,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 285917280,
+      "file_byte_end": 285920864,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.11.attn_q.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 11,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 285920864,
+      "file_byte_end": 285920864,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.11.attn_v.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 11,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 286472800,
+      "file_byte_end": 286473312,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.11.attn_v.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 11,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 286473312,
+      "file_byte_end": 286473312,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.12.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 12,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 286552160,
+      "file_byte_end": 286555744,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.12.ffn_down.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 12,
+      "dims": [
+        4864,
+        896
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 17024,
+      "bytes_per_block": 144,
+      "file_byte_start": 286555744,
+      "file_byte_end": 289007200,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.12.ffn_gate.weight",
+      "ggml_type": "Q5_0",
+      "role": "ffn",
+      "layer": 12,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 289007200,
+      "file_byte_end": 289007200,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.12.ffn_up.weight",
+      "ggml_type": "Q5_0",
+      "role": "ffn",
+      "layer": 12,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 292003424,
+      "file_byte_end": 292003424,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.12.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 12,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 294999648,
+      "file_byte_end": 295003232,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.12.attn_k.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 12,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 295003232,
+      "file_byte_end": 295003744,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.12.attn_k.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 12,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 295003744,
+      "file_byte_end": 295003744,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.12.attn_output.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 12,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 295082592,
+      "file_byte_end": 295082592,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.12.attn_q.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 12,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 295634528,
+      "file_byte_end": 295638112,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.12.attn_q.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 12,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 295638112,
+      "file_byte_end": 295638112,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.12.attn_v.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 12,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 296190048,
+      "file_byte_end": 296190560,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.12.attn_v.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 12,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 296190560,
+      "file_byte_end": 296190560,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.13.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 13,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 296269408,
+      "file_byte_end": 296272992,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.13.ffn_down.weight",
+      "ggml_type": "Q6_K",
+      "role": "ffn",
+      "layer": 13,
+      "dims": [
+        4864,
+        896
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 17024,
+      "bytes_per_block": 210,
+      "file_byte_start": 296272992,
+      "file_byte_end": 299848032,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights_low",
+          "block_offset": 0,
+          "num_bytes": 128,
+          "description": "Lower 4 bits of 256 \u00d7 6-bit weights, packed as 128 bytes"
+        },
+        {
+          "name": "weights_high",
+          "block_offset": 128,
+          "num_bytes": 64,
+          "description": "Upper 2 bits of 256 \u00d7 6-bit weights, packed as 64 bytes"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 192,
+          "num_bytes": 16,
+          "description": "16 \u00d7 INT8 sub-block scales; each affects 16 weights"
+        },
+        {
+          "name": "super_scale_d",
+          "block_offset": 208,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 16 sub-block scales; 1 bit flip corrupts all 256 weights"
+        }
+      ]
+    },
+    {
+      "name": "blk.13.ffn_gate.weight",
+      "ggml_type": "Q5_0",
+      "role": "ffn",
+      "layer": 13,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 299848032,
+      "file_byte_end": 299848032,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.13.ffn_up.weight",
+      "ggml_type": "Q5_0",
+      "role": "ffn",
+      "layer": 13,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 302844256,
+      "file_byte_end": 302844256,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.13.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 13,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 305840480,
+      "file_byte_end": 305844064,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.13.attn_k.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 13,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 305844064,
+      "file_byte_end": 305844576,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.13.attn_k.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 13,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 305844576,
+      "file_byte_end": 305844576,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.13.attn_output.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 13,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 305923424,
+      "file_byte_end": 305923424,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.13.attn_q.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 13,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 306475360,
+      "file_byte_end": 306478944,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.13.attn_q.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 13,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 306478944,
+      "file_byte_end": 306478944,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.13.attn_v.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 13,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 307030880,
+      "file_byte_end": 307031392,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.13.attn_v.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 13,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 307031392,
+      "file_byte_end": 307153248,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.14.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 14,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 307153248,
+      "file_byte_end": 307156832,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.14.ffn_down.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 14,
+      "dims": [
+        4864,
+        896
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 17024,
+      "bytes_per_block": 144,
+      "file_byte_start": 307156832,
+      "file_byte_end": 309608288,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.14.ffn_gate.weight",
+      "ggml_type": "Q5_0",
+      "role": "ffn",
+      "layer": 14,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 309608288,
+      "file_byte_end": 309608288,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.14.ffn_up.weight",
+      "ggml_type": "Q5_0",
+      "role": "ffn",
+      "layer": 14,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 312604512,
+      "file_byte_end": 312604512,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.14.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 14,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 315600736,
+      "file_byte_end": 315604320,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.14.attn_k.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 14,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 315604320,
+      "file_byte_end": 315604832,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.14.attn_k.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 14,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 315604832,
+      "file_byte_end": 315604832,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.14.attn_output.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 14,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 315683680,
+      "file_byte_end": 315683680,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.14.attn_q.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 14,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 316235616,
+      "file_byte_end": 316239200,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.14.attn_q.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 14,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 316239200,
+      "file_byte_end": 316239200,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.14.attn_v.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 14,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 316791136,
+      "file_byte_end": 316791648,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.14.attn_v.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 14,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 316791648,
+      "file_byte_end": 316791648,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.15.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 15,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 316870496,
+      "file_byte_end": 316874080,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.15.ffn_down.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 15,
+      "dims": [
+        4864,
+        896
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 17024,
+      "bytes_per_block": 144,
+      "file_byte_start": 316874080,
+      "file_byte_end": 319325536,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.15.ffn_gate.weight",
+      "ggml_type": "Q5_0",
+      "role": "ffn",
+      "layer": 15,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 319325536,
+      "file_byte_end": 319325536,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.15.ffn_up.weight",
+      "ggml_type": "Q5_0",
+      "role": "ffn",
+      "layer": 15,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 322321760,
+      "file_byte_end": 322321760,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.15.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 15,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 325317984,
+      "file_byte_end": 325321568,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.15.attn_k.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 15,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 325321568,
+      "file_byte_end": 325322080,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.15.attn_k.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 15,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 325322080,
+      "file_byte_end": 325322080,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.15.attn_output.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 15,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 325400928,
+      "file_byte_end": 325400928,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.15.attn_q.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 15,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 325952864,
+      "file_byte_end": 325956448,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.15.attn_q.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 15,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 325956448,
+      "file_byte_end": 325956448,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.15.attn_v.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 15,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 326508384,
+      "file_byte_end": 326508896,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.15.attn_v.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 15,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 326508896,
+      "file_byte_end": 326508896,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.16.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 16,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 326587744,
+      "file_byte_end": 326591328,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.16.ffn_down.weight",
+      "ggml_type": "Q6_K",
+      "role": "ffn",
+      "layer": 16,
+      "dims": [
+        4864,
+        896
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 17024,
+      "bytes_per_block": 210,
+      "file_byte_start": 326591328,
+      "file_byte_end": 330166368,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights_low",
+          "block_offset": 0,
+          "num_bytes": 128,
+          "description": "Lower 4 bits of 256 \u00d7 6-bit weights, packed as 128 bytes"
+        },
+        {
+          "name": "weights_high",
+          "block_offset": 128,
+          "num_bytes": 64,
+          "description": "Upper 2 bits of 256 \u00d7 6-bit weights, packed as 64 bytes"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 192,
+          "num_bytes": 16,
+          "description": "16 \u00d7 INT8 sub-block scales; each affects 16 weights"
+        },
+        {
+          "name": "super_scale_d",
+          "block_offset": 208,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 16 sub-block scales; 1 bit flip corrupts all 256 weights"
+        }
+      ]
+    },
+    {
+      "name": "blk.16.ffn_gate.weight",
+      "ggml_type": "Q5_0",
+      "role": "ffn",
+      "layer": 16,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 330166368,
+      "file_byte_end": 330166368,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.16.ffn_up.weight",
+      "ggml_type": "Q5_0",
+      "role": "ffn",
+      "layer": 16,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 333162592,
+      "file_byte_end": 333162592,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.16.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 16,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 336158816,
+      "file_byte_end": 336162400,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.16.attn_k.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 16,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 336162400,
+      "file_byte_end": 336162912,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.16.attn_k.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 16,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 336162912,
+      "file_byte_end": 336162912,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.16.attn_output.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 16,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 336241760,
+      "file_byte_end": 336241760,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.16.attn_q.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 16,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 336793696,
+      "file_byte_end": 336797280,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.16.attn_q.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 16,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 336797280,
+      "file_byte_end": 336797280,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.16.attn_v.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 16,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 337349216,
+      "file_byte_end": 337349728,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.16.attn_v.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 16,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 337349728,
+      "file_byte_end": 337471584,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.17.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 17,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 337471584,
+      "file_byte_end": 337475168,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.17.ffn_down.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 17,
+      "dims": [
+        4864,
+        896
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 17024,
+      "bytes_per_block": 144,
+      "file_byte_start": 337475168,
+      "file_byte_end": 339926624,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.17.ffn_gate.weight",
+      "ggml_type": "Q5_0",
+      "role": "ffn",
+      "layer": 17,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 339926624,
+      "file_byte_end": 339926624,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.17.ffn_up.weight",
+      "ggml_type": "Q5_0",
+      "role": "ffn",
+      "layer": 17,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 342922848,
+      "file_byte_end": 342922848,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.17.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 17,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 345919072,
+      "file_byte_end": 345922656,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.17.attn_k.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 17,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 345922656,
+      "file_byte_end": 345923168,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.17.attn_k.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 17,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 345923168,
+      "file_byte_end": 345923168,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.17.attn_output.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 17,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 346002016,
+      "file_byte_end": 346002016,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.17.attn_q.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 17,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 346553952,
+      "file_byte_end": 346557536,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.17.attn_q.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 17,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 346557536,
+      "file_byte_end": 346557536,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.17.attn_v.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 17,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 347109472,
+      "file_byte_end": 347109984,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.17.attn_v.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 17,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 347109984,
+      "file_byte_end": 347109984,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.18.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 18,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 347188832,
+      "file_byte_end": 347192416,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.18.ffn_down.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 18,
+      "dims": [
+        4864,
+        896
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 17024,
+      "bytes_per_block": 144,
+      "file_byte_start": 347192416,
+      "file_byte_end": 349643872,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.18.ffn_gate.weight",
+      "ggml_type": "Q5_0",
+      "role": "ffn",
+      "layer": 18,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 349643872,
+      "file_byte_end": 349643872,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.18.ffn_up.weight",
+      "ggml_type": "Q5_0",
+      "role": "ffn",
+      "layer": 18,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 352640096,
+      "file_byte_end": 352640096,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.18.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 18,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 355636320,
+      "file_byte_end": 355639904,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.18.attn_k.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 18,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 355639904,
+      "file_byte_end": 355640416,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.18.attn_k.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 18,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 355640416,
+      "file_byte_end": 355640416,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.18.attn_output.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 18,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 355719264,
+      "file_byte_end": 355719264,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.18.attn_q.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 18,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 356271200,
+      "file_byte_end": 356274784,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.18.attn_q.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 18,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 356274784,
+      "file_byte_end": 356274784,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.18.attn_v.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 18,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 356826720,
+      "file_byte_end": 356827232,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.18.attn_v.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 18,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 356827232,
+      "file_byte_end": 356827232,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.19.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 19,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 356906080,
+      "file_byte_end": 356909664,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.19.ffn_down.weight",
+      "ggml_type": "Q6_K",
+      "role": "ffn",
+      "layer": 19,
+      "dims": [
+        4864,
+        896
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 17024,
+      "bytes_per_block": 210,
+      "file_byte_start": 356909664,
+      "file_byte_end": 360484704,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights_low",
+          "block_offset": 0,
+          "num_bytes": 128,
+          "description": "Lower 4 bits of 256 \u00d7 6-bit weights, packed as 128 bytes"
+        },
+        {
+          "name": "weights_high",
+          "block_offset": 128,
+          "num_bytes": 64,
+          "description": "Upper 2 bits of 256 \u00d7 6-bit weights, packed as 64 bytes"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 192,
+          "num_bytes": 16,
+          "description": "16 \u00d7 INT8 sub-block scales; each affects 16 weights"
+        },
+        {
+          "name": "super_scale_d",
+          "block_offset": 208,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 16 sub-block scales; 1 bit flip corrupts all 256 weights"
+        }
+      ]
+    },
+    {
+      "name": "blk.19.ffn_gate.weight",
+      "ggml_type": "Q5_0",
+      "role": "ffn",
+      "layer": 19,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 360484704,
+      "file_byte_end": 360484704,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.19.ffn_up.weight",
+      "ggml_type": "Q5_0",
+      "role": "ffn",
+      "layer": 19,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 363480928,
+      "file_byte_end": 363480928,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.19.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 19,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 366477152,
+      "file_byte_end": 366480736,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.19.attn_k.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 19,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 366480736,
+      "file_byte_end": 366481248,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.19.attn_k.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 19,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 366481248,
+      "file_byte_end": 366481248,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.19.attn_output.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 19,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 366560096,
+      "file_byte_end": 366560096,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.19.attn_q.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 19,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 367112032,
+      "file_byte_end": 367115616,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.19.attn_q.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 19,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 367115616,
+      "file_byte_end": 367115616,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.19.attn_v.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 19,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 367667552,
+      "file_byte_end": 367668064,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.19.attn_v.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 19,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 367668064,
+      "file_byte_end": 367789920,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.2.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 2,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 367789920,
+      "file_byte_end": 367793504,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.2.ffn_down.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 2,
+      "dims": [
+        4864,
+        896
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 17024,
+      "bytes_per_block": 144,
+      "file_byte_start": 367793504,
+      "file_byte_end": 370244960,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.2.ffn_gate.weight",
+      "ggml_type": "Q5_0",
+      "role": "ffn",
+      "layer": 2,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 370244960,
+      "file_byte_end": 370244960,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.2.ffn_up.weight",
+      "ggml_type": "Q5_0",
+      "role": "ffn",
+      "layer": 2,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 373241184,
+      "file_byte_end": 373241184,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.2.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 2,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 376237408,
+      "file_byte_end": 376240992,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.2.attn_k.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 2,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 376240992,
+      "file_byte_end": 376241504,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.2.attn_k.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 2,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 376241504,
+      "file_byte_end": 376241504,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.2.attn_output.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 2,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 376320352,
+      "file_byte_end": 376320352,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.2.attn_q.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 2,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 376872288,
+      "file_byte_end": 376875872,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.2.attn_q.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 2,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 376875872,
+      "file_byte_end": 376875872,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.2.attn_v.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 2,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 377427808,
+      "file_byte_end": 377428320,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.2.attn_v.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 2,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 377428320,
+      "file_byte_end": 377428320,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.20.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 20,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 377507168,
+      "file_byte_end": 377510752,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.20.ffn_down.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 20,
+      "dims": [
+        4864,
+        896
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 17024,
+      "bytes_per_block": 144,
+      "file_byte_start": 377510752,
+      "file_byte_end": 379962208,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.20.ffn_gate.weight",
+      "ggml_type": "Q5_0",
+      "role": "ffn",
+      "layer": 20,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 379962208,
+      "file_byte_end": 379962208,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.20.ffn_up.weight",
+      "ggml_type": "Q5_0",
+      "role": "ffn",
+      "layer": 20,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 382958432,
+      "file_byte_end": 382958432,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.20.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 20,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 385954656,
+      "file_byte_end": 385958240,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.20.attn_k.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 20,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 385958240,
+      "file_byte_end": 385958752,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.20.attn_k.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 20,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 385958752,
+      "file_byte_end": 385958752,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.20.attn_output.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 20,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 386037600,
+      "file_byte_end": 386037600,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.20.attn_q.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 20,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 386589536,
+      "file_byte_end": 386593120,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.20.attn_q.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 20,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 386593120,
+      "file_byte_end": 386593120,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.20.attn_v.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 20,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 387145056,
+      "file_byte_end": 387145568,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.20.attn_v.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 20,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 387145568,
+      "file_byte_end": 387145568,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.21.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 21,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 387224416,
+      "file_byte_end": 387228000,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.21.ffn_down.weight",
+      "ggml_type": "Q6_K",
+      "role": "ffn",
+      "layer": 21,
+      "dims": [
+        4864,
+        896
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 17024,
+      "bytes_per_block": 210,
+      "file_byte_start": 387228000,
+      "file_byte_end": 390803040,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights_low",
+          "block_offset": 0,
+          "num_bytes": 128,
+          "description": "Lower 4 bits of 256 \u00d7 6-bit weights, packed as 128 bytes"
+        },
+        {
+          "name": "weights_high",
+          "block_offset": 128,
+          "num_bytes": 64,
+          "description": "Upper 2 bits of 256 \u00d7 6-bit weights, packed as 64 bytes"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 192,
+          "num_bytes": 16,
+          "description": "16 \u00d7 INT8 sub-block scales; each affects 16 weights"
+        },
+        {
+          "name": "super_scale_d",
+          "block_offset": 208,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 16 sub-block scales; 1 bit flip corrupts all 256 weights"
+        }
+      ]
+    },
+    {
+      "name": "blk.21.ffn_gate.weight",
+      "ggml_type": "Q5_0",
+      "role": "ffn",
+      "layer": 21,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 390803040,
+      "file_byte_end": 390803040,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.21.ffn_up.weight",
+      "ggml_type": "Q5_0",
+      "role": "ffn",
+      "layer": 21,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 393799264,
+      "file_byte_end": 393799264,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.21.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 21,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 396795488,
+      "file_byte_end": 396799072,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.21.attn_k.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 21,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 396799072,
+      "file_byte_end": 396799584,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.21.attn_k.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 21,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 396799584,
+      "file_byte_end": 396799584,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.21.attn_output.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 21,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 396878432,
+      "file_byte_end": 396878432,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.21.attn_q.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 21,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 397430368,
+      "file_byte_end": 397433952,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.21.attn_q.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 21,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 397433952,
+      "file_byte_end": 397433952,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.21.attn_v.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 21,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 397985888,
+      "file_byte_end": 397986400,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.21.attn_v.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 21,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 397986400,
+      "file_byte_end": 398108256,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.22.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 22,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 398108256,
+      "file_byte_end": 398111840,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.22.ffn_down.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 22,
+      "dims": [
+        4864,
+        896
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 17024,
+      "bytes_per_block": 144,
+      "file_byte_start": 398111840,
+      "file_byte_end": 400563296,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.22.ffn_gate.weight",
+      "ggml_type": "Q5_0",
+      "role": "ffn",
+      "layer": 22,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 400563296,
+      "file_byte_end": 400563296,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.22.ffn_up.weight",
+      "ggml_type": "Q5_0",
+      "role": "ffn",
+      "layer": 22,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 403559520,
+      "file_byte_end": 403559520,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.22.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 22,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 406555744,
+      "file_byte_end": 406559328,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.22.attn_k.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 22,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 406559328,
+      "file_byte_end": 406559840,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.22.attn_k.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 22,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 406559840,
+      "file_byte_end": 406559840,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.22.attn_output.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 22,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 406638688,
+      "file_byte_end": 406638688,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.22.attn_q.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 22,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 407190624,
+      "file_byte_end": 407194208,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.22.attn_q.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 22,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 407194208,
+      "file_byte_end": 407194208,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.22.attn_v.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 22,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 407746144,
+      "file_byte_end": 407746656,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.22.attn_v.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 22,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 407746656,
+      "file_byte_end": 407746656,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.23.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 23,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 407825504,
+      "file_byte_end": 407829088,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.23.ffn_down.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 23,
+      "dims": [
+        4864,
+        896
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 17024,
+      "bytes_per_block": 144,
+      "file_byte_start": 407829088,
+      "file_byte_end": 410280544,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.23.ffn_gate.weight",
+      "ggml_type": "Q5_0",
+      "role": "ffn",
+      "layer": 23,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 410280544,
+      "file_byte_end": 410280544,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.23.ffn_up.weight",
+      "ggml_type": "Q5_0",
+      "role": "ffn",
+      "layer": 23,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 413276768,
+      "file_byte_end": 413276768,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.23.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 23,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 416272992,
+      "file_byte_end": 416276576,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.23.attn_k.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 23,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 416276576,
+      "file_byte_end": 416277088,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.23.attn_k.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 23,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 416277088,
+      "file_byte_end": 416277088,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.23.attn_output.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 23,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 416355936,
+      "file_byte_end": 416355936,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.23.attn_q.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 23,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 416907872,
+      "file_byte_end": 416911456,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.23.attn_q.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 23,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 416911456,
+      "file_byte_end": 416911456,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.23.attn_v.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 23,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 417463392,
+      "file_byte_end": 417463904,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.23.attn_v.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 23,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 417463904,
+      "file_byte_end": 417463904,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.3.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 3,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 417542752,
+      "file_byte_end": 417546336,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.3.ffn_down.weight",
+      "ggml_type": "Q6_K",
+      "role": "ffn",
+      "layer": 3,
+      "dims": [
+        4864,
+        896
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 17024,
+      "bytes_per_block": 210,
+      "file_byte_start": 417546336,
+      "file_byte_end": 421121376,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights_low",
+          "block_offset": 0,
+          "num_bytes": 128,
+          "description": "Lower 4 bits of 256 \u00d7 6-bit weights, packed as 128 bytes"
+        },
+        {
+          "name": "weights_high",
+          "block_offset": 128,
+          "num_bytes": 64,
+          "description": "Upper 2 bits of 256 \u00d7 6-bit weights, packed as 64 bytes"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 192,
+          "num_bytes": 16,
+          "description": "16 \u00d7 INT8 sub-block scales; each affects 16 weights"
+        },
+        {
+          "name": "super_scale_d",
+          "block_offset": 208,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 16 sub-block scales; 1 bit flip corrupts all 256 weights"
+        }
+      ]
+    },
+    {
+      "name": "blk.3.ffn_gate.weight",
+      "ggml_type": "Q5_0",
+      "role": "ffn",
+      "layer": 3,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 421121376,
+      "file_byte_end": 421121376,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.3.ffn_up.weight",
+      "ggml_type": "Q5_0",
+      "role": "ffn",
+      "layer": 3,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 424117600,
+      "file_byte_end": 424117600,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.3.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 3,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 427113824,
+      "file_byte_end": 427117408,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.3.attn_k.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 3,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 427117408,
+      "file_byte_end": 427117920,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.3.attn_k.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 3,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 427117920,
+      "file_byte_end": 427117920,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.3.attn_output.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 3,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 427196768,
+      "file_byte_end": 427196768,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.3.attn_q.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 3,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 427748704,
+      "file_byte_end": 427752288,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.3.attn_q.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 3,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 427752288,
+      "file_byte_end": 427752288,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.3.attn_v.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 3,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 428304224,
+      "file_byte_end": 428304736,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.3.attn_v.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 3,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 428304736,
+      "file_byte_end": 428426592,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.4.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 4,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 428426592,
+      "file_byte_end": 428430176,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.4.ffn_down.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 4,
+      "dims": [
+        4864,
+        896
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 17024,
+      "bytes_per_block": 144,
+      "file_byte_start": 428430176,
+      "file_byte_end": 430881632,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.4.ffn_gate.weight",
+      "ggml_type": "Q5_0",
+      "role": "ffn",
+      "layer": 4,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 430881632,
+      "file_byte_end": 430881632,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.4.ffn_up.weight",
+      "ggml_type": "Q5_0",
+      "role": "ffn",
+      "layer": 4,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 433877856,
+      "file_byte_end": 433877856,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.4.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 4,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 436874080,
+      "file_byte_end": 436877664,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.4.attn_k.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 4,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 436877664,
+      "file_byte_end": 436878176,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.4.attn_k.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 4,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 436878176,
+      "file_byte_end": 436878176,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.4.attn_output.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 4,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 436957024,
+      "file_byte_end": 436957024,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.4.attn_q.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 4,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 437508960,
+      "file_byte_end": 437512544,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.4.attn_q.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 4,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 437512544,
+      "file_byte_end": 437512544,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.4.attn_v.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 4,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 438064480,
+      "file_byte_end": 438064992,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.4.attn_v.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 4,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 438064992,
+      "file_byte_end": 438064992,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.5.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 5,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 438143840,
+      "file_byte_end": 438147424,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.5.ffn_down.weight",
+      "ggml_type": "Q4_K",
+      "role": "ffn",
+      "layer": 5,
+      "dims": [
+        4864,
+        896
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 17024,
+      "bytes_per_block": 144,
+      "file_byte_start": 438147424,
+      "file_byte_end": 440598880,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    {
+      "name": "blk.5.ffn_gate.weight",
+      "ggml_type": "Q5_0",
+      "role": "ffn",
+      "layer": 5,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 440598880,
+      "file_byte_end": 440598880,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.5.ffn_up.weight",
+      "ggml_type": "Q5_0",
+      "role": "ffn",
+      "layer": 5,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 443595104,
+      "file_byte_end": 443595104,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.5.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 5,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 446591328,
+      "file_byte_end": 446594912,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.5.attn_k.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 5,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 446594912,
+      "file_byte_end": 446595424,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.5.attn_k.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 5,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 446595424,
+      "file_byte_end": 446595424,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.5.attn_output.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 5,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 446674272,
+      "file_byte_end": 446674272,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.5.attn_q.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 5,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 447226208,
+      "file_byte_end": 447229792,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.5.attn_q.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 5,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 447229792,
+      "file_byte_end": 447229792,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.5.attn_v.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 5,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 447781728,
+      "file_byte_end": 447782240,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.5.attn_v.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 5,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 447782240,
+      "file_byte_end": 447782240,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.6.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 6,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 447861088,
+      "file_byte_end": 447864672,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.6.ffn_down.weight",
+      "ggml_type": "Q6_K",
+      "role": "ffn",
+      "layer": 6,
+      "dims": [
+        4864,
+        896
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 17024,
+      "bytes_per_block": 210,
+      "file_byte_start": 447864672,
+      "file_byte_end": 451439712,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights_low",
+          "block_offset": 0,
+          "num_bytes": 128,
+          "description": "Lower 4 bits of 256 \u00d7 6-bit weights, packed as 128 bytes"
+        },
+        {
+          "name": "weights_high",
+          "block_offset": 128,
+          "num_bytes": 64,
+          "description": "Upper 2 bits of 256 \u00d7 6-bit weights, packed as 64 bytes"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 192,
+          "num_bytes": 16,
+          "description": "16 \u00d7 INT8 sub-block scales; each affects 16 weights"
+        },
+        {
+          "name": "super_scale_d",
+          "block_offset": 208,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 16 sub-block scales; 1 bit flip corrupts all 256 weights"
+        }
+      ]
+    },
+    {
+      "name": "blk.6.ffn_gate.weight",
+      "ggml_type": "Q5_0",
+      "role": "ffn",
+      "layer": 6,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 451439712,
+      "file_byte_end": 451439712,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.6.ffn_up.weight",
+      "ggml_type": "Q5_0",
+      "role": "ffn",
+      "layer": 6,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 454435936,
+      "file_byte_end": 454435936,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.6.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 6,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 457432160,
+      "file_byte_end": 457435744,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.6.attn_k.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 6,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 457435744,
+      "file_byte_end": 457436256,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.6.attn_k.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 6,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 457436256,
+      "file_byte_end": 457436256,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.6.attn_output.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 6,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 457515104,
+      "file_byte_end": 457515104,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.6.attn_q.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 6,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 458067040,
+      "file_byte_end": 458070624,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.6.attn_q.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 6,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 458070624,
+      "file_byte_end": 458070624,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.6.attn_v.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 6,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 458622560,
+      "file_byte_end": 458623072,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.6.attn_v.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 6,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 458623072,
+      "file_byte_end": 458744928,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.7.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 7,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 458744928,
+      "file_byte_end": 458748512,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.7.ffn_down.weight",
+      "ggml_type": "Q6_K",
+      "role": "ffn",
+      "layer": 7,
+      "dims": [
+        4864,
+        896
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 17024,
+      "bytes_per_block": 210,
+      "file_byte_start": 458748512,
+      "file_byte_end": 462323552,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights_low",
+          "block_offset": 0,
+          "num_bytes": 128,
+          "description": "Lower 4 bits of 256 \u00d7 6-bit weights, packed as 128 bytes"
+        },
+        {
+          "name": "weights_high",
+          "block_offset": 128,
+          "num_bytes": 64,
+          "description": "Upper 2 bits of 256 \u00d7 6-bit weights, packed as 64 bytes"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 192,
+          "num_bytes": 16,
+          "description": "16 \u00d7 INT8 sub-block scales; each affects 16 weights"
+        },
+        {
+          "name": "super_scale_d",
+          "block_offset": 208,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 16 sub-block scales; 1 bit flip corrupts all 256 weights"
+        }
+      ]
+    },
+    {
+      "name": "blk.7.ffn_gate.weight",
+      "ggml_type": "Q5_0",
+      "role": "ffn",
+      "layer": 7,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 462323552,
+      "file_byte_end": 462323552,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.7.ffn_up.weight",
+      "ggml_type": "Q5_0",
+      "role": "ffn",
+      "layer": 7,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 465319776,
+      "file_byte_end": 465319776,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.7.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 7,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 468316000,
+      "file_byte_end": 468319584,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.7.attn_k.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 7,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 468319584,
+      "file_byte_end": 468320096,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.7.attn_k.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 7,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 468320096,
+      "file_byte_end": 468320096,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.7.attn_output.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 7,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 468398944,
+      "file_byte_end": 468398944,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.7.attn_q.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 7,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 468950880,
+      "file_byte_end": 468954464,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.7.attn_q.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 7,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 468954464,
+      "file_byte_end": 468954464,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.7.attn_v.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 7,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 469506400,
+      "file_byte_end": 469506912,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.7.attn_v.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 7,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 469506912,
+      "file_byte_end": 469628768,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.8.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 8,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 469628768,
+      "file_byte_end": 469632352,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.8.ffn_down.weight",
+      "ggml_type": "Q6_K",
+      "role": "ffn",
+      "layer": 8,
+      "dims": [
+        4864,
+        896
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 17024,
+      "bytes_per_block": 210,
+      "file_byte_start": 469632352,
+      "file_byte_end": 473207392,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights_low",
+          "block_offset": 0,
+          "num_bytes": 128,
+          "description": "Lower 4 bits of 256 \u00d7 6-bit weights, packed as 128 bytes"
+        },
+        {
+          "name": "weights_high",
+          "block_offset": 128,
+          "num_bytes": 64,
+          "description": "Upper 2 bits of 256 \u00d7 6-bit weights, packed as 64 bytes"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 192,
+          "num_bytes": 16,
+          "description": "16 \u00d7 INT8 sub-block scales; each affects 16 weights"
+        },
+        {
+          "name": "super_scale_d",
+          "block_offset": 208,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 16 sub-block scales; 1 bit flip corrupts all 256 weights"
+        }
+      ]
+    },
+    {
+      "name": "blk.8.ffn_gate.weight",
+      "ggml_type": "Q5_0",
+      "role": "ffn",
+      "layer": 8,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 473207392,
+      "file_byte_end": 473207392,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.8.ffn_up.weight",
+      "ggml_type": "Q5_0",
+      "role": "ffn",
+      "layer": 8,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 476203616,
+      "file_byte_end": 476203616,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.8.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 8,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 479199840,
+      "file_byte_end": 479203424,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.8.attn_k.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 8,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 479203424,
+      "file_byte_end": 479203936,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.8.attn_k.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 8,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 479203936,
+      "file_byte_end": 479203936,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.8.attn_output.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 8,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 479282784,
+      "file_byte_end": 479282784,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.8.attn_q.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 8,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 479834720,
+      "file_byte_end": 479838304,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.8.attn_q.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 8,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 479838304,
+      "file_byte_end": 479838304,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.8.attn_v.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 8,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 480390240,
+      "file_byte_end": 480390752,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.8.attn_v.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 8,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 480390752,
+      "file_byte_end": 480512608,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.9.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 9,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 480512608,
+      "file_byte_end": 480516192,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.9.ffn_down.weight",
+      "ggml_type": "Q6_K",
+      "role": "ffn",
+      "layer": 9,
+      "dims": [
+        4864,
+        896
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 17024,
+      "bytes_per_block": 210,
+      "file_byte_start": 480516192,
+      "file_byte_end": 484091232,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights_low",
+          "block_offset": 0,
+          "num_bytes": 128,
+          "description": "Lower 4 bits of 256 \u00d7 6-bit weights, packed as 128 bytes"
+        },
+        {
+          "name": "weights_high",
+          "block_offset": 128,
+          "num_bytes": 64,
+          "description": "Upper 2 bits of 256 \u00d7 6-bit weights, packed as 64 bytes"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 192,
+          "num_bytes": 16,
+          "description": "16 \u00d7 INT8 sub-block scales; each affects 16 weights"
+        },
+        {
+          "name": "super_scale_d",
+          "block_offset": 208,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 16 sub-block scales; 1 bit flip corrupts all 256 weights"
+        }
+      ]
+    },
+    {
+      "name": "blk.9.ffn_gate.weight",
+      "ggml_type": "Q5_0",
+      "role": "ffn",
+      "layer": 9,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 484091232,
+      "file_byte_end": 484091232,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.9.ffn_up.weight",
+      "ggml_type": "Q5_0",
+      "role": "ffn",
+      "layer": 9,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 487087456,
+      "file_byte_end": 487087456,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.9.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 9,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 490083680,
+      "file_byte_end": 490087264,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.9.attn_k.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 9,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 490087264,
+      "file_byte_end": 490087776,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.9.attn_k.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 9,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 490087776,
+      "file_byte_end": 490087776,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.9.attn_output.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 9,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 490166624,
+      "file_byte_end": 490166624,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.9.attn_q.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 9,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 490718560,
+      "file_byte_end": 490722144,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.9.attn_q.weight",
+      "ggml_type": "Q5_0",
+      "role": "attn",
+      "layer": 9,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 490722144,
+      "file_byte_end": 490722144,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: Q5_0",
+      "block_layout": null
+    },
+    {
+      "name": "blk.9.attn_v.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 9,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 491274080,
+      "file_byte_end": 491274592,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.9.attn_v.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 9,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 491274592,
+      "file_byte_end": 491396448,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "output_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": null,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 491396448,
+      "file_byte_end": 491400032,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    }
+  ]
+}

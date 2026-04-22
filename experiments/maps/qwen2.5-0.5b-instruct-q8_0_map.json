@@ -1,0 +1,7511 @@
+{
+  "model_path": "/Users/viggy/Documents/Grad School/Sem_4/ECE 591 - SW HW Co-design/Project/bitbreaker/models/qwen2.5-0.5b-instruct-q8_0.gguf",
+  "quant_label": "Q8_0",
+  "tensor_data_base_offset": 5947744,
+  "n_layers": 24,
+  "fp16_bit_layout": {
+    "sign": [
+      15
+    ],
+    "exponent_msb": [
+      14
+    ],
+    "exponent": [
+      10,
+      11,
+      12,
+      13,
+      14
+    ],
+    "mantissa_msb": [
+      9
+    ],
+    "mantissa": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "mantissa_lsb": [
+      0
+    ]
+  },
+  "block_layouts_reference": {
+    "F16": {
+      "weights_per_block": 1,
+      "bytes_per_block": 2,
+      "regions": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    "Q8_0": {
+      "weights_per_block": 32,
+      "bytes_per_block": 34,
+      "regions": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    "Q4_0": {
+      "weights_per_block": 32,
+      "bytes_per_block": 18,
+      "regions": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    "Q4_K": {
+      "weights_per_block": 256,
+      "bytes_per_block": 144,
+      "regions": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    "Q6_K": {
+      "weights_per_block": 256,
+      "bytes_per_block": 210,
+      "regions": [
+        {
+          "name": "weights_low",
+          "block_offset": 0,
+          "num_bytes": 128,
+          "description": "Lower 4 bits of 256 \u00d7 6-bit weights, packed as 128 bytes"
+        },
+        {
+          "name": "weights_high",
+          "block_offset": 128,
+          "num_bytes": 64,
+          "description": "Upper 2 bits of 256 \u00d7 6-bit weights, packed as 64 bytes"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 192,
+          "num_bytes": 16,
+          "description": "16 \u00d7 INT8 sub-block scales; each affects 16 weights"
+        },
+        {
+          "name": "super_scale_d",
+          "block_offset": 208,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 16 sub-block scales; 1 bit flip corrupts all 256 weights"
+        }
+      ]
+    }
+  },
+  "tensors": [
+    {
+      "name": "output.weight",
+      "ggml_type": "Q8_0",
+      "role": "output",
+      "layer": null,
+      "dims": [
+        896,
+        151936
+      ],
+      "n_weights": 136134656,
+      "n_blocks": 4254208,
+      "bytes_per_block": 34,
+      "file_byte_start": 5947744,
+      "file_byte_end": 150590816,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "token_embd.weight",
+      "ggml_type": "Q8_0",
+      "role": "embedding",
+      "layer": null,
+      "dims": [
+        896,
+        151936
+      ],
+      "n_weights": 136134656,
+      "n_blocks": 4254208,
+      "bytes_per_block": 34,
+      "file_byte_start": 150590816,
+      "file_byte_end": 295233888,
+      "in_scope": false,
+      "reason_out_of_scope": "Embedding tensor excluded from flip pool",
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.0.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 0,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 295233888,
+      "file_byte_end": 295237472,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.0.ffn_down.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 0,
+      "dims": [
+        4864,
+        896
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 295237472,
+      "file_byte_end": 299868000,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.0.ffn_gate.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 0,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 299868000,
+      "file_byte_end": 304498528,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.0.ffn_up.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 0,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 304498528,
+      "file_byte_end": 309129056,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.0.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 0,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 309129056,
+      "file_byte_end": 309132640,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.0.attn_k.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 0,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 309132640,
+      "file_byte_end": 309133152,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.0.attn_k.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 0,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 309133152,
+      "file_byte_end": 309255008,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.0.attn_output.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 0,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": 25088,
+      "bytes_per_block": 34,
+      "file_byte_start": 309255008,
+      "file_byte_end": 310108000,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.0.attn_q.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 0,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 310108000,
+      "file_byte_end": 310111584,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.0.attn_q.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 0,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": 25088,
+      "bytes_per_block": 34,
+      "file_byte_start": 310111584,
+      "file_byte_end": 310964576,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.0.attn_v.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 0,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 310964576,
+      "file_byte_end": 310965088,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.0.attn_v.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 0,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 310965088,
+      "file_byte_end": 311086944,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.1.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 1,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 311086944,
+      "file_byte_end": 311090528,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.1.ffn_down.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 1,
+      "dims": [
+        4864,
+        896
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 311090528,
+      "file_byte_end": 315721056,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.1.ffn_gate.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 1,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 315721056,
+      "file_byte_end": 320351584,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.1.ffn_up.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 1,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 320351584,
+      "file_byte_end": 324982112,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.1.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 1,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 324982112,
+      "file_byte_end": 324985696,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.1.attn_k.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 1,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 324985696,
+      "file_byte_end": 324986208,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.1.attn_k.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 1,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 324986208,
+      "file_byte_end": 325108064,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.1.attn_output.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 1,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": 25088,
+      "bytes_per_block": 34,
+      "file_byte_start": 325108064,
+      "file_byte_end": 325961056,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.1.attn_q.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 1,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 325961056,
+      "file_byte_end": 325964640,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.1.attn_q.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 1,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": 25088,
+      "bytes_per_block": 34,
+      "file_byte_start": 325964640,
+      "file_byte_end": 326817632,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.1.attn_v.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 1,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 326817632,
+      "file_byte_end": 326818144,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.1.attn_v.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 1,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 326818144,
+      "file_byte_end": 326940000,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.10.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 10,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 326940000,
+      "file_byte_end": 326943584,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.10.ffn_down.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 10,
+      "dims": [
+        4864,
+        896
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 326943584,
+      "file_byte_end": 331574112,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.10.ffn_gate.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 10,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 331574112,
+      "file_byte_end": 336204640,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.10.ffn_up.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 10,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 336204640,
+      "file_byte_end": 340835168,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.10.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 10,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 340835168,
+      "file_byte_end": 340838752,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.10.attn_k.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 10,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 340838752,
+      "file_byte_end": 340839264,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.10.attn_k.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 10,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 340839264,
+      "file_byte_end": 340961120,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.10.attn_output.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 10,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": 25088,
+      "bytes_per_block": 34,
+      "file_byte_start": 340961120,
+      "file_byte_end": 341814112,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.10.attn_q.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 10,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 341814112,
+      "file_byte_end": 341817696,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.10.attn_q.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 10,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": 25088,
+      "bytes_per_block": 34,
+      "file_byte_start": 341817696,
+      "file_byte_end": 342670688,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.10.attn_v.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 10,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 342670688,
+      "file_byte_end": 342671200,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.10.attn_v.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 10,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 342671200,
+      "file_byte_end": 342793056,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.11.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 11,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 342793056,
+      "file_byte_end": 342796640,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.11.ffn_down.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 11,
+      "dims": [
+        4864,
+        896
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 342796640,
+      "file_byte_end": 347427168,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.11.ffn_gate.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 11,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 347427168,
+      "file_byte_end": 352057696,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.11.ffn_up.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 11,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 352057696,
+      "file_byte_end": 356688224,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.11.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 11,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 356688224,
+      "file_byte_end": 356691808,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.11.attn_k.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 11,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 356691808,
+      "file_byte_end": 356692320,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.11.attn_k.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 11,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 356692320,
+      "file_byte_end": 356814176,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.11.attn_output.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 11,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": 25088,
+      "bytes_per_block": 34,
+      "file_byte_start": 356814176,
+      "file_byte_end": 357667168,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.11.attn_q.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 11,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 357667168,
+      "file_byte_end": 357670752,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.11.attn_q.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 11,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": 25088,
+      "bytes_per_block": 34,
+      "file_byte_start": 357670752,
+      "file_byte_end": 358523744,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.11.attn_v.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 11,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 358523744,
+      "file_byte_end": 358524256,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.11.attn_v.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 11,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 358524256,
+      "file_byte_end": 358646112,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.12.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 12,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 358646112,
+      "file_byte_end": 358649696,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.12.ffn_down.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 12,
+      "dims": [
+        4864,
+        896
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 358649696,
+      "file_byte_end": 363280224,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.12.ffn_gate.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 12,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 363280224,
+      "file_byte_end": 367910752,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.12.ffn_up.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 12,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 367910752,
+      "file_byte_end": 372541280,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.12.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 12,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 372541280,
+      "file_byte_end": 372544864,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.12.attn_k.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 12,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 372544864,
+      "file_byte_end": 372545376,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.12.attn_k.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 12,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 372545376,
+      "file_byte_end": 372667232,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.12.attn_output.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 12,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": 25088,
+      "bytes_per_block": 34,
+      "file_byte_start": 372667232,
+      "file_byte_end": 373520224,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.12.attn_q.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 12,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 373520224,
+      "file_byte_end": 373523808,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.12.attn_q.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 12,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": 25088,
+      "bytes_per_block": 34,
+      "file_byte_start": 373523808,
+      "file_byte_end": 374376800,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.12.attn_v.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 12,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 374376800,
+      "file_byte_end": 374377312,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.12.attn_v.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 12,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 374377312,
+      "file_byte_end": 374499168,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.13.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 13,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 374499168,
+      "file_byte_end": 374502752,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.13.ffn_down.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 13,
+      "dims": [
+        4864,
+        896
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 374502752,
+      "file_byte_end": 379133280,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.13.ffn_gate.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 13,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 379133280,
+      "file_byte_end": 383763808,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.13.ffn_up.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 13,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 383763808,
+      "file_byte_end": 388394336,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.13.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 13,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 388394336,
+      "file_byte_end": 388397920,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.13.attn_k.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 13,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 388397920,
+      "file_byte_end": 388398432,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.13.attn_k.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 13,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 388398432,
+      "file_byte_end": 388520288,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.13.attn_output.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 13,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": 25088,
+      "bytes_per_block": 34,
+      "file_byte_start": 388520288,
+      "file_byte_end": 389373280,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.13.attn_q.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 13,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 389373280,
+      "file_byte_end": 389376864,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.13.attn_q.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 13,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": 25088,
+      "bytes_per_block": 34,
+      "file_byte_start": 389376864,
+      "file_byte_end": 390229856,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.13.attn_v.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 13,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 390229856,
+      "file_byte_end": 390230368,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.13.attn_v.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 13,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 390230368,
+      "file_byte_end": 390352224,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.14.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 14,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 390352224,
+      "file_byte_end": 390355808,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.14.ffn_down.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 14,
+      "dims": [
+        4864,
+        896
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 390355808,
+      "file_byte_end": 394986336,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.14.ffn_gate.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 14,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 394986336,
+      "file_byte_end": 399616864,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.14.ffn_up.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 14,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 399616864,
+      "file_byte_end": 404247392,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.14.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 14,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 404247392,
+      "file_byte_end": 404250976,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.14.attn_k.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 14,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 404250976,
+      "file_byte_end": 404251488,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.14.attn_k.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 14,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 404251488,
+      "file_byte_end": 404373344,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.14.attn_output.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 14,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": 25088,
+      "bytes_per_block": 34,
+      "file_byte_start": 404373344,
+      "file_byte_end": 405226336,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.14.attn_q.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 14,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 405226336,
+      "file_byte_end": 405229920,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.14.attn_q.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 14,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": 25088,
+      "bytes_per_block": 34,
+      "file_byte_start": 405229920,
+      "file_byte_end": 406082912,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.14.attn_v.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 14,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 406082912,
+      "file_byte_end": 406083424,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.14.attn_v.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 14,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 406083424,
+      "file_byte_end": 406205280,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.15.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 15,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 406205280,
+      "file_byte_end": 406208864,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.15.ffn_down.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 15,
+      "dims": [
+        4864,
+        896
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 406208864,
+      "file_byte_end": 410839392,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.15.ffn_gate.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 15,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 410839392,
+      "file_byte_end": 415469920,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.15.ffn_up.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 15,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 415469920,
+      "file_byte_end": 420100448,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.15.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 15,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 420100448,
+      "file_byte_end": 420104032,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.15.attn_k.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 15,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 420104032,
+      "file_byte_end": 420104544,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.15.attn_k.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 15,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 420104544,
+      "file_byte_end": 420226400,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.15.attn_output.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 15,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": 25088,
+      "bytes_per_block": 34,
+      "file_byte_start": 420226400,
+      "file_byte_end": 421079392,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.15.attn_q.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 15,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 421079392,
+      "file_byte_end": 421082976,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.15.attn_q.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 15,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": 25088,
+      "bytes_per_block": 34,
+      "file_byte_start": 421082976,
+      "file_byte_end": 421935968,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.15.attn_v.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 15,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 421935968,
+      "file_byte_end": 421936480,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.15.attn_v.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 15,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 421936480,
+      "file_byte_end": 422058336,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.16.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 16,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 422058336,
+      "file_byte_end": 422061920,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.16.ffn_down.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 16,
+      "dims": [
+        4864,
+        896
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 422061920,
+      "file_byte_end": 426692448,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.16.ffn_gate.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 16,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 426692448,
+      "file_byte_end": 431322976,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.16.ffn_up.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 16,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 431322976,
+      "file_byte_end": 435953504,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.16.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 16,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 435953504,
+      "file_byte_end": 435957088,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.16.attn_k.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 16,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 435957088,
+      "file_byte_end": 435957600,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.16.attn_k.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 16,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 435957600,
+      "file_byte_end": 436079456,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.16.attn_output.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 16,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": 25088,
+      "bytes_per_block": 34,
+      "file_byte_start": 436079456,
+      "file_byte_end": 436932448,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.16.attn_q.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 16,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 436932448,
+      "file_byte_end": 436936032,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.16.attn_q.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 16,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": 25088,
+      "bytes_per_block": 34,
+      "file_byte_start": 436936032,
+      "file_byte_end": 437789024,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.16.attn_v.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 16,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 437789024,
+      "file_byte_end": 437789536,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.16.attn_v.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 16,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 437789536,
+      "file_byte_end": 437911392,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.17.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 17,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 437911392,
+      "file_byte_end": 437914976,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.17.ffn_down.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 17,
+      "dims": [
+        4864,
+        896
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 437914976,
+      "file_byte_end": 442545504,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.17.ffn_gate.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 17,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 442545504,
+      "file_byte_end": 447176032,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.17.ffn_up.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 17,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 447176032,
+      "file_byte_end": 451806560,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.17.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 17,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 451806560,
+      "file_byte_end": 451810144,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.17.attn_k.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 17,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 451810144,
+      "file_byte_end": 451810656,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.17.attn_k.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 17,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 451810656,
+      "file_byte_end": 451932512,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.17.attn_output.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 17,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": 25088,
+      "bytes_per_block": 34,
+      "file_byte_start": 451932512,
+      "file_byte_end": 452785504,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.17.attn_q.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 17,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 452785504,
+      "file_byte_end": 452789088,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.17.attn_q.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 17,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": 25088,
+      "bytes_per_block": 34,
+      "file_byte_start": 452789088,
+      "file_byte_end": 453642080,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.17.attn_v.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 17,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 453642080,
+      "file_byte_end": 453642592,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.17.attn_v.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 17,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 453642592,
+      "file_byte_end": 453764448,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.18.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 18,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 453764448,
+      "file_byte_end": 453768032,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.18.ffn_down.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 18,
+      "dims": [
+        4864,
+        896
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 453768032,
+      "file_byte_end": 458398560,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.18.ffn_gate.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 18,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 458398560,
+      "file_byte_end": 463029088,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.18.ffn_up.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 18,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 463029088,
+      "file_byte_end": 467659616,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.18.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 18,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 467659616,
+      "file_byte_end": 467663200,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.18.attn_k.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 18,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 467663200,
+      "file_byte_end": 467663712,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.18.attn_k.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 18,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 467663712,
+      "file_byte_end": 467785568,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.18.attn_output.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 18,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": 25088,
+      "bytes_per_block": 34,
+      "file_byte_start": 467785568,
+      "file_byte_end": 468638560,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.18.attn_q.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 18,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 468638560,
+      "file_byte_end": 468642144,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.18.attn_q.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 18,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": 25088,
+      "bytes_per_block": 34,
+      "file_byte_start": 468642144,
+      "file_byte_end": 469495136,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.18.attn_v.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 18,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 469495136,
+      "file_byte_end": 469495648,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.18.attn_v.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 18,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 469495648,
+      "file_byte_end": 469617504,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.19.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 19,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 469617504,
+      "file_byte_end": 469621088,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.19.ffn_down.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 19,
+      "dims": [
+        4864,
+        896
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 469621088,
+      "file_byte_end": 474251616,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.19.ffn_gate.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 19,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 474251616,
+      "file_byte_end": 478882144,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.19.ffn_up.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 19,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 478882144,
+      "file_byte_end": 483512672,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.19.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 19,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 483512672,
+      "file_byte_end": 483516256,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.19.attn_k.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 19,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 483516256,
+      "file_byte_end": 483516768,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.19.attn_k.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 19,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 483516768,
+      "file_byte_end": 483638624,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.19.attn_output.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 19,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": 25088,
+      "bytes_per_block": 34,
+      "file_byte_start": 483638624,
+      "file_byte_end": 484491616,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.19.attn_q.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 19,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 484491616,
+      "file_byte_end": 484495200,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.19.attn_q.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 19,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": 25088,
+      "bytes_per_block": 34,
+      "file_byte_start": 484495200,
+      "file_byte_end": 485348192,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.19.attn_v.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 19,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 485348192,
+      "file_byte_end": 485348704,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.19.attn_v.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 19,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 485348704,
+      "file_byte_end": 485470560,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.2.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 2,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 485470560,
+      "file_byte_end": 485474144,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.2.ffn_down.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 2,
+      "dims": [
+        4864,
+        896
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 485474144,
+      "file_byte_end": 490104672,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.2.ffn_gate.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 2,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 490104672,
+      "file_byte_end": 494735200,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.2.ffn_up.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 2,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 494735200,
+      "file_byte_end": 499365728,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.2.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 2,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 499365728,
+      "file_byte_end": 499369312,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.2.attn_k.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 2,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 499369312,
+      "file_byte_end": 499369824,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.2.attn_k.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 2,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 499369824,
+      "file_byte_end": 499491680,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.2.attn_output.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 2,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": 25088,
+      "bytes_per_block": 34,
+      "file_byte_start": 499491680,
+      "file_byte_end": 500344672,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.2.attn_q.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 2,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 500344672,
+      "file_byte_end": 500348256,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.2.attn_q.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 2,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": 25088,
+      "bytes_per_block": 34,
+      "file_byte_start": 500348256,
+      "file_byte_end": 501201248,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.2.attn_v.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 2,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 501201248,
+      "file_byte_end": 501201760,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.2.attn_v.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 2,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 501201760,
+      "file_byte_end": 501323616,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.20.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 20,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 501323616,
+      "file_byte_end": 501327200,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.20.ffn_down.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 20,
+      "dims": [
+        4864,
+        896
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 501327200,
+      "file_byte_end": 505957728,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.20.ffn_gate.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 20,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 505957728,
+      "file_byte_end": 510588256,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.20.ffn_up.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 20,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 510588256,
+      "file_byte_end": 515218784,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.20.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 20,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 515218784,
+      "file_byte_end": 515222368,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.20.attn_k.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 20,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 515222368,
+      "file_byte_end": 515222880,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.20.attn_k.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 20,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 515222880,
+      "file_byte_end": 515344736,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.20.attn_output.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 20,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": 25088,
+      "bytes_per_block": 34,
+      "file_byte_start": 515344736,
+      "file_byte_end": 516197728,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.20.attn_q.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 20,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 516197728,
+      "file_byte_end": 516201312,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.20.attn_q.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 20,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": 25088,
+      "bytes_per_block": 34,
+      "file_byte_start": 516201312,
+      "file_byte_end": 517054304,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.20.attn_v.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 20,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 517054304,
+      "file_byte_end": 517054816,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.20.attn_v.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 20,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 517054816,
+      "file_byte_end": 517176672,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.21.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 21,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 517176672,
+      "file_byte_end": 517180256,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.21.ffn_down.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 21,
+      "dims": [
+        4864,
+        896
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 517180256,
+      "file_byte_end": 521810784,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.21.ffn_gate.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 21,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 521810784,
+      "file_byte_end": 526441312,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.21.ffn_up.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 21,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 526441312,
+      "file_byte_end": 531071840,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.21.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 21,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 531071840,
+      "file_byte_end": 531075424,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.21.attn_k.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 21,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 531075424,
+      "file_byte_end": 531075936,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.21.attn_k.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 21,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 531075936,
+      "file_byte_end": 531197792,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.21.attn_output.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 21,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": 25088,
+      "bytes_per_block": 34,
+      "file_byte_start": 531197792,
+      "file_byte_end": 532050784,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.21.attn_q.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 21,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 532050784,
+      "file_byte_end": 532054368,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.21.attn_q.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 21,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": 25088,
+      "bytes_per_block": 34,
+      "file_byte_start": 532054368,
+      "file_byte_end": 532907360,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.21.attn_v.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 21,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 532907360,
+      "file_byte_end": 532907872,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.21.attn_v.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 21,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 532907872,
+      "file_byte_end": 533029728,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.22.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 22,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 533029728,
+      "file_byte_end": 533033312,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.22.ffn_down.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 22,
+      "dims": [
+        4864,
+        896
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 533033312,
+      "file_byte_end": 537663840,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.22.ffn_gate.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 22,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 537663840,
+      "file_byte_end": 542294368,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.22.ffn_up.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 22,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 542294368,
+      "file_byte_end": 546924896,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.22.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 22,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 546924896,
+      "file_byte_end": 546928480,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.22.attn_k.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 22,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 546928480,
+      "file_byte_end": 546928992,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.22.attn_k.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 22,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 546928992,
+      "file_byte_end": 547050848,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.22.attn_output.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 22,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": 25088,
+      "bytes_per_block": 34,
+      "file_byte_start": 547050848,
+      "file_byte_end": 547903840,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.22.attn_q.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 22,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 547903840,
+      "file_byte_end": 547907424,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.22.attn_q.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 22,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": 25088,
+      "bytes_per_block": 34,
+      "file_byte_start": 547907424,
+      "file_byte_end": 548760416,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.22.attn_v.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 22,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 548760416,
+      "file_byte_end": 548760928,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.22.attn_v.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 22,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 548760928,
+      "file_byte_end": 548882784,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.23.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 23,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 548882784,
+      "file_byte_end": 548886368,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.23.ffn_down.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 23,
+      "dims": [
+        4864,
+        896
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 548886368,
+      "file_byte_end": 553516896,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.23.ffn_gate.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 23,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 553516896,
+      "file_byte_end": 558147424,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.23.ffn_up.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 23,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 558147424,
+      "file_byte_end": 562777952,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.23.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 23,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 562777952,
+      "file_byte_end": 562781536,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.23.attn_k.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 23,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 562781536,
+      "file_byte_end": 562782048,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.23.attn_k.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 23,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 562782048,
+      "file_byte_end": 562903904,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.23.attn_output.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 23,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": 25088,
+      "bytes_per_block": 34,
+      "file_byte_start": 562903904,
+      "file_byte_end": 563756896,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.23.attn_q.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 23,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 563756896,
+      "file_byte_end": 563760480,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.23.attn_q.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 23,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": 25088,
+      "bytes_per_block": 34,
+      "file_byte_start": 563760480,
+      "file_byte_end": 564613472,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.23.attn_v.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 23,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 564613472,
+      "file_byte_end": 564613984,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.23.attn_v.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 23,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 564613984,
+      "file_byte_end": 564735840,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.3.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 3,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 564735840,
+      "file_byte_end": 564739424,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.3.ffn_down.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 3,
+      "dims": [
+        4864,
+        896
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 564739424,
+      "file_byte_end": 569369952,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.3.ffn_gate.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 3,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 569369952,
+      "file_byte_end": 574000480,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.3.ffn_up.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 3,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 574000480,
+      "file_byte_end": 578631008,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.3.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 3,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 578631008,
+      "file_byte_end": 578634592,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.3.attn_k.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 3,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 578634592,
+      "file_byte_end": 578635104,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.3.attn_k.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 3,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 578635104,
+      "file_byte_end": 578756960,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.3.attn_output.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 3,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": 25088,
+      "bytes_per_block": 34,
+      "file_byte_start": 578756960,
+      "file_byte_end": 579609952,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.3.attn_q.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 3,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 579609952,
+      "file_byte_end": 579613536,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.3.attn_q.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 3,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": 25088,
+      "bytes_per_block": 34,
+      "file_byte_start": 579613536,
+      "file_byte_end": 580466528,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.3.attn_v.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 3,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 580466528,
+      "file_byte_end": 580467040,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.3.attn_v.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 3,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 580467040,
+      "file_byte_end": 580588896,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.4.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 4,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 580588896,
+      "file_byte_end": 580592480,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.4.ffn_down.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 4,
+      "dims": [
+        4864,
+        896
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 580592480,
+      "file_byte_end": 585223008,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.4.ffn_gate.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 4,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 585223008,
+      "file_byte_end": 589853536,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.4.ffn_up.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 4,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 589853536,
+      "file_byte_end": 594484064,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.4.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 4,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 594484064,
+      "file_byte_end": 594487648,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.4.attn_k.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 4,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 594487648,
+      "file_byte_end": 594488160,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.4.attn_k.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 4,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 594488160,
+      "file_byte_end": 594610016,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.4.attn_output.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 4,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": 25088,
+      "bytes_per_block": 34,
+      "file_byte_start": 594610016,
+      "file_byte_end": 595463008,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.4.attn_q.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 4,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 595463008,
+      "file_byte_end": 595466592,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.4.attn_q.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 4,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": 25088,
+      "bytes_per_block": 34,
+      "file_byte_start": 595466592,
+      "file_byte_end": 596319584,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.4.attn_v.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 4,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 596319584,
+      "file_byte_end": 596320096,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.4.attn_v.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 4,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 596320096,
+      "file_byte_end": 596441952,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.5.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 5,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 596441952,
+      "file_byte_end": 596445536,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.5.ffn_down.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 5,
+      "dims": [
+        4864,
+        896
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 596445536,
+      "file_byte_end": 601076064,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.5.ffn_gate.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 5,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 601076064,
+      "file_byte_end": 605706592,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.5.ffn_up.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 5,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 605706592,
+      "file_byte_end": 610337120,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.5.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 5,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 610337120,
+      "file_byte_end": 610340704,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.5.attn_k.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 5,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 610340704,
+      "file_byte_end": 610341216,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.5.attn_k.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 5,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 610341216,
+      "file_byte_end": 610463072,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.5.attn_output.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 5,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": 25088,
+      "bytes_per_block": 34,
+      "file_byte_start": 610463072,
+      "file_byte_end": 611316064,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.5.attn_q.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 5,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 611316064,
+      "file_byte_end": 611319648,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.5.attn_q.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 5,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": 25088,
+      "bytes_per_block": 34,
+      "file_byte_start": 611319648,
+      "file_byte_end": 612172640,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.5.attn_v.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 5,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 612172640,
+      "file_byte_end": 612173152,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.5.attn_v.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 5,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 612173152,
+      "file_byte_end": 612295008,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.6.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 6,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 612295008,
+      "file_byte_end": 612298592,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.6.ffn_down.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 6,
+      "dims": [
+        4864,
+        896
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 612298592,
+      "file_byte_end": 616929120,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.6.ffn_gate.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 6,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 616929120,
+      "file_byte_end": 621559648,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.6.ffn_up.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 6,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 621559648,
+      "file_byte_end": 626190176,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.6.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 6,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 626190176,
+      "file_byte_end": 626193760,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.6.attn_k.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 6,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 626193760,
+      "file_byte_end": 626194272,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.6.attn_k.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 6,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 626194272,
+      "file_byte_end": 626316128,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.6.attn_output.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 6,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": 25088,
+      "bytes_per_block": 34,
+      "file_byte_start": 626316128,
+      "file_byte_end": 627169120,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.6.attn_q.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 6,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 627169120,
+      "file_byte_end": 627172704,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.6.attn_q.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 6,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": 25088,
+      "bytes_per_block": 34,
+      "file_byte_start": 627172704,
+      "file_byte_end": 628025696,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.6.attn_v.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 6,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 628025696,
+      "file_byte_end": 628026208,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.6.attn_v.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 6,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 628026208,
+      "file_byte_end": 628148064,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.7.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 7,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 628148064,
+      "file_byte_end": 628151648,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.7.ffn_down.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 7,
+      "dims": [
+        4864,
+        896
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 628151648,
+      "file_byte_end": 632782176,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.7.ffn_gate.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 7,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 632782176,
+      "file_byte_end": 637412704,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.7.ffn_up.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 7,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 637412704,
+      "file_byte_end": 642043232,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.7.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 7,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 642043232,
+      "file_byte_end": 642046816,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.7.attn_k.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 7,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 642046816,
+      "file_byte_end": 642047328,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.7.attn_k.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 7,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 642047328,
+      "file_byte_end": 642169184,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.7.attn_output.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 7,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": 25088,
+      "bytes_per_block": 34,
+      "file_byte_start": 642169184,
+      "file_byte_end": 643022176,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.7.attn_q.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 7,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 643022176,
+      "file_byte_end": 643025760,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.7.attn_q.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 7,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": 25088,
+      "bytes_per_block": 34,
+      "file_byte_start": 643025760,
+      "file_byte_end": 643878752,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.7.attn_v.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 7,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 643878752,
+      "file_byte_end": 643879264,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.7.attn_v.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 7,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 643879264,
+      "file_byte_end": 644001120,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.8.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 8,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 644001120,
+      "file_byte_end": 644004704,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.8.ffn_down.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 8,
+      "dims": [
+        4864,
+        896
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 644004704,
+      "file_byte_end": 648635232,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.8.ffn_gate.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 8,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 648635232,
+      "file_byte_end": 653265760,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.8.ffn_up.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 8,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 653265760,
+      "file_byte_end": 657896288,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.8.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 8,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 657896288,
+      "file_byte_end": 657899872,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.8.attn_k.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 8,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 657899872,
+      "file_byte_end": 657900384,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.8.attn_k.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 8,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 657900384,
+      "file_byte_end": 658022240,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.8.attn_output.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 8,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": 25088,
+      "bytes_per_block": 34,
+      "file_byte_start": 658022240,
+      "file_byte_end": 658875232,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.8.attn_q.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 8,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 658875232,
+      "file_byte_end": 658878816,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.8.attn_q.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 8,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": 25088,
+      "bytes_per_block": 34,
+      "file_byte_start": 658878816,
+      "file_byte_end": 659731808,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.8.attn_v.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 8,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 659731808,
+      "file_byte_end": 659732320,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.8.attn_v.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 8,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 659732320,
+      "file_byte_end": 659854176,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.9.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 9,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 659854176,
+      "file_byte_end": 659857760,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.9.ffn_down.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 9,
+      "dims": [
+        4864,
+        896
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 659857760,
+      "file_byte_end": 664488288,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.9.ffn_gate.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 9,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 664488288,
+      "file_byte_end": 669118816,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.9.ffn_up.weight",
+      "ggml_type": "Q8_0",
+      "role": "ffn",
+      "layer": 9,
+      "dims": [
+        896,
+        4864
+      ],
+      "n_weights": 4358144,
+      "n_blocks": 136192,
+      "bytes_per_block": 34,
+      "file_byte_start": 669118816,
+      "file_byte_end": 673749344,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.9.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 9,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 673749344,
+      "file_byte_end": 673752928,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.9.attn_k.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 9,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 673752928,
+      "file_byte_end": 673753440,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.9.attn_k.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 9,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 673753440,
+      "file_byte_end": 673875296,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.9.attn_output.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 9,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": 25088,
+      "bytes_per_block": 34,
+      "file_byte_start": 673875296,
+      "file_byte_end": 674728288,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.9.attn_q.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 9,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 674728288,
+      "file_byte_end": 674731872,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.9.attn_q.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 9,
+      "dims": [
+        896,
+        896
+      ],
+      "n_weights": 802816,
+      "n_blocks": 25088,
+      "bytes_per_block": 34,
+      "file_byte_start": 674731872,
+      "file_byte_end": 675584864,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "blk.9.attn_v.bias",
+      "ggml_type": "F32",
+      "role": "attn",
+      "layer": 9,
+      "dims": [
+        128
+      ],
+      "n_weights": 128,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 675584864,
+      "file_byte_end": 675585376,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.9.attn_v.weight",
+      "ggml_type": "Q8_0",
+      "role": "attn",
+      "layer": 9,
+      "dims": [
+        896,
+        128
+      ],
+      "n_weights": 114688,
+      "n_blocks": 3584,
+      "bytes_per_block": 34,
+      "file_byte_start": 675585376,
+      "file_byte_end": 675707232,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    {
+      "name": "output_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": null,
+      "dims": [
+        896
+      ],
+      "n_weights": 896,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 675707232,
+      "file_byte_end": 675710816,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    }
+  ]
+}

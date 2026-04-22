@@ -1,0 +1,61 @@
+==================================================================================================================
+  Exp 2 -- Scale vs Weight Bits  [MAC]
+==================================================================================================================
+  Model          Quant    Condition      Flips Seed            PPL        % Worse      ARC    Hella  Status
+  --------------------------------------------------------------------------------------------------------------
+  llama_fp16     FP16     weights            1    0         13.880          -0.0%    69.0%    41.1%  OK    
+  llama_fp16     FP16     weights            1    1         13.880          +0.0%    69.1%    41.1%  OK    
+  llama_fp16     FP16     weights            5    0       2092.937      +14978.3%    30.2%    33.3%  OK    
+  llama_fp16     FP16     weights            5    1         13.880          +0.0%    69.1%    41.1%  OK    
+  llama_fp16     FP16     weights           10    0     403299.488      2.91e+06%    24.6%    27.5%  OK    
+  llama_fp16     FP16     weights           10    1     296925.755      2.14e+06%    26.1%    27.7%  OK    
+
+  llama_q4       Q4_0     block_scale        1    0         15.051          +0.0%    67.4%    41.1%  OK    
+  llama_q4       Q4_0     block_scale        1    1         15.051          +0.0%    67.4%    41.1%  OK    
+  llama_q4       Q4_0     block_scale        5    0      1.001e+06      6.65e+06%    24.2%    27.9%  OK    
+  llama_q4       Q4_0     block_scale        5    1         15.051          +0.0%    67.4%    41.1%  OK    
+  llama_q4       Q4_0     block_scale       10    0      1.016e+06      6.75e+06%    24.5%    27.2%  OK    
+  llama_q4       Q4_0     block_scale       10    1     635628.946      4.22e+06%    24.5%    26.4%  OK    
+
+  llama_q4km     Q4_K_M   super_scale        1    0         14.333          +0.0%    68.8%    40.4%  OK    
+  llama_q4km     Q4_K_M   super_scale        1    1         14.329          +0.0%    68.9%    40.4%  OK    
+  llama_q4km     Q4_K_M   super_scale        5    0      1.422e+06      9.92e+06%    23.2%    27.6%  OK    
+  llama_q4km     Q4_K_M   super_scale        5    1         14.329          +0.0%    68.9%    40.5%  OK    
+  llama_q4km     Q4_K_M   super_scale       10    0     747339.928      5.22e+06%    22.6%    27.5%  OK    
+  llama_q4km     Q4_K_M   super_scale       10    1            N/A            N/A    24.7%    27.5%  OK    
+
+  llama_q8       Q8_0     block_scale        1    0         13.882          +0.0%    69.1%    41.1%  OK    
+  llama_q8       Q8_0     block_scale        1    1         13.882          -0.0%    69.1%    41.1%  OK    
+  llama_q8       Q8_0     block_scale        5    0      1.326e+06      9.55e+06%    24.3%    28.3%  OK    
+  llama_q8       Q8_0     block_scale        5    1         13.882          +0.0%    69.1%    41.1%  OK    
+  llama_q8       Q8_0     block_scale       10    0     499661.822      3.60e+06%    25.2%    28.8%  OK    
+  llama_q8       Q8_0     block_scale       10    1      1.376e+06      9.91e+06%    25.2%    28.2%  OK    
+
+  qwen_fp16      FP16     weights            1    0         15.865          +0.0%    65.8%    38.0%  OK    
+  qwen_fp16      FP16     weights            1    1         15.863          +0.0%    65.7%    38.0%  OK    
+  qwen_fp16      FP16     weights            5    0        inf/nan            inf    26.4%    26.2%  OK    
+  qwen_fp16      FP16     weights            5    1         15.863          -0.0%    65.8%    38.0%  OK    
+  qwen_fp16      FP16     weights           10    0        inf/nan            inf    25.7%    29.4%  OK    
+  qwen_fp16      FP16     weights           10    1     182925.510      1.15e+06%    28.6%    28.9%  OK    
+
+  qwen_q4        Q4_0     block_scale        1    0         17.440          -0.3%    62.0%    37.5%  OK    
+  qwen_q4        Q4_0     block_scale        1    1         17.486          +0.0%    61.8%    37.5%  OK    
+  qwen_q4        Q4_0     block_scale        5    0        inf/nan            inf    25.0%    27.0%  OK    
+  qwen_q4        Q4_0     block_scale        5    1         17.487          +0.0%    61.9%    37.5%  OK    
+  qwen_q4        Q4_0     block_scale       10    0            N/A            N/A    26.1%    25.8%  OK    
+  qwen_q4        Q4_0     block_scale       10    1            N/A            N/A    25.1%    25.8%  OK    
+
+  qwen_q4km      Q4_K_M   super_scale        1    0         17.335          +6.0%    63.8%    36.2%  OK    
+  qwen_q4km      Q4_K_M   super_scale        1    1         16.350          +0.0%    66.0%    37.3%  OK    
+  qwen_q4km      Q4_K_M   super_scale        5    0      2.310e+11      1.41e+12%    24.5%    27.4%  OK    
+  qwen_q4km      Q4_K_M   super_scale        5    1         16.350          +0.0%    66.0%    37.3%  OK    
+  qwen_q4km      Q4_K_M   super_scale       10    0      2.296e+08      1.40e+09%    25.9%    27.4%  OK    
+  qwen_q4km      Q4_K_M   super_scale       10    1      1.814e+07      1.11e+08%    25.8%    28.0%  OK    
+
+  qwen_q8        Q8_0     block_scale        1    0         15.906          +0.0%    66.1%    37.8%  OK    
+  qwen_q8        Q8_0     block_scale        1    1         15.903          +0.0%    66.1%    37.8%  OK    
+  qwen_q8        Q8_0     block_scale        5    0        inf/nan            inf    24.9%    27.4%  OK    
+  qwen_q8        Q8_0     block_scale        5    1         15.903          -0.0%    66.1%    37.8%  OK    
+  qwen_q8        Q8_0     block_scale       10    0            N/A            N/A    25.3%    25.8%  OK    
+  qwen_q8        Q8_0     block_scale       10    1            N/A            N/A    25.3%    25.8%  OK    
+==================================================================================================================

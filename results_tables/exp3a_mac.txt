@@ -1,0 +1,45 @@
+==================================================================================================================
+  Exp 3a -- Role Targeting: Attn vs FFN  [MAC]
+==================================================================================================================
+  Model          Quant    Condition    Region           Seed            PPL        % Worse      ARC    Hella  Status
+  --------------------------------------------------------------------------------------------------------------
+  llama_fp16     FP16     attn_only    weights             0       9898.324      +71211.0%    32.5%    29.2%  OK    
+  llama_fp16     FP16     attn_only    weights             1     297117.000      2.14e+06%    25.8%    27.7%  OK    
+  llama_fp16     FP16     ffn_only     weights             0       6742.900      +48478.2%    30.7%    32.3%  OK    
+  llama_fp16     FP16     ffn_only     weights             1       1331.516       +9492.7%    31.1%    30.1%  OK    
+
+  llama_q4       Q4_0     attn_only    block_scale         0     624467.036      4.15e+06%    24.6%    28.0%  OK    
+  llama_q4       Q4_0     attn_only    block_scale         1      1.214e+06      8.06e+06%    25.3%    28.0%  OK    
+  llama_q4       Q4_0     ffn_only     block_scale         0     998632.331      6.63e+06%    24.5%    28.2%  OK    
+  llama_q4       Q4_0     ffn_only     block_scale         1     635626.090      4.22e+06%    24.5%    26.4%  OK    
+
+  llama_q4km     Q4_K_M   attn_only    super_scale_d       0            N/A            N/A    25.0%    25.8%  OK    
+  llama_q4km     Q4_K_M   attn_only    super_scale_d       1     787691.815      5.50e+06%    23.9%    27.0%  OK    
+  llama_q4km     Q4_K_M   ffn_only     super_scale_d       0      4.632e+06      3.23e+07%    25.2%    28.0%  OK    
+  llama_q4km     Q4_K_M   ffn_only     super_scale_d       1     846534.514      5.91e+06%    23.7%    26.6%  OK    
+
+  llama_q8       Q8_0     attn_only    block_scale         0     623243.685      4.49e+06%    25.3%    28.0%  OK    
+  llama_q8       Q8_0     attn_only    block_scale         1      1.330e+06      9.58e+06%    25.5%    28.1%  OK    
+  llama_q8       Q8_0     ffn_only     block_scale         0     697683.143      5.03e+06%    25.8%    27.8%  OK    
+  llama_q8       Q8_0     ffn_only     block_scale         1     506487.613      3.65e+06%    25.9%    27.3%  OK    
+
+  qwen_fp16      FP16     attn_only    weights             0         16.148          +1.8%    66.4%    37.7%  OK    
+  qwen_fp16      FP16     attn_only    weights             1       6189.555      +38917.8%    46.9%    30.1%  OK    
+  qwen_fp16      FP16     ffn_only     weights             0      3.464e+06      2.18e+07%    25.8%    28.0%  OK    
+  qwen_fp16      FP16     ffn_only     weights             1      26854.216     +169184.1%    47.1%    30.4%  OK    
+
+  qwen_q4        Q4_0     attn_only    block_scale         0         17.841          +2.0%    62.1%    37.2%  OK    
+  qwen_q4        Q4_0     attn_only    block_scale         1      1.035e+07      5.92e+07%    26.7%    28.1%  OK    
+  qwen_q4        Q4_0     ffn_only     block_scale         0      7.185e+07      4.11e+08%    25.5%    27.5%  OK    
+  qwen_q4        Q4_0     ffn_only     block_scale         1            N/A            N/A    36.8%    28.1%  OK    
+
+  qwen_q4km      Q4_K_M   attn_only    block_scale         0      1.758e+07      1.08e+08%    27.1%    27.5%  OK    
+  qwen_q4km      Q4_K_M   attn_only    block_scale         1      2.376e+08      1.45e+09%    25.8%    27.8%  OK    
+  qwen_q4km      Q4_K_M   ffn_only     super_scale_d       0      2.296e+08      1.40e+09%    25.9%    27.4%  OK    
+  qwen_q4km      Q4_K_M   ffn_only     super_scale_d       1      1.814e+07      1.11e+08%    25.8%    28.0%  OK    
+
+  qwen_q8        Q8_0     attn_only    block_scale         0         16.259          +2.2%    66.3%    37.6%  OK    
+  qwen_q8        Q8_0     attn_only    block_scale         1      1.149e+07      7.22e+07%    26.6%    27.8%  OK    
+  qwen_q8        Q8_0     ffn_only     block_scale         0      1.092e+08      6.87e+08%    24.5%    28.1%  OK    
+  qwen_q8        Q8_0     ffn_only     block_scale         1            N/A            N/A    35.9%    29.2%  OK    
+==================================================================================================================

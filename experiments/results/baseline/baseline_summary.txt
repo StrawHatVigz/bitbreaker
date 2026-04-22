@@ -1,0 +1,18 @@
+
+==========================================================================================
+  BitBreaker Baseline Results  |  Platform: MAC
+==========================================================================================
+Model                   PPL      ±    GPU Mem    Tok/s         ARC-Easy        HellaSwag
+------------------------------------------------------------------------------------------
+Qwen 0.5B  FP16     15.8634 0.12172   1202 MiB 1955 t/s    65.74% (2376)    38.00% (2500)
+Qwen 0.5B  Q8       15.9032 0.12216    639 MiB 1829 t/s    66.12% (2376)    37.84% (2500)
+Qwen 0.5B  Q4KM     16.3498 0.12563    463 MiB 1665 t/s    65.95% (2376)    37.28% (2500)
+Qwen 0.5B  Q4       17.4864 0.13620    403 MiB 1959 t/s    61.83% (2376)    37.52% (2500)
+
+Llama 1B   FP16     13.8805 0.10298   2357 MiB  843 t/s    69.07% (2376)    41.12% (2500)
+Llama 1B   Q8       13.8820 0.10302   1252 MiB  855 t/s    69.11% (2376)    41.12% (2500)
+Llama 1B   Q4KM     14.3290 0.10649    763 MiB  779 t/s    68.90% (2376)    40.44% (2500)
+Llama 1B   Q4       15.0513 0.11160    730 MiB  846 t/s    67.47% (2376)    41.12% (2500)
+==========================================================================================
+Perplexity logs : /Users/viggy/Documents/Grad School/Sem_4/ECE 591 - SW HW Co-design/Project/bitbreaker/experiments/results/baseline/perplexity
+Task results    : /Users/viggy/Documents/Grad School/Sem_4/ECE 591 - SW HW Co-design/Project/bitbreaker/experiments/results/baseline/tasks

@@ -1,0 +1,7316 @@
+{
+  "model_path": "/Users/viggy/Documents/Grad School/Sem_4/ECE 591 - SW HW Co-design/Project/bitbreaker/models/Llama-3.2-1B-Instruct-f16.gguf",
+  "quant_label": "FP16",
+  "tensor_data_base_offset": 7831264,
+  "n_layers": 16,
+  "fp16_bit_layout": {
+    "sign": [
+      15
+    ],
+    "exponent_msb": [
+      14
+    ],
+    "exponent": [
+      10,
+      11,
+      12,
+      13,
+      14
+    ],
+    "mantissa_msb": [
+      9
+    ],
+    "mantissa": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "mantissa_lsb": [
+      0
+    ]
+  },
+  "block_layouts_reference": {
+    "F16": {
+      "weights_per_block": 1,
+      "bytes_per_block": 2,
+      "regions": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    "Q8_0": {
+      "weights_per_block": 32,
+      "bytes_per_block": 34,
+      "regions": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 INT8 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 32,
+          "description": "32 \u00d7 INT8 weights (bit7=sign, max swing \u00b1127\u00d7scale)"
+        }
+      ]
+    },
+    "Q4_0": {
+      "weights_per_block": 32,
+      "bytes_per_block": 18,
+      "regions": [
+        {
+          "name": "block_scale",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 scale shared across 32 4-bit weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 2,
+          "num_bytes": 16,
+          "description": "32 \u00d7 4-bit weights packed as 16 bytes (2 nibbles/byte, MSB=high nibble)"
+        }
+      ]
+    },
+    "Q4_K": {
+      "weights_per_block": 256,
+      "bytes_per_block": 144,
+      "regions": [
+        {
+          "name": "super_scale_d",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 8 sub-block scales; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "super_scale_dmin",
+          "block_offset": 2,
+          "num_bytes": 2,
+          "description": "FP16 super-scale dmin \u2014 multiplies all 8 sub-block mins; 1 bit flip corrupts all 256 weights"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 4,
+          "num_bytes": 12,
+          "description": "8\u00d76-bit sub-scales + 8\u00d76-bit sub-mins packed into 12 bytes; each sub-scale affects 32 weights"
+        },
+        {
+          "name": "weights",
+          "block_offset": 16,
+          "num_bytes": 128,
+          "description": "256 \u00d7 4-bit weights packed as 128 bytes (2 nibbles per byte)"
+        }
+      ]
+    },
+    "Q6_K": {
+      "weights_per_block": 256,
+      "bytes_per_block": 210,
+      "regions": [
+        {
+          "name": "weights_low",
+          "block_offset": 0,
+          "num_bytes": 128,
+          "description": "Lower 4 bits of 256 \u00d7 6-bit weights, packed as 128 bytes"
+        },
+        {
+          "name": "weights_high",
+          "block_offset": 128,
+          "num_bytes": 64,
+          "description": "Upper 2 bits of 256 \u00d7 6-bit weights, packed as 64 bytes"
+        },
+        {
+          "name": "sub_scales",
+          "block_offset": 192,
+          "num_bytes": 16,
+          "description": "16 \u00d7 INT8 sub-block scales; each affects 16 weights"
+        },
+        {
+          "name": "super_scale_d",
+          "block_offset": 208,
+          "num_bytes": 2,
+          "description": "FP16 super-scale d \u2014 multiplies all 16 sub-block scales; 1 bit flip corrupts all 256 weights"
+        }
+      ]
+    }
+  },
+  "tensors": [
+    {
+      "name": "rope_freqs.weight",
+      "ggml_type": "F32",
+      "role": "other",
+      "layer": null,
+      "dims": [
+        32
+      ],
+      "n_weights": 32,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 7831264,
+      "file_byte_end": 7831392,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "token_embd.weight",
+      "ggml_type": "F16",
+      "role": "embedding",
+      "layer": null,
+      "dims": [
+        2048,
+        128256
+      ],
+      "n_weights": 262668288,
+      "n_blocks": 262668288,
+      "bytes_per_block": 2,
+      "file_byte_start": 7831392,
+      "file_byte_end": 533167968,
+      "in_scope": false,
+      "reason_out_of_scope": "Embedding tensor excluded from flip pool",
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.0.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 0,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 533167968,
+      "file_byte_end": 533176160,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.0.ffn_down.weight",
+      "ggml_type": "F16",
+      "role": "ffn",
+      "layer": 0,
+      "dims": [
+        8192,
+        2048
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 16777216,
+      "bytes_per_block": 2,
+      "file_byte_start": 533176160,
+      "file_byte_end": 566730592,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.0.ffn_gate.weight",
+      "ggml_type": "F16",
+      "role": "ffn",
+      "layer": 0,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 16777216,
+      "bytes_per_block": 2,
+      "file_byte_start": 566730592,
+      "file_byte_end": 600285024,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.0.ffn_up.weight",
+      "ggml_type": "F16",
+      "role": "ffn",
+      "layer": 0,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 16777216,
+      "bytes_per_block": 2,
+      "file_byte_start": 600285024,
+      "file_byte_end": 633839456,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.0.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 0,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 633839456,
+      "file_byte_end": 633847648,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.0.attn_k.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 0,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 1048576,
+      "bytes_per_block": 2,
+      "file_byte_start": 633847648,
+      "file_byte_end": 635944800,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.0.attn_output.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 0,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 4194304,
+      "bytes_per_block": 2,
+      "file_byte_start": 635944800,
+      "file_byte_end": 644333408,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.0.attn_q.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 0,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 4194304,
+      "bytes_per_block": 2,
+      "file_byte_start": 644333408,
+      "file_byte_end": 652722016,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.0.attn_v.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 0,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 1048576,
+      "bytes_per_block": 2,
+      "file_byte_start": 652722016,
+      "file_byte_end": 654819168,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.1.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 1,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 654819168,
+      "file_byte_end": 654827360,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.1.ffn_down.weight",
+      "ggml_type": "F16",
+      "role": "ffn",
+      "layer": 1,
+      "dims": [
+        8192,
+        2048
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 16777216,
+      "bytes_per_block": 2,
+      "file_byte_start": 654827360,
+      "file_byte_end": 688381792,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.1.ffn_gate.weight",
+      "ggml_type": "F16",
+      "role": "ffn",
+      "layer": 1,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 16777216,
+      "bytes_per_block": 2,
+      "file_byte_start": 688381792,
+      "file_byte_end": 721936224,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.1.ffn_up.weight",
+      "ggml_type": "F16",
+      "role": "ffn",
+      "layer": 1,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 16777216,
+      "bytes_per_block": 2,
+      "file_byte_start": 721936224,
+      "file_byte_end": 755490656,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.1.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 1,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 755490656,
+      "file_byte_end": 755498848,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.1.attn_k.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 1,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 1048576,
+      "bytes_per_block": 2,
+      "file_byte_start": 755498848,
+      "file_byte_end": 757596000,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.1.attn_output.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 1,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 4194304,
+      "bytes_per_block": 2,
+      "file_byte_start": 757596000,
+      "file_byte_end": 765984608,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.1.attn_q.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 1,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 4194304,
+      "bytes_per_block": 2,
+      "file_byte_start": 765984608,
+      "file_byte_end": 774373216,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.1.attn_v.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 1,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 1048576,
+      "bytes_per_block": 2,
+      "file_byte_start": 774373216,
+      "file_byte_end": 776470368,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.10.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 10,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 776470368,
+      "file_byte_end": 776478560,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.10.ffn_down.weight",
+      "ggml_type": "F16",
+      "role": "ffn",
+      "layer": 10,
+      "dims": [
+        8192,
+        2048
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 16777216,
+      "bytes_per_block": 2,
+      "file_byte_start": 776478560,
+      "file_byte_end": 810032992,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.10.ffn_gate.weight",
+      "ggml_type": "F16",
+      "role": "ffn",
+      "layer": 10,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 16777216,
+      "bytes_per_block": 2,
+      "file_byte_start": 810032992,
+      "file_byte_end": 843587424,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.10.ffn_up.weight",
+      "ggml_type": "F16",
+      "role": "ffn",
+      "layer": 10,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 16777216,
+      "bytes_per_block": 2,
+      "file_byte_start": 843587424,
+      "file_byte_end": 877141856,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.10.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 10,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 877141856,
+      "file_byte_end": 877150048,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.10.attn_k.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 10,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 1048576,
+      "bytes_per_block": 2,
+      "file_byte_start": 877150048,
+      "file_byte_end": 879247200,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.10.attn_output.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 10,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 4194304,
+      "bytes_per_block": 2,
+      "file_byte_start": 879247200,
+      "file_byte_end": 887635808,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.10.attn_q.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 10,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 4194304,
+      "bytes_per_block": 2,
+      "file_byte_start": 887635808,
+      "file_byte_end": 896024416,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.10.attn_v.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 10,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 1048576,
+      "bytes_per_block": 2,
+      "file_byte_start": 896024416,
+      "file_byte_end": 898121568,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.11.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 11,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 898121568,
+      "file_byte_end": 898129760,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.11.ffn_down.weight",
+      "ggml_type": "F16",
+      "role": "ffn",
+      "layer": 11,
+      "dims": [
+        8192,
+        2048
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 16777216,
+      "bytes_per_block": 2,
+      "file_byte_start": 898129760,
+      "file_byte_end": 931684192,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.11.ffn_gate.weight",
+      "ggml_type": "F16",
+      "role": "ffn",
+      "layer": 11,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 16777216,
+      "bytes_per_block": 2,
+      "file_byte_start": 931684192,
+      "file_byte_end": 965238624,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.11.ffn_up.weight",
+      "ggml_type": "F16",
+      "role": "ffn",
+      "layer": 11,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 16777216,
+      "bytes_per_block": 2,
+      "file_byte_start": 965238624,
+      "file_byte_end": 998793056,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.11.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 11,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 998793056,
+      "file_byte_end": 998801248,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.11.attn_k.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 11,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 1048576,
+      "bytes_per_block": 2,
+      "file_byte_start": 998801248,
+      "file_byte_end": 1000898400,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.11.attn_output.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 11,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 4194304,
+      "bytes_per_block": 2,
+      "file_byte_start": 1000898400,
+      "file_byte_end": 1009287008,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.11.attn_q.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 11,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 4194304,
+      "bytes_per_block": 2,
+      "file_byte_start": 1009287008,
+      "file_byte_end": 1017675616,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.11.attn_v.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 11,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 1048576,
+      "bytes_per_block": 2,
+      "file_byte_start": 1017675616,
+      "file_byte_end": 1019772768,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.12.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 12,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 1019772768,
+      "file_byte_end": 1019780960,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.12.ffn_down.weight",
+      "ggml_type": "F16",
+      "role": "ffn",
+      "layer": 12,
+      "dims": [
+        8192,
+        2048
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 16777216,
+      "bytes_per_block": 2,
+      "file_byte_start": 1019780960,
+      "file_byte_end": 1053335392,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.12.ffn_gate.weight",
+      "ggml_type": "F16",
+      "role": "ffn",
+      "layer": 12,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 16777216,
+      "bytes_per_block": 2,
+      "file_byte_start": 1053335392,
+      "file_byte_end": 1086889824,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.12.ffn_up.weight",
+      "ggml_type": "F16",
+      "role": "ffn",
+      "layer": 12,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 16777216,
+      "bytes_per_block": 2,
+      "file_byte_start": 1086889824,
+      "file_byte_end": 1120444256,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.12.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 12,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 1120444256,
+      "file_byte_end": 1120452448,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.12.attn_k.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 12,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 1048576,
+      "bytes_per_block": 2,
+      "file_byte_start": 1120452448,
+      "file_byte_end": 1122549600,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.12.attn_output.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 12,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 4194304,
+      "bytes_per_block": 2,
+      "file_byte_start": 1122549600,
+      "file_byte_end": 1130938208,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.12.attn_q.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 12,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 4194304,
+      "bytes_per_block": 2,
+      "file_byte_start": 1130938208,
+      "file_byte_end": 1139326816,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.12.attn_v.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 12,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 1048576,
+      "bytes_per_block": 2,
+      "file_byte_start": 1139326816,
+      "file_byte_end": 1141423968,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.13.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 13,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 1141423968,
+      "file_byte_end": 1141432160,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.13.ffn_down.weight",
+      "ggml_type": "F16",
+      "role": "ffn",
+      "layer": 13,
+      "dims": [
+        8192,
+        2048
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 16777216,
+      "bytes_per_block": 2,
+      "file_byte_start": 1141432160,
+      "file_byte_end": 1174986592,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.13.ffn_gate.weight",
+      "ggml_type": "F16",
+      "role": "ffn",
+      "layer": 13,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 16777216,
+      "bytes_per_block": 2,
+      "file_byte_start": 1174986592,
+      "file_byte_end": 1208541024,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.13.ffn_up.weight",
+      "ggml_type": "F16",
+      "role": "ffn",
+      "layer": 13,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 16777216,
+      "bytes_per_block": 2,
+      "file_byte_start": 1208541024,
+      "file_byte_end": 1242095456,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.13.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 13,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 1242095456,
+      "file_byte_end": 1242103648,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.13.attn_k.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 13,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 1048576,
+      "bytes_per_block": 2,
+      "file_byte_start": 1242103648,
+      "file_byte_end": 1244200800,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.13.attn_output.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 13,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 4194304,
+      "bytes_per_block": 2,
+      "file_byte_start": 1244200800,
+      "file_byte_end": 1252589408,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.13.attn_q.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 13,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 4194304,
+      "bytes_per_block": 2,
+      "file_byte_start": 1252589408,
+      "file_byte_end": 1260978016,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.13.attn_v.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 13,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 1048576,
+      "bytes_per_block": 2,
+      "file_byte_start": 1260978016,
+      "file_byte_end": 1263075168,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.14.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 14,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 1263075168,
+      "file_byte_end": 1263083360,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.14.ffn_down.weight",
+      "ggml_type": "F16",
+      "role": "ffn",
+      "layer": 14,
+      "dims": [
+        8192,
+        2048
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 16777216,
+      "bytes_per_block": 2,
+      "file_byte_start": 1263083360,
+      "file_byte_end": 1296637792,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.14.ffn_gate.weight",
+      "ggml_type": "F16",
+      "role": "ffn",
+      "layer": 14,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 16777216,
+      "bytes_per_block": 2,
+      "file_byte_start": 1296637792,
+      "file_byte_end": 1330192224,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.14.ffn_up.weight",
+      "ggml_type": "F16",
+      "role": "ffn",
+      "layer": 14,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 16777216,
+      "bytes_per_block": 2,
+      "file_byte_start": 1330192224,
+      "file_byte_end": 1363746656,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.14.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 14,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 1363746656,
+      "file_byte_end": 1363754848,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.14.attn_k.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 14,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 1048576,
+      "bytes_per_block": 2,
+      "file_byte_start": 1363754848,
+      "file_byte_end": 1365852000,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.14.attn_output.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 14,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 4194304,
+      "bytes_per_block": 2,
+      "file_byte_start": 1365852000,
+      "file_byte_end": 1374240608,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.14.attn_q.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 14,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 4194304,
+      "bytes_per_block": 2,
+      "file_byte_start": 1374240608,
+      "file_byte_end": 1382629216,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.14.attn_v.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 14,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 1048576,
+      "bytes_per_block": 2,
+      "file_byte_start": 1382629216,
+      "file_byte_end": 1384726368,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.15.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 15,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 1384726368,
+      "file_byte_end": 1384734560,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.15.ffn_down.weight",
+      "ggml_type": "F16",
+      "role": "ffn",
+      "layer": 15,
+      "dims": [
+        8192,
+        2048
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 16777216,
+      "bytes_per_block": 2,
+      "file_byte_start": 1384734560,
+      "file_byte_end": 1418288992,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.15.ffn_gate.weight",
+      "ggml_type": "F16",
+      "role": "ffn",
+      "layer": 15,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 16777216,
+      "bytes_per_block": 2,
+      "file_byte_start": 1418288992,
+      "file_byte_end": 1451843424,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.15.ffn_up.weight",
+      "ggml_type": "F16",
+      "role": "ffn",
+      "layer": 15,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 16777216,
+      "bytes_per_block": 2,
+      "file_byte_start": 1451843424,
+      "file_byte_end": 1485397856,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.15.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 15,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 1485397856,
+      "file_byte_end": 1485406048,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.15.attn_k.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 15,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 1048576,
+      "bytes_per_block": 2,
+      "file_byte_start": 1485406048,
+      "file_byte_end": 1487503200,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.15.attn_output.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 15,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 4194304,
+      "bytes_per_block": 2,
+      "file_byte_start": 1487503200,
+      "file_byte_end": 1495891808,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.15.attn_q.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 15,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 4194304,
+      "bytes_per_block": 2,
+      "file_byte_start": 1495891808,
+      "file_byte_end": 1504280416,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.15.attn_v.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 15,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 1048576,
+      "bytes_per_block": 2,
+      "file_byte_start": 1504280416,
+      "file_byte_end": 1506377568,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.2.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 2,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 1506377568,
+      "file_byte_end": 1506385760,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.2.ffn_down.weight",
+      "ggml_type": "F16",
+      "role": "ffn",
+      "layer": 2,
+      "dims": [
+        8192,
+        2048
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 16777216,
+      "bytes_per_block": 2,
+      "file_byte_start": 1506385760,
+      "file_byte_end": 1539940192,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.2.ffn_gate.weight",
+      "ggml_type": "F16",
+      "role": "ffn",
+      "layer": 2,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 16777216,
+      "bytes_per_block": 2,
+      "file_byte_start": 1539940192,
+      "file_byte_end": 1573494624,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.2.ffn_up.weight",
+      "ggml_type": "F16",
+      "role": "ffn",
+      "layer": 2,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 16777216,
+      "bytes_per_block": 2,
+      "file_byte_start": 1573494624,
+      "file_byte_end": 1607049056,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.2.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 2,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 1607049056,
+      "file_byte_end": 1607057248,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.2.attn_k.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 2,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 1048576,
+      "bytes_per_block": 2,
+      "file_byte_start": 1607057248,
+      "file_byte_end": 1609154400,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.2.attn_output.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 2,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 4194304,
+      "bytes_per_block": 2,
+      "file_byte_start": 1609154400,
+      "file_byte_end": 1617543008,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.2.attn_q.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 2,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 4194304,
+      "bytes_per_block": 2,
+      "file_byte_start": 1617543008,
+      "file_byte_end": 1625931616,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.2.attn_v.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 2,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 1048576,
+      "bytes_per_block": 2,
+      "file_byte_start": 1625931616,
+      "file_byte_end": 1628028768,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.3.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 3,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 1628028768,
+      "file_byte_end": 1628036960,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.3.ffn_down.weight",
+      "ggml_type": "F16",
+      "role": "ffn",
+      "layer": 3,
+      "dims": [
+        8192,
+        2048
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 16777216,
+      "bytes_per_block": 2,
+      "file_byte_start": 1628036960,
+      "file_byte_end": 1661591392,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.3.ffn_gate.weight",
+      "ggml_type": "F16",
+      "role": "ffn",
+      "layer": 3,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 16777216,
+      "bytes_per_block": 2,
+      "file_byte_start": 1661591392,
+      "file_byte_end": 1695145824,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.3.ffn_up.weight",
+      "ggml_type": "F16",
+      "role": "ffn",
+      "layer": 3,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 16777216,
+      "bytes_per_block": 2,
+      "file_byte_start": 1695145824,
+      "file_byte_end": 1728700256,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.3.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 3,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 1728700256,
+      "file_byte_end": 1728708448,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.3.attn_k.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 3,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 1048576,
+      "bytes_per_block": 2,
+      "file_byte_start": 1728708448,
+      "file_byte_end": 1730805600,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.3.attn_output.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 3,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 4194304,
+      "bytes_per_block": 2,
+      "file_byte_start": 1730805600,
+      "file_byte_end": 1739194208,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.3.attn_q.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 3,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 4194304,
+      "bytes_per_block": 2,
+      "file_byte_start": 1739194208,
+      "file_byte_end": 1747582816,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.3.attn_v.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 3,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 1048576,
+      "bytes_per_block": 2,
+      "file_byte_start": 1747582816,
+      "file_byte_end": 1749679968,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.4.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 4,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 1749679968,
+      "file_byte_end": 1749688160,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.4.ffn_down.weight",
+      "ggml_type": "F16",
+      "role": "ffn",
+      "layer": 4,
+      "dims": [
+        8192,
+        2048
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 16777216,
+      "bytes_per_block": 2,
+      "file_byte_start": 1749688160,
+      "file_byte_end": 1783242592,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.4.ffn_gate.weight",
+      "ggml_type": "F16",
+      "role": "ffn",
+      "layer": 4,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 16777216,
+      "bytes_per_block": 2,
+      "file_byte_start": 1783242592,
+      "file_byte_end": 1816797024,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.4.ffn_up.weight",
+      "ggml_type": "F16",
+      "role": "ffn",
+      "layer": 4,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 16777216,
+      "bytes_per_block": 2,
+      "file_byte_start": 1816797024,
+      "file_byte_end": 1850351456,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.4.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 4,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 1850351456,
+      "file_byte_end": 1850359648,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.4.attn_k.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 4,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 1048576,
+      "bytes_per_block": 2,
+      "file_byte_start": 1850359648,
+      "file_byte_end": 1852456800,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.4.attn_output.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 4,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 4194304,
+      "bytes_per_block": 2,
+      "file_byte_start": 1852456800,
+      "file_byte_end": 1860845408,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.4.attn_q.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 4,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 4194304,
+      "bytes_per_block": 2,
+      "file_byte_start": 1860845408,
+      "file_byte_end": 1869234016,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.4.attn_v.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 4,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 1048576,
+      "bytes_per_block": 2,
+      "file_byte_start": 1869234016,
+      "file_byte_end": 1871331168,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.5.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 5,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 1871331168,
+      "file_byte_end": 1871339360,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.5.ffn_down.weight",
+      "ggml_type": "F16",
+      "role": "ffn",
+      "layer": 5,
+      "dims": [
+        8192,
+        2048
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 16777216,
+      "bytes_per_block": 2,
+      "file_byte_start": 1871339360,
+      "file_byte_end": 1904893792,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.5.ffn_gate.weight",
+      "ggml_type": "F16",
+      "role": "ffn",
+      "layer": 5,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 16777216,
+      "bytes_per_block": 2,
+      "file_byte_start": 1904893792,
+      "file_byte_end": 1938448224,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.5.ffn_up.weight",
+      "ggml_type": "F16",
+      "role": "ffn",
+      "layer": 5,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 16777216,
+      "bytes_per_block": 2,
+      "file_byte_start": 1938448224,
+      "file_byte_end": 1972002656,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.5.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 5,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 1972002656,
+      "file_byte_end": 1972010848,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.5.attn_k.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 5,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 1048576,
+      "bytes_per_block": 2,
+      "file_byte_start": 1972010848,
+      "file_byte_end": 1974108000,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.5.attn_output.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 5,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 4194304,
+      "bytes_per_block": 2,
+      "file_byte_start": 1974108000,
+      "file_byte_end": 1982496608,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.5.attn_q.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 5,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 4194304,
+      "bytes_per_block": 2,
+      "file_byte_start": 1982496608,
+      "file_byte_end": 1990885216,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.5.attn_v.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 5,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 1048576,
+      "bytes_per_block": 2,
+      "file_byte_start": 1990885216,
+      "file_byte_end": 1992982368,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.6.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 6,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 1992982368,
+      "file_byte_end": 1992990560,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.6.ffn_down.weight",
+      "ggml_type": "F16",
+      "role": "ffn",
+      "layer": 6,
+      "dims": [
+        8192,
+        2048
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 16777216,
+      "bytes_per_block": 2,
+      "file_byte_start": 1992990560,
+      "file_byte_end": 2026544992,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.6.ffn_gate.weight",
+      "ggml_type": "F16",
+      "role": "ffn",
+      "layer": 6,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 16777216,
+      "bytes_per_block": 2,
+      "file_byte_start": 2026544992,
+      "file_byte_end": 2060099424,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.6.ffn_up.weight",
+      "ggml_type": "F16",
+      "role": "ffn",
+      "layer": 6,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 16777216,
+      "bytes_per_block": 2,
+      "file_byte_start": 2060099424,
+      "file_byte_end": 2093653856,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.6.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 6,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 2093653856,
+      "file_byte_end": 2093662048,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.6.attn_k.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 6,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 1048576,
+      "bytes_per_block": 2,
+      "file_byte_start": 2093662048,
+      "file_byte_end": 2095759200,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.6.attn_output.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 6,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 4194304,
+      "bytes_per_block": 2,
+      "file_byte_start": 2095759200,
+      "file_byte_end": 2104147808,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.6.attn_q.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 6,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 4194304,
+      "bytes_per_block": 2,
+      "file_byte_start": 2104147808,
+      "file_byte_end": 2112536416,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.6.attn_v.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 6,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 1048576,
+      "bytes_per_block": 2,
+      "file_byte_start": 2112536416,
+      "file_byte_end": 2114633568,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.7.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 7,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 2114633568,
+      "file_byte_end": 2114641760,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.7.ffn_down.weight",
+      "ggml_type": "F16",
+      "role": "ffn",
+      "layer": 7,
+      "dims": [
+        8192,
+        2048
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 16777216,
+      "bytes_per_block": 2,
+      "file_byte_start": 2114641760,
+      "file_byte_end": 2148196192,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.7.ffn_gate.weight",
+      "ggml_type": "F16",
+      "role": "ffn",
+      "layer": 7,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 16777216,
+      "bytes_per_block": 2,
+      "file_byte_start": 2148196192,
+      "file_byte_end": 2181750624,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.7.ffn_up.weight",
+      "ggml_type": "F16",
+      "role": "ffn",
+      "layer": 7,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 16777216,
+      "bytes_per_block": 2,
+      "file_byte_start": 2181750624,
+      "file_byte_end": 2215305056,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.7.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 7,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 2215305056,
+      "file_byte_end": 2215313248,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.7.attn_k.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 7,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 1048576,
+      "bytes_per_block": 2,
+      "file_byte_start": 2215313248,
+      "file_byte_end": 2217410400,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.7.attn_output.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 7,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 4194304,
+      "bytes_per_block": 2,
+      "file_byte_start": 2217410400,
+      "file_byte_end": 2225799008,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.7.attn_q.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 7,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 4194304,
+      "bytes_per_block": 2,
+      "file_byte_start": 2225799008,
+      "file_byte_end": 2234187616,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.7.attn_v.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 7,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 1048576,
+      "bytes_per_block": 2,
+      "file_byte_start": 2234187616,
+      "file_byte_end": 2236284768,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.8.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 8,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 2236284768,
+      "file_byte_end": 2236292960,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.8.ffn_down.weight",
+      "ggml_type": "F16",
+      "role": "ffn",
+      "layer": 8,
+      "dims": [
+        8192,
+        2048
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 16777216,
+      "bytes_per_block": 2,
+      "file_byte_start": 2236292960,
+      "file_byte_end": 2269847392,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.8.ffn_gate.weight",
+      "ggml_type": "F16",
+      "role": "ffn",
+      "layer": 8,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 16777216,
+      "bytes_per_block": 2,
+      "file_byte_start": 2269847392,
+      "file_byte_end": 2303401824,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.8.ffn_up.weight",
+      "ggml_type": "F16",
+      "role": "ffn",
+      "layer": 8,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 16777216,
+      "bytes_per_block": 2,
+      "file_byte_start": 2303401824,
+      "file_byte_end": 2336956256,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.8.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 8,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 2336956256,
+      "file_byte_end": 2336964448,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.8.attn_k.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 8,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 1048576,
+      "bytes_per_block": 2,
+      "file_byte_start": 2336964448,
+      "file_byte_end": 2339061600,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.8.attn_output.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 8,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 4194304,
+      "bytes_per_block": 2,
+      "file_byte_start": 2339061600,
+      "file_byte_end": 2347450208,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.8.attn_q.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 8,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 4194304,
+      "bytes_per_block": 2,
+      "file_byte_start": 2347450208,
+      "file_byte_end": 2355838816,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.8.attn_v.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 8,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 1048576,
+      "bytes_per_block": 2,
+      "file_byte_start": 2355838816,
+      "file_byte_end": 2357935968,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.9.attn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 9,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 2357935968,
+      "file_byte_end": 2357944160,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.9.ffn_down.weight",
+      "ggml_type": "F16",
+      "role": "ffn",
+      "layer": 9,
+      "dims": [
+        8192,
+        2048
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 16777216,
+      "bytes_per_block": 2,
+      "file_byte_start": 2357944160,
+      "file_byte_end": 2391498592,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.9.ffn_gate.weight",
+      "ggml_type": "F16",
+      "role": "ffn",
+      "layer": 9,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 16777216,
+      "bytes_per_block": 2,
+      "file_byte_start": 2391498592,
+      "file_byte_end": 2425053024,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.9.ffn_up.weight",
+      "ggml_type": "F16",
+      "role": "ffn",
+      "layer": 9,
+      "dims": [
+        2048,
+        8192
+      ],
+      "n_weights": 16777216,
+      "n_blocks": 16777216,
+      "bytes_per_block": 2,
+      "file_byte_start": 2425053024,
+      "file_byte_end": 2458607456,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.9.ffn_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": 9,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 2458607456,
+      "file_byte_end": 2458615648,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    },
+    {
+      "name": "blk.9.attn_k.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 9,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 1048576,
+      "bytes_per_block": 2,
+      "file_byte_start": 2458615648,
+      "file_byte_end": 2460712800,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.9.attn_output.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 9,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 4194304,
+      "bytes_per_block": 2,
+      "file_byte_start": 2460712800,
+      "file_byte_end": 2469101408,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.9.attn_q.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 9,
+      "dims": [
+        2048,
+        2048
+      ],
+      "n_weights": 4194304,
+      "n_blocks": 4194304,
+      "bytes_per_block": 2,
+      "file_byte_start": 2469101408,
+      "file_byte_end": 2477490016,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "blk.9.attn_v.weight",
+      "ggml_type": "F16",
+      "role": "attn",
+      "layer": 9,
+      "dims": [
+        2048,
+        512
+      ],
+      "n_weights": 1048576,
+      "n_blocks": 1048576,
+      "bytes_per_block": 2,
+      "file_byte_start": 2477490016,
+      "file_byte_end": 2479587168,
+      "in_scope": true,
+      "reason_out_of_scope": null,
+      "block_layout": [
+        {
+          "name": "weights",
+          "block_offset": 0,
+          "num_bytes": 2,
+          "description": "FP16 weight: bit15=sign, bits14-10=exponent, bits9-0=mantissa",
+          "bit_layout": {
+            "sign": [
+              15
+            ],
+            "exponent_msb": [
+              14
+            ],
+            "exponent": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "mantissa_msb": [
+              9
+            ],
+            "mantissa": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "mantissa_lsb": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "output_norm.weight",
+      "ggml_type": "F32",
+      "role": "norm",
+      "layer": null,
+      "dims": [
+        2048
+      ],
+      "n_weights": 2048,
+      "n_blocks": null,
+      "bytes_per_block": null,
+      "file_byte_start": 2479587168,
+      "file_byte_end": 2479595360,
+      "in_scope": false,
+      "reason_out_of_scope": "Unsupported quantization type: F32",
+      "block_layout": null
+    }
+  ]
+}

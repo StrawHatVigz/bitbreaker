@@ -1,0 +1,1157 @@
+{
+  "experiment": "exp1_random_sweep",
+  "runs": [
+    {
+      "model": "qwen_fp16",
+      "quant": "FP16",
+      "flip_count": 25,
+      "seed": 0,
+      "ppl": 43561.195,
+      "error": null
+    },
+    {
+      "model": "qwen_fp16",
+      "quant": "FP16",
+      "flip_count": 50,
+      "seed": 0,
+      "ppl": Infinity,
+      "error": null
+    },
+    {
+      "model": "qwen_fp16",
+      "quant": "FP16",
+      "flip_count": 100,
+      "seed": 0,
+      "ppl": Infinity,
+      "error": null
+    },
+    {
+      "model": "qwen_fp16",
+      "quant": "FP16",
+      "flip_count": 250,
+      "seed": 0,
+      "ppl": Infinity,
+      "error": null
+    },
+    {
+      "model": "qwen_fp16",
+      "quant": "FP16",
+      "flip_count": 500,
+      "seed": 0,
+      "ppl": Infinity,
+      "error": null
+    },
+    {
+      "model": "qwen_fp16",
+      "quant": "FP16",
+      "flip_count": 1000,
+      "seed": 0,
+      "ppl": Infinity,
+      "error": null
+    },
+    {
+      "model": "qwen_fp16",
+      "quant": "FP16",
+      "flip_count": 25,
+      "seed": 1,
+      "ppl": 3091337.2918,
+      "error": null
+    },
+    {
+      "model": "qwen_fp16",
+      "quant": "FP16",
+      "flip_count": 50,
+      "seed": 1,
+      "ppl": 3231752.3103,
+      "error": null
+    },
+    {
+      "model": "qwen_fp16",
+      "quant": "FP16",
+      "flip_count": 100,
+      "seed": 1,
+      "ppl": 1.378343000774925e+100,
+      "error": null
+    },
+    {
+      "model": "qwen_fp16",
+      "quant": "FP16",
+      "flip_count": 250,
+      "seed": 1,
+      "ppl": 1.2753074156612573e+149,
+      "error": null
+    },
+    {
+      "model": "qwen_fp16",
+      "quant": "FP16",
+      "flip_count": 500,
+      "seed": 1,
+      "ppl": Infinity,
+      "error": null
+    },
+    {
+      "model": "qwen_fp16",
+      "quant": "FP16",
+      "flip_count": 1000,
+      "seed": 1,
+      "ppl": Infinity,
+      "error": null
+    },
+    {
+      "model": "qwen_fp16",
+      "quant": "FP16",
+      "flip_count": 25,
+      "seed": 2,
+      "ppl": 15.8932,
+      "error": null
+    },
+    {
+      "model": "qwen_fp16",
+      "quant": "FP16",
+      "flip_count": 50,
+      "seed": 2,
+      "ppl": 155588.6443,
+      "error": null
+    },
+    {
+      "model": "qwen_fp16",
+      "quant": "FP16",
+      "flip_count": 100,
+      "seed": 2,
+      "ppl": 528519.8253,
+      "error": null
+    },
+    {
+      "model": "qwen_fp16",
+      "quant": "FP16",
+      "flip_count": 250,
+      "seed": 2,
+      "ppl": Infinity,
+      "error": null
+    },
+    {
+      "model": "qwen_fp16",
+      "quant": "FP16",
+      "flip_count": 500,
+      "seed": 2,
+      "ppl": Infinity,
+      "error": null
+    },
+    {
+      "model": "qwen_fp16",
+      "quant": "FP16",
+      "flip_count": 1000,
+      "seed": 2,
+      "ppl": Infinity,
+      "error": null
+    },
+    {
+      "model": "qwen_q8",
+      "quant": "Q8_0",
+      "flip_count": 25,
+      "seed": 0,
+      "ppl": 15.9568,
+      "error": null
+    },
+    {
+      "model": "qwen_q8",
+      "quant": "Q8_0",
+      "flip_count": 50,
+      "seed": 0,
+      "ppl": 15.9538,
+      "error": null
+    },
+    {
+      "model": "qwen_q8",
+      "quant": "Q8_0",
+      "flip_count": 100,
+      "seed": 0,
+      "ppl": 15.9537,
+      "error": null
+    },
+    {
+      "model": "qwen_q8",
+      "quant": "Q8_0",
+      "flip_count": 250,
+      "seed": 0,
+      "ppl": 15.9515,
+      "error": null
+    },
+    {
+      "model": "qwen_q8",
+      "quant": "Q8_0",
+      "flip_count": 500,
+      "seed": 0,
+      "ppl": 15.9546,
+      "error": null
+    },
+    {
+      "model": "qwen_q8",
+      "quant": "Q8_0",
+      "flip_count": 1000,
+      "seed": 0,
+      "ppl": 15.9508,
+      "error": null
+    },
+    {
+      "model": "qwen_q8",
+      "quant": "Q8_0",
+      "flip_count": 25,
+      "seed": 1,
+      "ppl": 15.9513,
+      "error": null
+    },
+    {
+      "model": "qwen_q8",
+      "quant": "Q8_0",
+      "flip_count": 50,
+      "seed": 1,
+      "ppl": 15.9534,
+      "error": null
+    },
+    {
+      "model": "qwen_q8",
+      "quant": "Q8_0",
+      "flip_count": 100,
+      "seed": 1,
+      "ppl": 15.9522,
+      "error": null
+    },
+    {
+      "model": "qwen_q8",
+      "quant": "Q8_0",
+      "flip_count": 250,
+      "seed": 1,
+      "ppl": 15.9533,
+      "error": null
+    },
+    {
+      "model": "qwen_q8",
+      "quant": "Q8_0",
+      "flip_count": 500,
+      "seed": 1,
+      "ppl": 15.9549,
+      "error": null
+    },
+    {
+      "model": "qwen_q8",
+      "quant": "Q8_0",
+      "flip_count": 1000,
+      "seed": 1,
+      "ppl": 15.9554,
+      "error": null
+    },
+    {
+      "model": "qwen_q8",
+      "quant": "Q8_0",
+      "flip_count": 25,
+      "seed": 2,
+      "ppl": 15.9524,
+      "error": null
+    },
+    {
+      "model": "qwen_q8",
+      "quant": "Q8_0",
+      "flip_count": 50,
+      "seed": 2,
+      "ppl": 15.9501,
+      "error": null
+    },
+    {
+      "model": "qwen_q8",
+      "quant": "Q8_0",
+      "flip_count": 100,
+      "seed": 2,
+      "ppl": 15.9523,
+      "error": null
+    },
+    {
+      "model": "qwen_q8",
+      "quant": "Q8_0",
+      "flip_count": 250,
+      "seed": 2,
+      "ppl": 15.9538,
+      "error": null
+    },
+    {
+      "model": "qwen_q8",
+      "quant": "Q8_0",
+      "flip_count": 500,
+      "seed": 2,
+      "ppl": 15.9554,
+      "error": null
+    },
+    {
+      "model": "qwen_q8",
+      "quant": "Q8_0",
+      "flip_count": 1000,
+      "seed": 2,
+      "ppl": 15.9519,
+      "error": null
+    },
+    {
+      "model": "qwen_q4km",
+      "quant": "Q4_K_M",
+      "flip_count": 25,
+      "seed": 0,
+      "ppl": 16.4245,
+      "error": null
+    },
+    {
+      "model": "qwen_q4km",
+      "quant": "Q4_K_M",
+      "flip_count": 50,
+      "seed": 0,
+      "ppl": 16.4215,
+      "error": null
+    },
+    {
+      "model": "qwen_q4km",
+      "quant": "Q4_K_M",
+      "flip_count": 100,
+      "seed": 0,
+      "ppl": 16.4224,
+      "error": null
+    },
+    {
+      "model": "qwen_q4km",
+      "quant": "Q4_K_M",
+      "flip_count": 250,
+      "seed": 0,
+      "ppl": 16.4259,
+      "error": null
+    },
+    {
+      "model": "qwen_q4km",
+      "quant": "Q4_K_M",
+      "flip_count": 500,
+      "seed": 0,
+      "ppl": 16.4268,
+      "error": null
+    },
+    {
+      "model": "qwen_q4km",
+      "quant": "Q4_K_M",
+      "flip_count": 1000,
+      "seed": 0,
+      "ppl": 16.43,
+      "error": null
+    },
+    {
+      "model": "qwen_q4km",
+      "quant": "Q4_K_M",
+      "flip_count": 25,
+      "seed": 1,
+      "ppl": 16.4258,
+      "error": null
+    },
+    {
+      "model": "qwen_q4km",
+      "quant": "Q4_K_M",
+      "flip_count": 50,
+      "seed": 1,
+      "ppl": 16.4281,
+      "error": null
+    },
+    {
+      "model": "qwen_q4km",
+      "quant": "Q4_K_M",
+      "flip_count": 100,
+      "seed": 1,
+      "ppl": 16.4295,
+      "error": null
+    },
+    {
+      "model": "qwen_q4km",
+      "quant": "Q4_K_M",
+      "flip_count": 250,
+      "seed": 1,
+      "ppl": 16.4277,
+      "error": null
+    },
+    {
+      "model": "qwen_q4km",
+      "quant": "Q4_K_M",
+      "flip_count": 500,
+      "seed": 1,
+      "ppl": 16.4294,
+      "error": null
+    },
+    {
+      "model": "qwen_q4km",
+      "quant": "Q4_K_M",
+      "flip_count": 1000,
+      "seed": 1,
+      "ppl": 16.4285,
+      "error": null
+    },
+    {
+      "model": "qwen_q4km",
+      "quant": "Q4_K_M",
+      "flip_count": 25,
+      "seed": 2,
+      "ppl": 16.4235,
+      "error": null
+    },
+    {
+      "model": "qwen_q4km",
+      "quant": "Q4_K_M",
+      "flip_count": 50,
+      "seed": 2,
+      "ppl": 16.4237,
+      "error": null
+    },
+    {
+      "model": "qwen_q4km",
+      "quant": "Q4_K_M",
+      "flip_count": 100,
+      "seed": 2,
+      "ppl": 16.4285,
+      "error": null
+    },
+    {
+      "model": "qwen_q4km",
+      "quant": "Q4_K_M",
+      "flip_count": 250,
+      "seed": 2,
+      "ppl": 16.4271,
+      "error": null
+    },
+    {
+      "model": "qwen_q4km",
+      "quant": "Q4_K_M",
+      "flip_count": 500,
+      "seed": 2,
+      "ppl": 16.4283,
+      "error": null
+    },
+    {
+      "model": "qwen_q4km",
+      "quant": "Q4_K_M",
+      "flip_count": 1000,
+      "seed": 2,
+      "ppl": 16.4273,
+      "error": null
+    },
+    {
+      "model": "qwen_q4",
+      "quant": "Q4_0",
+      "flip_count": 25,
+      "seed": 0,
+      "ppl": 17.5425,
+      "error": null
+    },
+    {
+      "model": "qwen_q4",
+      "quant": "Q4_0",
+      "flip_count": 50,
+      "seed": 0,
+      "ppl": 17.5454,
+      "error": null
+    },
+    {
+      "model": "qwen_q4",
+      "quant": "Q4_0",
+      "flip_count": 100,
+      "seed": 0,
+      "ppl": 17.5418,
+      "error": null
+    },
+    {
+      "model": "qwen_q4",
+      "quant": "Q4_0",
+      "flip_count": 250,
+      "seed": 0,
+      "ppl": 17.5403,
+      "error": null
+    },
+    {
+      "model": "qwen_q4",
+      "quant": "Q4_0",
+      "flip_count": 500,
+      "seed": 0,
+      "ppl": 17.5438,
+      "error": null
+    },
+    {
+      "model": "qwen_q4",
+      "quant": "Q4_0",
+      "flip_count": 1000,
+      "seed": 0,
+      "ppl": 17.5403,
+      "error": null
+    },
+    {
+      "model": "qwen_q4",
+      "quant": "Q4_0",
+      "flip_count": 25,
+      "seed": 1,
+      "ppl": 17.5434,
+      "error": null
+    },
+    {
+      "model": "qwen_q4",
+      "quant": "Q4_0",
+      "flip_count": 50,
+      "seed": 1,
+      "ppl": 17.5381,
+      "error": null
+    },
+    {
+      "model": "qwen_q4",
+      "quant": "Q4_0",
+      "flip_count": 100,
+      "seed": 1,
+      "ppl": 17.5374,
+      "error": null
+    },
+    {
+      "model": "qwen_q4",
+      "quant": "Q4_0",
+      "flip_count": 250,
+      "seed": 1,
+      "ppl": 17.537,
+      "error": null
+    },
+    {
+      "model": "qwen_q4",
+      "quant": "Q4_0",
+      "flip_count": 500,
+      "seed": 1,
+      "ppl": 17.5406,
+      "error": null
+    },
+    {
+      "model": "qwen_q4",
+      "quant": "Q4_0",
+      "flip_count": 1000,
+      "seed": 1,
+      "ppl": 17.5435,
+      "error": null
+    },
+    {
+      "model": "qwen_q4",
+      "quant": "Q4_0",
+      "flip_count": 25,
+      "seed": 2,
+      "ppl": 17.5389,
+      "error": null
+    },
+    {
+      "model": "qwen_q4",
+      "quant": "Q4_0",
+      "flip_count": 50,
+      "seed": 2,
+      "ppl": 17.5397,
+      "error": null
+    },
+    {
+      "model": "qwen_q4",
+      "quant": "Q4_0",
+      "flip_count": 100,
+      "seed": 2,
+      "ppl": 17.54,
+      "error": null
+    },
+    {
+      "model": "qwen_q4",
+      "quant": "Q4_0",
+      "flip_count": 250,
+      "seed": 2,
+      "ppl": 17.5373,
+      "error": null
+    },
+    {
+      "model": "qwen_q4",
+      "quant": "Q4_0",
+      "flip_count": 500,
+      "seed": 2,
+      "ppl": 17.5412,
+      "error": null
+    },
+    {
+      "model": "qwen_q4",
+      "quant": "Q4_0",
+      "flip_count": 1000,
+      "seed": 2,
+      "ppl": 17.5405,
+      "error": null
+    },
+    {
+      "model": "llama_fp16",
+      "quant": "FP16",
+      "flip_count": 25,
+      "seed": 0,
+      "ppl": 14.308,
+      "error": null
+    },
+    {
+      "model": "llama_fp16",
+      "quant": "FP16",
+      "flip_count": 50,
+      "seed": 0,
+      "ppl": 12634.1095,
+      "error": null
+    },
+    {
+      "model": "llama_fp16",
+      "quant": "FP16",
+      "flip_count": 100,
+      "seed": 0,
+      "ppl": 612225.873,
+      "error": null
+    },
+    {
+      "model": "llama_fp16",
+      "quant": "FP16",
+      "flip_count": 250,
+      "seed": 0,
+      "ppl": 327488.128,
+      "error": null
+    },
+    {
+      "model": "llama_fp16",
+      "quant": "FP16",
+      "flip_count": 500,
+      "seed": 0,
+      "ppl": 964272.8797,
+      "error": null
+    },
+    {
+      "model": "llama_fp16",
+      "quant": "FP16",
+      "flip_count": 1000,
+      "seed": 0,
+      "ppl": 1736589.6517,
+      "error": null
+    },
+    {
+      "model": "llama_fp16",
+      "quant": "FP16",
+      "flip_count": 25,
+      "seed": 1,
+      "ppl": 14.3228,
+      "error": null
+    },
+    {
+      "model": "llama_fp16",
+      "quant": "FP16",
+      "flip_count": 50,
+      "seed": 1,
+      "ppl": 54.324,
+      "error": null
+    },
+    {
+      "model": "llama_fp16",
+      "quant": "FP16",
+      "flip_count": 100,
+      "seed": 1,
+      "ppl": 6408.4579,
+      "error": null
+    },
+    {
+      "model": "llama_fp16",
+      "quant": "FP16",
+      "flip_count": 250,
+      "seed": 1,
+      "ppl": 504173.9095,
+      "error": null
+    },
+    {
+      "model": "llama_fp16",
+      "quant": "FP16",
+      "flip_count": 500,
+      "seed": 1,
+      "ppl": 1720965.5798,
+      "error": null
+    },
+    {
+      "model": "llama_fp16",
+      "quant": "FP16",
+      "flip_count": 1000,
+      "seed": 1,
+      "ppl": 723971.5807,
+      "error": null
+    },
+    {
+      "model": "llama_fp16",
+      "quant": "FP16",
+      "flip_count": 25,
+      "seed": 2,
+      "ppl": 14.1266,
+      "error": null
+    },
+    {
+      "model": "llama_fp16",
+      "quant": "FP16",
+      "flip_count": 50,
+      "seed": 2,
+      "ppl": 3652.2896,
+      "error": null
+    },
+    {
+      "model": "llama_fp16",
+      "quant": "FP16",
+      "flip_count": 100,
+      "seed": 2,
+      "ppl": 5859.5862,
+      "error": null
+    },
+    {
+      "model": "llama_fp16",
+      "quant": "FP16",
+      "flip_count": 250,
+      "seed": 2,
+      "ppl": 631035.7177,
+      "error": null
+    },
+    {
+      "model": "llama_fp16",
+      "quant": "FP16",
+      "flip_count": 500,
+      "seed": 2,
+      "ppl": 1033715.0185,
+      "error": null
+    },
+    {
+      "model": "llama_fp16",
+      "quant": "FP16",
+      "flip_count": 1000,
+      "seed": 2,
+      "ppl": 2346691.5702,
+      "error": null
+    },
+    {
+      "model": "llama_q8",
+      "quant": "Q8_0",
+      "flip_count": 25,
+      "seed": 0,
+      "ppl": 13.8915,
+      "error": null
+    },
+    {
+      "model": "llama_q8",
+      "quant": "Q8_0",
+      "flip_count": 50,
+      "seed": 0,
+      "ppl": 13.8907,
+      "error": null
+    },
+    {
+      "model": "llama_q8",
+      "quant": "Q8_0",
+      "flip_count": 100,
+      "seed": 0,
+      "ppl": 13.8927,
+      "error": null
+    },
+    {
+      "model": "llama_q8",
+      "quant": "Q8_0",
+      "flip_count": 250,
+      "seed": 0,
+      "ppl": 13.8916,
+      "error": null
+    },
+    {
+      "model": "llama_q8",
+      "quant": "Q8_0",
+      "flip_count": 500,
+      "seed": 0,
+      "ppl": 13.8941,
+      "error": null
+    },
+    {
+      "model": "llama_q8",
+      "quant": "Q8_0",
+      "flip_count": 1000,
+      "seed": 0,
+      "ppl": 13.8953,
+      "error": null
+    },
+    {
+      "model": "llama_q8",
+      "quant": "Q8_0",
+      "flip_count": 25,
+      "seed": 1,
+      "ppl": 13.8904,
+      "error": null
+    },
+    {
+      "model": "llama_q8",
+      "quant": "Q8_0",
+      "flip_count": 50,
+      "seed": 1,
+      "ppl": 13.8904,
+      "error": null
+    },
+    {
+      "model": "llama_q8",
+      "quant": "Q8_0",
+      "flip_count": 100,
+      "seed": 1,
+      "ppl": 13.8908,
+      "error": null
+    },
+    {
+      "model": "llama_q8",
+      "quant": "Q8_0",
+      "flip_count": 250,
+      "seed": 1,
+      "ppl": 13.8912,
+      "error": null
+    },
+    {
+      "model": "llama_q8",
+      "quant": "Q8_0",
+      "flip_count": 500,
+      "seed": 1,
+      "ppl": 13.8907,
+      "error": null
+    },
+    {
+      "model": "llama_q8",
+      "quant": "Q8_0",
+      "flip_count": 1000,
+      "seed": 1,
+      "ppl": 13.8918,
+      "error": null
+    },
+    {
+      "model": "llama_q8",
+      "quant": "Q8_0",
+      "flip_count": 25,
+      "seed": 2,
+      "ppl": 13.8912,
+      "error": null
+    },
+    {
+      "model": "llama_q8",
+      "quant": "Q8_0",
+      "flip_count": 50,
+      "seed": 2,
+      "ppl": 13.8911,
+      "error": null
+    },
+    {
+      "model": "llama_q8",
+      "quant": "Q8_0",
+      "flip_count": 100,
+      "seed": 2,
+      "ppl": 13.8901,
+      "error": null
+    },
+    {
+      "model": "llama_q8",
+      "quant": "Q8_0",
+      "flip_count": 250,
+      "seed": 2,
+      "ppl": 13.891,
+      "error": null
+    },
+    {
+      "model": "llama_q8",
+      "quant": "Q8_0",
+      "flip_count": 500,
+      "seed": 2,
+      "ppl": 13.8915,
+      "error": null
+    },
+    {
+      "model": "llama_q8",
+      "quant": "Q8_0",
+      "flip_count": 1000,
+      "seed": 2,
+      "ppl": 13.8901,
+      "error": null
+    },
+    {
+      "model": "llama_q4km",
+      "quant": "Q4_K_M",
+      "flip_count": 25,
+      "seed": 0,
+      "ppl": 14.3555,
+      "error": null
+    },
+    {
+      "model": "llama_q4km",
+      "quant": "Q4_K_M",
+      "flip_count": 50,
+      "seed": 0,
+      "ppl": 14.3561,
+      "error": null
+    },
+    {
+      "model": "llama_q4km",
+      "quant": "Q4_K_M",
+      "flip_count": 100,
+      "seed": 0,
+      "ppl": 14.3493,
+      "error": null
+    },
+    {
+      "model": "llama_q4km",
+      "quant": "Q4_K_M",
+      "flip_count": 250,
+      "seed": 0,
+      "ppl": 14.357,
+      "error": null
+    },
+    {
+      "model": "llama_q4km",
+      "quant": "Q4_K_M",
+      "flip_count": 500,
+      "seed": 0,
+      "ppl": 14.3525,
+      "error": null
+    },
+    {
+      "model": "llama_q4km",
+      "quant": "Q4_K_M",
+      "flip_count": 1000,
+      "seed": 0,
+      "ppl": 14.3531,
+      "error": null
+    },
+    {
+      "model": "llama_q4km",
+      "quant": "Q4_K_M",
+      "flip_count": 25,
+      "seed": 1,
+      "ppl": 14.355,
+      "error": null
+    },
+    {
+      "model": "llama_q4km",
+      "quant": "Q4_K_M",
+      "flip_count": 50,
+      "seed": 1,
+      "ppl": 14.3593,
+      "error": null
+    },
+    {
+      "model": "llama_q4km",
+      "quant": "Q4_K_M",
+      "flip_count": 100,
+      "seed": 1,
+      "ppl": 14.3542,
+      "error": null
+    },
+    {
+      "model": "llama_q4km",
+      "quant": "Q4_K_M",
+      "flip_count": 250,
+      "seed": 1,
+      "ppl": 14.3563,
+      "error": null
+    },
+    {
+      "model": "llama_q4km",
+      "quant": "Q4_K_M",
+      "flip_count": 500,
+      "seed": 1,
+      "ppl": 14.3595,
+      "error": null
+    },
+    {
+      "model": "llama_q4km",
+      "quant": "Q4_K_M",
+      "flip_count": 1000,
+      "seed": 1,
+      "ppl": 14.355,
+      "error": null
+    },
+    {
+      "model": "llama_q4km",
+      "quant": "Q4_K_M",
+      "flip_count": 25,
+      "seed": 2,
+      "ppl": 14.3566,
+      "error": null
+    },
+    {
+      "model": "llama_q4km",
+      "quant": "Q4_K_M",
+      "flip_count": 50,
+      "seed": 2,
+      "ppl": 14.3559,
+      "error": null
+    },
+    {
+      "model": "llama_q4km",
+      "quant": "Q4_K_M",
+      "flip_count": 100,
+      "seed": 2,
+      "ppl": 14.3594,
+      "error": null
+    },
+    {
+      "model": "llama_q4km",
+      "quant": "Q4_K_M",
+      "flip_count": 250,
+      "seed": 2,
+      "ppl": 14.3507,
+      "error": null
+    },
+    {
+      "model": "llama_q4km",
+      "quant": "Q4_K_M",
+      "flip_count": 500,
+      "seed": 2,
+      "ppl": 14.3536,
+      "error": null
+    },
+    {
+      "model": "llama_q4km",
+      "quant": "Q4_K_M",
+      "flip_count": 1000,
+      "seed": 2,
+      "ppl": 14.3642,
+      "error": null
+    },
+    {
+      "model": "llama_q4",
+      "quant": "Q4_0",
+      "flip_count": 25,
+      "seed": 0,
+      "ppl": 15.0591,
+      "error": null
+    },
+    {
+      "model": "llama_q4",
+      "quant": "Q4_0",
+      "flip_count": 50,
+      "seed": 0,
+      "ppl": 15.0577,
+      "error": null
+    },
+    {
+      "model": "llama_q4",
+      "quant": "Q4_0",
+      "flip_count": 100,
+      "seed": 0,
+      "ppl": 15.0608,
+      "error": null
+    },
+    {
+      "model": "llama_q4",
+      "quant": "Q4_0",
+      "flip_count": 250,
+      "seed": 0,
+      "ppl": 15.0587,
+      "error": null
+    },
+    {
+      "model": "llama_q4",
+      "quant": "Q4_0",
+      "flip_count": 500,
+      "seed": 0,
+      "ppl": 15.0584,
+      "error": null
+    },
+    {
+      "model": "llama_q4",
+      "quant": "Q4_0",
+      "flip_count": 1000,
+      "seed": 0,
+      "ppl": 15.0594,
+      "error": null
+    },
+    {
+      "model": "llama_q4",
+      "quant": "Q4_0",
+      "flip_count": 25,
+      "seed": 1,
+      "ppl": 15.0612,
+      "error": null
+    },
+    {
+      "model": "llama_q4",
+      "quant": "Q4_0",
+      "flip_count": 50,
+      "seed": 1,
+      "ppl": 15.0607,
+      "error": null
+    },
+    {
+      "model": "llama_q4",
+      "quant": "Q4_0",
+      "flip_count": 100,
+      "seed": 1,
+      "ppl": 15.0613,
+      "error": null
+    },
+    {
+      "model": "llama_q4",
+      "quant": "Q4_0",
+      "flip_count": 250,
+      "seed": 1,
+      "ppl": 15.0615,
+      "error": null
+    },
+    {
+      "model": "llama_q4",
+      "quant": "Q4_0",
+      "flip_count": 500,
+      "seed": 1,
+      "ppl": 15.0595,
+      "error": null
+    },
+    {
+      "model": "llama_q4",
+      "quant": "Q4_0",
+      "flip_count": 1000,
+      "seed": 1,
+      "ppl": 15.0573,
+      "error": null
+    },
+    {
+      "model": "llama_q4",
+      "quant": "Q4_0",
+      "flip_count": 25,
+      "seed": 2,
+      "ppl": 15.0595,
+      "error": null
+    },
+    {
+      "model": "llama_q4",
+      "quant": "Q4_0",
+      "flip_count": 50,
+      "seed": 2,
+      "ppl": 15.0602,
+      "error": null
+    },
+    {
+      "model": "llama_q4",
+      "quant": "Q4_0",
+      "flip_count": 100,
+      "seed": 2,
+      "ppl": 15.062,
+      "error": null
+    },
+    {
+      "model": "llama_q4",
+      "quant": "Q4_0",
+      "flip_count": 250,
+      "seed": 2,
+      "ppl": 15.0597,
+      "error": null
+    },
+    {
+      "model": "llama_q4",
+      "quant": "Q4_0",
+      "flip_count": 500,
+      "seed": 2,
+      "ppl": 15.0556,
+      "error": null
+    },
+    {
+      "model": "llama_q4",
+      "quant": "Q4_0",
+      "flip_count": 1000,
+      "seed": 2,
+      "ppl": 15.0583,
+      "error": null
+    }
+  ]
+}

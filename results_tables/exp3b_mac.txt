@@ -1,0 +1,61 @@
+==================================================================================================================
+  Exp 3b -- Depth Targeting: Early / Middle / Late  [MAC]
+==================================================================================================================
+  Model          Quant    Condition              Layers Seed            PPL        % Worse      ARC    Hella  Status
+  --------------------------------------------------------------------------------------------------------------
+  llama_fp16     FP16     early_layers           [0, 3]    0     250862.402      1.81e+06%    24.3%    27.6%  OK    
+  llama_fp16     FP16     early_layers           [0, 3]    1      63845.327     +459864.2%    24.9%    28.0%  OK    
+  llama_fp16     FP16     late_layers          [12, 15]    0     314038.706      2.26e+06%    32.9%    29.7%  OK    
+  llama_fp16     FP16     late_layers          [12, 15]    1        101.158        +628.8%    44.9%    34.1%  OK    
+  llama_fp16     FP16     middle_layers         [4, 11]    0      18383.358     +132340.2%    30.6%    29.9%  OK    
+  llama_fp16     FP16     middle_layers         [4, 11]    1        159.882       +1051.8%    52.2%    33.5%  OK    
+
+  llama_q4       Q4_0     early_layers           [0, 3]    0     328138.327      2.18e+06%    25.4%    27.4%  OK    
+  llama_q4       Q4_0     early_layers           [0, 3]    1         40.300        +167.8%    64.2%    38.0%  OK    
+  llama_q4       Q4_0     late_layers          [12, 15]    0      2.929e+07      1.95e+08%    26.4%    26.6%  OK    
+  llama_q4       Q4_0     late_layers          [12, 15]    1      25023.123     +166152.2%    29.8%    28.3%  OK    
+  llama_q4       Q4_0     middle_layers         [4, 11]    0      2.065e+06      1.37e+07%    24.6%    28.6%  OK    
+  llama_q4       Q4_0     middle_layers         [4, 11]    1      14607.766      +96953.2%    35.0%    32.1%  OK    
+
+  llama_q4km     Q4_K_M   early_layers           [0, 3]    0      1.374e+06      9.59e+06%    24.9%    27.5%  OK    
+  llama_q4km     Q4_K_M   early_layers           [0, 3]    1      1.189e+06      8.30e+06%    25.6%    27.2%  OK    
+  llama_q4km     Q4_K_M   late_layers          [12, 15]    0     807614.610      5.64e+06%    24.6%    27.7%  OK    
+  llama_q4km     Q4_K_M   late_layers          [12, 15]    1     485600.543      3.39e+06%    26.5%    28.2%  OK    
+  llama_q4km     Q4_K_M   middle_layers         [4, 11]    0            N/A            N/A    24.6%    27.9%  OK    
+  llama_q4km     Q4_K_M   middle_layers         [4, 11]    1      91310.275     +637141.1%    30.1%    29.1%  OK    
+
+  llama_q8       Q8_0     early_layers           [0, 3]    0     283144.784      2.04e+06%    25.5%    27.9%  OK    
+  llama_q8       Q8_0     early_layers           [0, 3]    1     518584.569      3.74e+06%    24.1%    28.2%  OK    
+  llama_q8       Q8_0     late_layers          [12, 15]    0      2.869e+07      2.07e+08%    26.2%    27.0%  OK    
+  llama_q8       Q8_0     late_layers          [12, 15]    1      25998.448     +187181.7%    30.7%    28.4%  OK    
+  llama_q8       Q8_0     middle_layers         [4, 11]    0      2.306e+06      1.66e+07%    25.0%    28.5%  OK    
+  llama_q8       Q8_0     middle_layers         [4, 11]    1      13433.223      +96667.2%    34.0%    31.7%  OK    
+
+  qwen_fp16      FP16     early_layers           [0, 5]    0     348627.673      2.20e+06%    25.9%    27.2%  OK    
+  qwen_fp16      FP16     early_layers           [0, 5]    1       1680.812      +10495.5%    27.7%    28.1%  OK    
+  qwen_fp16      FP16     late_layers          [18, 23]    0      3.309e+06      2.09e+07%    25.8%    28.3%  OK    
+  qwen_fp16      FP16     late_layers          [18, 23]    1         18.872         +19.0%    62.6%    37.2%  OK    
+  qwen_fp16      FP16     middle_layers         [6, 17]    0      42613.837     +268529.9%    29.1%    28.9%  OK    
+  qwen_fp16      FP16     middle_layers         [6, 17]    1       1091.271       +6779.2%    29.0%    29.4%  OK    
+
+  qwen_q4        Q4_0     early_layers           [0, 5]    0      9.110e+07      5.21e+08%    23.2%    28.3%  OK    
+  qwen_q4        Q4_0     early_layers           [0, 5]    1      5.120e+06      2.93e+07%    25.3%    28.1%  OK    
+  qwen_q4        Q4_0     late_layers          [18, 23]    0            N/A            N/A    25.3%    24.4%  OK    
+  qwen_q4        Q4_0     late_layers          [18, 23]    1      4.236e+06      2.42e+07%    25.0%    28.6%  OK    
+  qwen_q4        Q4_0     middle_layers         [6, 17]    0     918928.419      5.26e+06%    25.0%    27.4%  OK    
+  qwen_q4        Q4_0     middle_layers         [6, 17]    1      5.483e+06      3.14e+07%    24.7%    27.6%  OK    
+
+  qwen_q4km      Q4_K_M   early_layers           [0, 5]    0      4.978e+10      3.04e+11%    25.5%    27.9%  OK    
+  qwen_q4km      Q4_K_M   early_layers           [0, 5]    1      1.143e+07      6.99e+07%    25.6%    28.0%  OK    
+  qwen_q4km      Q4_K_M   late_layers          [18, 23]    0      1.113e+07      6.81e+07%    25.3%    27.8%  OK    
+  qwen_q4km      Q4_K_M   late_layers          [18, 23]    1      1.284e+07      7.85e+07%    26.3%    28.4%  OK    
+  qwen_q4km      Q4_K_M   middle_layers         [6, 17]    0      3.567e+08      2.18e+09%    24.7%    28.0%  OK    
+  qwen_q4km      Q4_K_M   middle_layers         [6, 17]    1      1.668e+07      1.02e+08%    24.4%    27.2%  OK    
+
+  qwen_q8        Q8_0     early_layers           [0, 5]    0      7.858e+07      4.94e+08%    23.6%    28.2%  OK    
+  qwen_q8        Q8_0     early_layers           [0, 5]    1      5.826e+06      3.66e+07%    25.0%    27.7%  OK    
+  qwen_q8        Q8_0     late_layers          [18, 23]    0            N/A            N/A    25.5%    25.8%  OK    
+  qwen_q8        Q8_0     late_layers          [18, 23]    1      3.885e+06      2.44e+07%    26.6%    28.1%  OK    
+  qwen_q8        Q8_0     middle_layers         [6, 17]    0     852505.097      5.36e+06%    26.1%    27.6%  OK    
+  qwen_q8        Q8_0     middle_layers         [6, 17]    1      5.980e+06      3.76e+07%    24.7%    27.7%  OK    
+==================================================================================================================

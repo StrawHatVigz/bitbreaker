@@ -1,0 +1,16 @@
+# Model files - too large for git
+models/
+*.gguf
+
+# llama.cpp build - not needed in repo
+llama.cpp/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+
+# Virtual environments
+venv/
+.env

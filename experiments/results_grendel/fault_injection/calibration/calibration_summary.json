@@ -1,0 +1,105 @@
+{
+  "model": "llama_q4km",
+  "quant": "Q4_K_M",
+  "runs": [
+    {
+      "flip_count": 1,
+      "seed": 0,
+      "ppl": 14.3582,
+      "ppl_err": 0.10681,
+      "arc_easy": 0.6868686868686869,
+      "arc_n": 2376,
+      "hellaswag": 0.4024,
+      "hellaswag_n": 2500,
+      "error": null
+    },
+    {
+      "flip_count": 5,
+      "seed": 0,
+      "ppl": 14.3585,
+      "ppl_err": 0.1068,
+      "arc_easy": 0.688973063973064,
+      "arc_n": 2376,
+      "hellaswag": 0.4024,
+      "hellaswag_n": 2500,
+      "error": null
+    },
+    {
+      "flip_count": 10,
+      "seed": 0,
+      "ppl": 14.3581,
+      "ppl_err": 0.10681,
+      "arc_easy": 0.6906565656565656,
+      "arc_n": 2376,
+      "hellaswag": 0.4064,
+      "hellaswag_n": 2500,
+      "error": null
+    },
+    {
+      "flip_count": 1,
+      "seed": 1,
+      "ppl": 14.3565,
+      "ppl_err": 0.10678,
+      "arc_easy": 0.6906565656565656,
+      "arc_n": 2376,
+      "hellaswag": 0.4032,
+      "hellaswag_n": 2500,
+      "error": null
+    },
+    {
+      "flip_count": 5,
+      "seed": 1,
+      "ppl": 14.359,
+      "ppl_err": 0.10681,
+      "arc_easy": 0.6885521885521886,
+      "arc_n": 2376,
+      "hellaswag": 0.4032,
+      "hellaswag_n": 2500,
+      "error": null
+    },
+    {
+      "flip_count": 10,
+      "seed": 1,
+      "ppl": 14.3559,
+      "ppl_err": 0.10679,
+      "arc_easy": 0.6885521885521886,
+      "arc_n": 2376,
+      "hellaswag": 0.404,
+      "hellaswag_n": 2500,
+      "error": null
+    },
+    {
+      "flip_count": 1,
+      "seed": 2,
+      "ppl": 14.3566,
+      "ppl_err": 0.10677,
+      "arc_easy": 0.6893939393939394,
+      "arc_n": 2376,
+      "hellaswag": 0.4024,
+      "hellaswag_n": 2500,
+      "error": null
+    },
+    {
+      "flip_count": 5,
+      "seed": 2,
+      "ppl": 14.3543,
+      "ppl_err": 0.10678,
+      "arc_easy": 0.6927609427609428,
+      "arc_n": 2376,
+      "hellaswag": 0.4056,
+      "hellaswag_n": 2500,
+      "error": null
+    },
+    {
+      "flip_count": 10,
+      "seed": 2,
+      "ppl": 14.3557,
+      "ppl_err": 0.10679,
+      "arc_easy": 0.6856060606060606,
+      "arc_n": 2376,
+      "hellaswag": 0.4052,
+      "hellaswag_n": 2500,
+      "error": null
+    }
+  ]
+}
