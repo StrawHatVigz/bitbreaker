@@ -1,9 +1,9 @@
-#!/bin/zsh
+#!/bin/bash
 
-LLAMA_BIN="/Users/viggy/Documents/Grad School/Sem_4/ECE 591 - SW HW Co-design/Project/bitbreaker/llama.cpp/build/bin/llama-perplexity"
-MODELS_DIR="/Users/viggy/Documents/Grad School/Sem_4/ECE 591 - SW HW Co-design/Project/bitbreaker/models"
-WIKITEXT="/Users/viggy/Documents/Grad School/Sem_4/ECE 591 - SW HW Co-design/Project/bitbreaker/configs/wikitext2_test.txt"
-RESULTS_DIR="/Users/viggy/Documents/Grad School/Sem_4/ECE 591 - SW HW Co-design/Project/bitbreaker/experiments/results/baseline/perplexity"
+LLAMA_BIN="/mnt/ncsudrive/r/rrgundam/NCSU/ECE591/Code/bitbreaker/llama.cpp/build/bin/llama-perplexity"
+MODELS_DIR="/mnt/ncsudrive/r/rrgundam/NCSU/ECE591/Code/bitbreaker/models"
+WIKITEXT="/mnt/ncsudrive/r/rrgundam/NCSU/ECE591/Code/bitbreaker/configs/wikitext2_test.txt"
+RESULTS_DIR="/mnt/ncsudrive/r/rrgundam/NCSU/ECE591/Code/bitbreaker/experiments/results/baseline/perplexity"
 
 MODELS=(
     "qwen2.5-0.5b-instruct-fp16.gguf:qwen_fp16"

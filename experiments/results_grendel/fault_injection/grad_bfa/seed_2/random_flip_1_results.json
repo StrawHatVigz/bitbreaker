@@ -1,0 +1,28 @@
+{
+  "model": "Qwen2.5-0.5B-Instruct",
+  "quant_label": "FP16",
+  "platform": "grendel",
+  "mode": "random",
+  "flip_count": 1,
+  "seed": 2,
+  "calib_tokens": 512,
+  "bits_targeted": [
+    10,
+    11,
+    12,
+    13,
+    14
+  ],
+  "baseline_ppl": 18.9863,
+  "ppl": 18.9863,
+  "degradation": 1.0,
+  "flips": [
+    {
+      "layer": "model.layers.13.self_attn.q_proj.weight",
+      "flat_idx": 65599,
+      "bit": 10,
+      "delta_loss_approx": 0.0
+    }
+  ],
+  "eval_time_s": 14.07
+}

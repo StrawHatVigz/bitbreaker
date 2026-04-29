@@ -1,0 +1,148 @@
+{
+  "experiment": "grad_bfa",
+  "model": "Qwen2.5-0.5B-Instruct",
+  "baseline_ppl": 18.9863,
+  "seeds": {
+    "0": {
+      "baseline_ppl": 18.9863,
+      "guided": {
+        "1": {
+          "ppl": null,
+          "degradation": null
+        },
+        "5": {
+          "ppl": null,
+          "degradation": null
+        },
+        "10": {
+          "ppl": null,
+          "degradation": null
+        },
+        "25": {
+          "ppl": null,
+          "degradation": null
+        },
+        "50": {
+          "ppl": null,
+          "degradation": null
+        }
+      },
+      "random": {
+        "1": {
+          "ppl": 18.9869,
+          "degradation": 1.0
+        },
+        "5": {
+          "ppl": 67.2064,
+          "degradation": 3.5397
+        },
+        "10": {
+          "ppl": 472.4249,
+          "degradation": 24.8824
+        },
+        "25": {
+          "ppl": 807336.6014,
+          "degradation": 42522.0607
+        },
+        "50": {
+          "ppl": 25195668.6805,
+          "degradation": 1327044.6944
+        }
+      }
+    },
+    "1": {
+      "baseline_ppl": 18.9863,
+      "guided": {
+        "1": {
+          "ppl": null,
+          "degradation": null
+        },
+        "5": {
+          "ppl": null,
+          "degradation": null
+        },
+        "10": {
+          "ppl": null,
+          "degradation": null
+        },
+        "25": {
+          "ppl": null,
+          "degradation": null
+        },
+        "50": {
+          "ppl": null,
+          "degradation": null
+        }
+      },
+      "random": {
+        "1": {
+          "ppl": 18.9862,
+          "degradation": 1.0
+        },
+        "5": {
+          "ppl": 18.9863,
+          "degradation": 1.0
+        },
+        "10": {
+          "ppl": 19.6533,
+          "degradation": 1.0351
+        },
+        "25": {
+          "ppl": 50262.4664,
+          "degradation": 2647.3018
+        },
+        "50": {
+          "ppl": 13339651.3645,
+          "degradation": 702593.5208
+        }
+      }
+    },
+    "2": {
+      "baseline_ppl": 18.9863,
+      "guided": {
+        "1": {
+          "ppl": null,
+          "degradation": null
+        },
+        "5": {
+          "ppl": null,
+          "degradation": null
+        },
+        "10": {
+          "ppl": null,
+          "degradation": null
+        },
+        "25": {
+          "ppl": null,
+          "degradation": null
+        },
+        "50": {
+          "ppl": null,
+          "degradation": null
+        }
+      },
+      "random": {
+        "1": {
+          "ppl": 18.9863,
+          "degradation": 1.0
+        },
+        "5": {
+          "ppl": 22.6888,
+          "degradation": 1.195
+        },
+        "10": {
+          "ppl": 22.6933,
+          "degradation": 1.1952
+        },
+        "25": {
+          "ppl": 2021.7772,
+          "degradation": 106.4861
+        },
+        "50": {
+          "ppl": 942215.7264,
+          "degradation": 49626.0844
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "model": "Qwen2.5-0.5B-Instruct",
+  "dtype": "bfloat16",
+  "platform": "grendel",
+  "mode": "progressive_guided",
+  "seed": 1,
+  "calib_tokens": 512,
+  "bits": [
+    10,
+    11,
+    12,
+    13,
+    14
+  ],
+  "baseline_ppl": 19.0109,
+  "checkpoints": {
+    "1": {
+      "ppl": null,
+      "degradation": null
+    },
+    "5": {
+      "ppl": null,
+      "degradation": null
+    },
+    "10": {
+      "ppl": null,
+      "degradation": null
+    },
+    "25": {
+      "ppl": null,
+      "degradation": null
+    },
+    "50": {
+      "ppl": null,
+      "degradation": null
+    }
+  },
+  "flip_history": [
+    {
+      "step": 1,
+      "layer": "model.layers.21.mlp.down_proj.weight",
+      "flat_idx": 302135,
+      "bit": 14,
+      "delta_loss_approx": 6.479986479451465e+37
+    }
+  ],
+  "total_time_s": 95.42
+}

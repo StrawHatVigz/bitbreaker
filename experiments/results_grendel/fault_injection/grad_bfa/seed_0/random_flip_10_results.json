@@ -1,0 +1,82 @@
+{
+  "model": "Qwen2.5-0.5B-Instruct",
+  "quant_label": "FP16",
+  "platform": "grendel",
+  "mode": "random",
+  "flip_count": 10,
+  "seed": 0,
+  "calib_tokens": 512,
+  "bits_targeted": [
+    10,
+    11,
+    12,
+    13,
+    14
+  ],
+  "baseline_ppl": 18.9863,
+  "ppl": 472.4249,
+  "degradation": 24.8824,
+  "flips": [
+    {
+      "layer": "model.layers.4.self_attn.o_proj.weight",
+      "flat_idx": 165286,
+      "bit": 10,
+      "delta_loss_approx": 0.0
+    },
+    {
+      "layer": "model.layers.4.mlp.up_proj.weight",
+      "flat_idx": 1631869,
+      "bit": 12,
+      "delta_loss_approx": 0.0
+    },
+    {
+      "layer": "model.layers.6.mlp.down_proj.weight",
+      "flat_idx": 2543022,
+      "bit": 14,
+      "delta_loss_approx": 0.0
+    },
+    {
+      "layer": "model.layers.8.self_attn.k_proj.weight",
+      "flat_idx": 7770,
+      "bit": 14,
+      "delta_loss_approx": 0.0
+    },
+    {
+      "layer": "model.layers.22.mlp.up_proj.weight",
+      "flat_idx": 706388,
+      "bit": 14,
+      "delta_loss_approx": 0.0
+    },
+    {
+      "layer": "model.layers.17.self_attn.v_proj.weight",
+      "flat_idx": 57989,
+      "bit": 10,
+      "delta_loss_approx": 0.0
+    },
+    {
+      "layer": "model.layers.20.mlp.up_proj.weight",
+      "flat_idx": 2475300,
+      "bit": 11,
+      "delta_loss_approx": 0.0
+    },
+    {
+      "layer": "model.layers.6.mlp.gate_proj.weight",
+      "flat_idx": 2364726,
+      "bit": 14,
+      "delta_loss_approx": 0.0
+    },
+    {
+      "layer": "model.layers.5.mlp.up_proj.weight",
+      "flat_idx": 3373448,
+      "bit": 10,
+      "delta_loss_approx": 0.0
+    },
+    {
+      "layer": "model.layers.17.mlp.up_proj.weight",
+      "flat_idx": 3605973,
+      "bit": 11,
+      "delta_loss_approx": 0.0
+    }
+  ],
+  "eval_time_s": 14.05
+}

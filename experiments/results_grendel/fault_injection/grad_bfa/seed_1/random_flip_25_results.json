@@ -1,0 +1,172 @@
+{
+  "model": "Qwen2.5-0.5B-Instruct",
+  "quant_label": "FP16",
+  "platform": "grendel",
+  "mode": "random",
+  "flip_count": 25,
+  "seed": 1,
+  "calib_tokens": 512,
+  "bits_targeted": [
+    10,
+    11,
+    12,
+    13,
+    14
+  ],
+  "baseline_ppl": 18.9863,
+  "ppl": 50262.4664,
+  "degradation": 2647.3018,
+  "flips": [
+    {
+      "layer": "model.layers.21.self_attn.q_proj.weight",
+      "flat_idx": 799149,
+      "bit": 12,
+      "delta_loss_approx": 0.0
+    },
+    {
+      "layer": "model.layers.1.self_attn.v_proj.weight",
+      "flat_idx": 90457,
+      "bit": 10,
+      "delta_loss_approx": 0.0
+    },
+    {
+      "layer": "model.layers.0.mlp.down_proj.weight",
+      "flat_idx": 22723,
+      "bit": 12,
+      "delta_loss_approx": 0.0
+    },
+    {
+      "layer": "model.layers.18.self_attn.o_proj.weight",
+      "flat_idx": 341909,
+      "bit": 11,
+      "delta_loss_approx": 0.0
+    },
+    {
+      "layer": "model.layers.3.mlp.up_proj.weight",
+      "flat_idx": 3148573,
+      "bit": 10,
+      "delta_loss_approx": 0.0
+    },
+    {
+      "layer": "model.layers.11.self_attn.k_proj.weight",
+      "flat_idx": 2583,
+      "bit": 14,
+      "delta_loss_approx": 0.0
+    },
+    {
+      "layer": "model.layers.8.self_attn.k_proj.weight",
+      "flat_idx": 2571,
+      "bit": 12,
+      "delta_loss_approx": 0.0
+    },
+    {
+      "layer": "model.layers.21.self_attn.k_proj.weight",
+      "flat_idx": 76062,
+      "bit": 12,
+      "delta_loss_approx": 0.0
+    },
+    {
+      "layer": "model.layers.18.mlp.up_proj.weight",
+      "flat_idx": 1366783,
+      "bit": 10,
+      "delta_loss_approx": 0.0
+    },
+    {
+      "layer": "model.layers.3.self_attn.v_proj.weight",
+      "flat_idx": 41849,
+      "bit": 10,
+      "delta_loss_approx": 0.0
+    },
+    {
+      "layer": "model.layers.15.self_attn.q_proj.weight",
+      "flat_idx": 683368,
+      "bit": 11,
+      "delta_loss_approx": 0.0
+    },
+    {
+      "layer": "model.layers.2.self_attn.k_proj.weight",
+      "flat_idx": 48574,
+      "bit": 13,
+      "delta_loss_approx": 0.0
+    },
+    {
+      "layer": "model.layers.14.mlp.down_proj.weight",
+      "flat_idx": 2129739,
+      "bit": 12,
+      "delta_loss_approx": 0.0
+    },
+    {
+      "layer": "model.layers.13.mlp.up_proj.weight",
+      "flat_idx": 4179753,
+      "bit": 14,
+      "delta_loss_approx": 0.0
+    },
+    {
+      "layer": "model.layers.23.mlp.up_proj.weight",
+      "flat_idx": 2684077,
+      "bit": 14,
+      "delta_loss_approx": 0.0
+    },
+    {
+      "layer": "model.layers.6.self_attn.q_proj.weight",
+      "flat_idx": 66224,
+      "bit": 12,
+      "delta_loss_approx": 0.0
+    },
+    {
+      "layer": "model.layers.18.self_attn.q_proj.weight",
+      "flat_idx": 568582,
+      "bit": 14,
+      "delta_loss_approx": 0.0
+    },
+    {
+      "layer": "model.layers.21.self_attn.o_proj.weight",
+      "flat_idx": 713805,
+      "bit": 13,
+      "delta_loss_approx": 0.0
+    },
+    {
+      "layer": "model.layers.2.mlp.up_proj.weight",
+      "flat_idx": 3249561,
+      "bit": 11,
+      "delta_loss_approx": 0.0
+    },
+    {
+      "layer": "model.layers.17.self_attn.k_proj.weight",
+      "flat_idx": 10289,
+      "bit": 11,
+      "delta_loss_approx": 0.0
+    },
+    {
+      "layer": "model.layers.5.self_attn.k_proj.weight",
+      "flat_idx": 59847,
+      "bit": 14,
+      "delta_loss_approx": 0.0
+    },
+    {
+      "layer": "model.layers.20.self_attn.o_proj.weight",
+      "flat_idx": 596707,
+      "bit": 10,
+      "delta_loss_approx": 0.0
+    },
+    {
+      "layer": "model.layers.20.mlp.down_proj.weight",
+      "flat_idx": 2800128,
+      "bit": 14,
+      "delta_loss_approx": 0.0
+    },
+    {
+      "layer": "model.layers.1.self_attn.k_proj.weight",
+      "flat_idx": 76132,
+      "bit": 14,
+      "delta_loss_approx": 0.0
+    },
+    {
+      "layer": "model.layers.1.self_attn.k_proj.weight",
+      "flat_idx": 68449,
+      "bit": 11,
+      "delta_loss_approx": 0.0
+    }
+  ],
+  "eval_time_s": 14.07
+}

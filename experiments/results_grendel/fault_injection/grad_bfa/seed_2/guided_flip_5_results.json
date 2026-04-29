@@ -1,0 +1,52 @@
+{
+  "model": "Qwen2.5-0.5B-Instruct",
+  "quant_label": "FP16",
+  "platform": "grendel",
+  "mode": "guided",
+  "flip_count": 5,
+  "seed": 2,
+  "calib_tokens": 512,
+  "bits_targeted": [
+    10,
+    11,
+    12,
+    13,
+    14
+  ],
+  "baseline_ppl": 18.9863,
+  "ppl": null,
+  "degradation": null,
+  "flips": [
+    {
+      "layer": "model.layers.3.mlp.gate_proj.weight",
+      "flat_idx": 2702398,
+      "bit": 14,
+      "delta_loss_approx": 3839.98828125
+    },
+    {
+      "layer": "model.layers.3.mlp.gate_proj.weight",
+      "flat_idx": 2013374,
+      "bit": 14,
+      "delta_loss_approx": 3767.9423828125
+    },
+    {
+      "layer": "model.layers.3.mlp.up_proj.weight",
+      "flat_idx": 2013374,
+      "bit": 14,
+      "delta_loss_approx": 3644.9443359375
+    },
+    {
+      "layer": "model.layers.3.mlp.up_proj.weight",
+      "flat_idx": 2702398,
+      "bit": 14,
+      "delta_loss_approx": 3584.4296875
+    },
+    {
+      "layer": "model.layers.2.mlp.down_proj.weight",
+      "flat_idx": 2773293,
+      "bit": 14,
+      "delta_loss_approx": 2461.24365234375
+    }
+  ],
+  "eval_time_s": 13.94
+}
