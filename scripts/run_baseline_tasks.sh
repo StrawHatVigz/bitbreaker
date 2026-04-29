@@ -1,15 +1,15 @@
-#!/bin/bash
+#!/bin/zsh
 
 # Run ARC-Easy + HellaSwag baseline evaluation on all 8 models
 # Results saved to experiments/results/baseline/tasks/
 
-BASE="/mnt/ncsudrive/r/rrgundam/NCSU/ECE591/Code/bitbreaker"
+BASE="/Users/viggy/Documents/Grad School/Sem_4/ECE 591 - SW HW Co-design/Project/bitbreaker"
 MODELS_DIR="$BASE/models"
 RESULTS_DIR="$BASE/experiments/results/baseline/tasks"
 EVAL_SCRIPT="$BASE/src/evaluation/evaluate_tasks.py"
 
 # Activate conda env
-source /mnt/ncsudrive/r/rrgundam/miniconda3/etc/profile.d/conda.sh
+source /opt/miniconda3/etc/profile.d/conda.sh
 conda activate bitbreaker
 
 # model filename : label
