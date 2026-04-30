@@ -84,7 +84,7 @@ SEEDS_MAC     = [0, 1]
 # ─────────────────────────────────────────────
 
 def detect_platform() -> str:
-    return 'mac' if platform_lib.system() == 'Darwin' else 'grendel'
+    return 'mac' if platform_lib.system() == 'Darwin' else 'linux'
 
 
 def should_skip(output_path: Path) -> bool:
@@ -157,7 +157,11 @@ def main():
     parser = argparse.ArgumentParser(
         description='BitBreaker Exp 3b: Depth Targeting -- Early vs Late Layers'
     )
-    parser.add_argument('--platform', choices=['mac', 'grendel'], default=None)
+    parser.add_argument('--platform', choices=['mac', 'grendel', 'linux'], default=None,
+                        help="'mac'=Apple Silicon Metal, 'grendel'=NCSU GPU cluster, "
+                             "'linux'=any other Linux/CUDA machine")
+    parser.add_argument('--n-gpu-layers', type=int, default=99,
+                        help='GPU layers to offload (default 99). Use 0 for CPU-only.')
     parser.add_argument('--dry-run', action='store_true')
     args = parser.parse_args()
 
@@ -244,7 +248,7 @@ def main():
         injector = FaultInjector(
             model_map      = mm,
             project_root   = PROJECT_ROOT,
-            n_gpu_layers   = 99,
+            n_gpu_layers   = args.n_gpu_layers,
             platform       = platform,
             run_perplexity = True,
             run_tasks      = True,
